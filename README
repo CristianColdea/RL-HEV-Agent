@@ -21,7 +21,7 @@
     * electric motor (EM) efficiency map;
     * gear shift.
 ## Screenshots
-![Example screenshot](./img/screenshot.png)
+![Example screenshot](agent.png)
 
 ## Technologies
 * Tech 1 - Plain _Python_ and specialized lybraries;
