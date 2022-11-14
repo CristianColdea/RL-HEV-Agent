@@ -35,13 +35,13 @@ Also, some additional modules must be imported, i.e., fuel consumption simulator
 ## Code Examples
 Show examples of usage (just an example):
 * Import fuel consumption simulator as a _Python module.
-'''
+```
 import sfc.py as sfc
-'''
+```
 * Call the specific fuel consumption simulator with the appropriated args.
-'''
+```
 sfc = sfc(arg1, arg2,  ...)
-'''
+```
 
 ## Features
 List of features ready and TODOs for future development
