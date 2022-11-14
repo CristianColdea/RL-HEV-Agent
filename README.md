@@ -30,6 +30,7 @@
 
 ## Setup
 Keep the scripts, files and modules in the same folder.
+Also, some additional modules must be imported, i.e., fuel consumption simulator and electric motor efficiency map generator from the corresponding repos of this developer.
 
 ## Code Examples
 Show examples of usage:
