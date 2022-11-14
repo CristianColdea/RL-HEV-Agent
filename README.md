@@ -33,8 +33,15 @@ Keep the scripts, files and modules in the same folder.
 Also, some additional modules must be imported, i.e., fuel consumption simulator and electric motor efficiency map generator from the corresponding repos of this developer.
 
 ## Code Examples
-Show examples of usage:
-`put-your-code-here`
+Show examples of usage (just an example):
+* Import fuel consumption simulator as a _Python module.
+'''
+import sfc.py as sfc
+'''
+* Call the specific fuel consumption simulator with the appropriated args.
+'''
+sfc = sfc(arg1, arg2,  ...)
+'''
 
 ## Features
 List of features ready and TODOs for future development
