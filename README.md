@@ -60,4 +60,4 @@ Project is: __in progress_.
 Add here credits. Project inspired by..., based on...
 
 ## Contact
-Created by [@flynerdpl](https://www.flynerd.pl/) - feel free to contact me!
+rdt333@gmail.com - feel free to contact me!
