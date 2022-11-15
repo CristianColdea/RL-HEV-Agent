@@ -24,7 +24,7 @@
 ![Example screenshot](agent.png)
 
 ## Technologies
-* Tech 1 - Plain _Python_ and specialized lybraries;
+* Tech 1 - Plain _Python_ and its specialized lybraries;
 * Tech 2 - _Keras_;
 * Tech 3 - _TensorFlow_.
 
@@ -45,13 +45,18 @@ sfc = sfc(arg1, arg2,  ...)
 
 ## Features
 List of features ready and TODOs for future development
-* Awesome feature 1
-* Awesome feature 2
-* Awesome feature 3
+* Project started, README partially done.
 
 To-do list:
-* Wow improvement to be done 1
-* Wow improvement to be done 2
+* Get ready the README file, with project outline.
+* Code the charge-discharge reward system.
+* Code gear shift reward system.
+* Code the data gathering part of the RL agent.
+* Assemble all the reward shaping systems.
+* Train the agent and collect output.
+* Code the neural network in order to model the DQ part.
+* Code the WLTP cycle in order to get the road test parameters for a certain vehicle.
+* Test the vehicle
 
 ## Status
 Project is: __in progress_.
