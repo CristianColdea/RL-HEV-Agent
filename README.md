@@ -65,7 +65,7 @@ To-do list:
 Project is: __in progress_.
 
 ## Inspiration
-Add here credits. Project inspired by..., based on...
+https://www.researchgate.net/publication/308830029_Efficiency_maps_of_electrical_machines
 
 ## Contact
 rdt333@gmail.com - feel free to contact me!
