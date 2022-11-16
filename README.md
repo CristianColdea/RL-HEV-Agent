@@ -65,7 +65,10 @@ To-do list:
 Project is: __in progress_.
 
 ## Inspiration
-https://www.researchgate.net/publication/308830029_Efficiency_maps_of_electrical_machines
+1) https://www.researchgate.net/publication/308830029_Efficiency_maps_of_electrical_machines
+2) Ben-Chaim, Michael and Shmerling, Efraim. A Model of Vehicle Fuel Consumption at Conditions of the EUDC. International Journal of Mechanics.
+3) Ben-Chaim, Michael, Shmerling, Efraim and Kuperman, Alon. Analytic Modeling of Vehicle Fuel Consumption. mdpi.com/journal/energies, 2013.
+4) Schoen, Alexander et al. A Machine Learning Model for Average Fuel Consumption in Heavy Vehicles.
 
 ## Contact
 rdt333@gmail.com - feel free to contact me!
