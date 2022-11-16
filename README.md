@@ -12,7 +12,7 @@
 * [Contact](#contact)
 
 ## General info
-* The objective of this project is to have a Reinforcement Learning Agent able to manage the complex HEV Powertrain.
+* The objective of this project is to code a Reinforcement Learning Agent able to manage the complex HEV Powertrain.
 * The agent will work based on a number of reward shaping systems, i.e., a system of systems in a cybernetic way.
 * Precisely this is going to be a Deep Q-Network agent.
 * The reward shaping systems are as following:
