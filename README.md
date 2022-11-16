@@ -48,7 +48,7 @@ List of features ready and TODOs for future development
 * Project started, README partially done.
 
 To-do list:
-* Get ready the README file, with project outline.
+* ~~Get ready the README file, with project outline.~~
 * Code the charge-discharge reward system.
 * Code gear shift reward system.
 * Code the data gathering part of the RL agent.
