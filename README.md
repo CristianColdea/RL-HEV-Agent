@@ -49,6 +49,7 @@ List of features ready and TODOs for future development
 
 To-do list:
 * ~~Get ready the README file, with project outline.~~
+* Collect/determine the needed technical data of both the classical (ICE) and HE vehicles.
 * Code the charge-discharge reward system.
 * Code gear shift reward system.
 * Code the data gathering part of the RL agent.
