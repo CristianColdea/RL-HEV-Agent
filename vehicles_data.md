@@ -17,3 +17,4 @@
 |13 |Vehicle frontal area |2.19 sqm |2.19 sqm |
 |14 |EM max speed |- |x |
 |15 |EM max power |- |90 |
+|16 |EM gear ratio |- |x |
