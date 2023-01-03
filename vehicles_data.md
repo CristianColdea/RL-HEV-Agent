@@ -15,6 +15,6 @@
 |11 |Rolling resistance |0.009 |0.009 |
 |12 |Aerodynamic coefficient |0.28 |0.28 |
 |13 |Vehicle frontal area |2.19 sqm |2.19 sqm |
-|14 |EM max speed |- |x |
+|14 |EM max speed |- |1200 |
 |15 |EM max power |- |90 |
 |16 |EM gear ratio |- |x |
