@@ -65,7 +65,7 @@ To-do list:
 * Results and analysis.
 
 ## Status
-Project is: __in progress_.
+Project is: _in progress_.
 
 ## Inspiration
 1) https://www.researchgate.net/publication/308830029_Efficiency_maps_of_electrical_machines
