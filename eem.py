@@ -15,7 +15,8 @@ def eem(T_inst, n_inst, n_max, T_cont, c_ovr, c_lb, P_rat, type='SPM',
     maximum loss as coefficient of the  rated power,
     rated power, in kW, EM type, wether the motor works in constant
     torque or power regime.
-    Outputs the EM efficiency on the given conditions.
+    Outputs whether the inputed torque and speed isnt't exceeding
+    the rated power, and the EM efficiency on the given conditions.
     """
 
     # compute overload torque
@@ -29,10 +30,15 @@ def eem(T_inst, n_inst, n_max, T_cont, c_ovr, c_lb, P_rat, type='SPM',
     if(n_inst > n_max):
         sys.exit("The instantaneous speed cannot exceed max value")
 
+    # setup a list for return values
+    #ret = []
+    #print(bool(T_inst * n_inst * (11 / 105000) > P_rat)
+    #print(ret)
+ 
     # check for the instantaneous power in relation to the rated one
     if(T_inst * n_inst * (11 / 105000) > P_rat):
         sys.exit("The instantaneous power cannot exceed the rated one")
-   
+               
     T = T_inst / T_ovr
     n = n_inst / n_max
     
@@ -65,9 +71,11 @@ def eem(T_inst, n_inst, n_max, T_cont, c_ovr, c_lb, P_rat, type='SPM',
 
     print("The loss is: ", (c_lb * P_rat * loss), " [kW]")
     print("The instantaneous power is ", (T_inst * n_inst * (11 / 105000)), " [kW]")
-        
-    return ((T_inst * n_inst * (11 / 105000)) /  
-           (T_inst * n_inst * (11 / 105000) + (c_lb * P_rat * loss)))
 
+    ret = (bool(T_inst * n_inst * (11 / 105000) < P_rat),
+          ((T_inst * n_inst * (11 / 105000)) /  
+          (T_inst * n_inst * (11 / 105000) + (c_lb * P_rat * loss))))
+        
+    return ret
 # check the script with a function call
 print(eem(130, 3200, 12000, 130, 1.15, 0.07, 50)) 
