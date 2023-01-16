@@ -52,6 +52,7 @@ To-do list:
 * ~~Compute transmission final ratio based on vehicle max speed, rolling radius and ICE max speed.~~
 * Collect/determine the needed technical data of both the classical (ICE) and HE vehicles.
 * ~~Rework of the electric motor (EM) efficiency map script to be RL agent ready.~~
+* Code the script for the generator efficiency map.
 * Code the charge-discharge reward system.
 * Code gear shift reward system.
 * Code the data gathering part of the RL agent.
