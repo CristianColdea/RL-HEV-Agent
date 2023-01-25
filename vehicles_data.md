@@ -16,5 +16,7 @@
 |12 |Aerodynamic coefficient |0.28 |0.28 |
 |13 |Vehicle frontal area |2.19 sqm |2.19 sqm |
 |14 |EM max speed |- |12 krpm |
-|15 |EM max power |- |90 kW |
-|16 |EM gear ratio |- |x |
+|15 |EM max power |- |75 kW |
+|16 |EM max torque |- |230 Nm |
+|17 |Battery capacity |- |15 kw |
+|18 |EM gear ratio |- |x |
