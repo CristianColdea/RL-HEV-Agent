@@ -21,3 +21,4 @@ def final_ratio(v_max, xi_g, r_d, n_max, s_f=1.05):
 # the ninth gear, xi_g = 0.601, and rolling radius r_d = 0.317 m.
 
 print(final_ratio(239, 0.601, 0.317, 5000))
+
