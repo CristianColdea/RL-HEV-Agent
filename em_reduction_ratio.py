@@ -27,7 +27,7 @@ def reduction_ratio(v, r_d, n_em, n_max, v_max, s_f=1.05):
     
     return(bool(v_em > v_max), xi_red)
 
-# function call with v = 90 km/h, n_em = 3200 rpm, 
-# and rolling radius r_d = 0.317 m.
+# function call with v = 90 km/h, n_em = 3200 rpm, n_max = 12 krpm,
+# v_max = 239 km/h, and rolling radius r_d = 0.317 m.
 
-print(reduction_ratio(90, 0.317, 3200))
+print(reduction_ratio(90, 0.317, 3200, 12000, 239))
