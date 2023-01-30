@@ -2,7 +2,7 @@
 Script for Electric Motor (EM) Efficiency computation.
 """
 
-import sys
+#import sys
 
 def eem(T_inst, n_inst, n_max, T_cont, c_ovr, c_lb, P_rat, type='SPM',
         T_const=False, P_const=False):
