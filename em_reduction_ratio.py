@@ -19,7 +19,13 @@ def reduction_ratio(v, r_d, n_em, n_max, v_max, s_f=1.05):
 
     xi_red = (3.6 * r_d * n_em) /  (9.55 * v * s_f) 
     
-    return xi_red
+    # compute vehicle speed at maximum EM revs, for the determined
+    # reduction ratio
+    v_em = (3.6 * r_d * n_max) / (9.55 * xi_red * s_f)
+    
+    # return tuple 
+    
+    return(bool(v_em > v_max), xi_red)
 
 # function call with v = 90 km/h, n_em = 3200 rpm, 
 # and rolling radius r_d = 0.317 m.
