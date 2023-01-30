@@ -1,24 +1,27 @@
 """
-Script to compute transmission final gear ratio, please read the next
-docstring.
+Script to compute Electric Motor (EM) reduction gear ratio,
+please read the next docstring.
 Code reused from specific fuel consumption script (simfc3.py).
+The rationale behind this whole idea is to provide an evently distributed
+maximum possible efficiency for both urban and non-urban driving.
 """
 
-def final_ratio(v_max, xi_g, r_d, n_max, s_f=1.05):
+def reduction_ratio(v, r_d, n_em, s_f=1.05):
     """
     Function to compute engine speed related to vehicle speed.
-    Takes as parameters vehicle speed, in km/h, final gear ratio,
-    gearbox ratio, rolling/dynamic radius of the wheel, in m
+    Takes as parameters vehicle speed, in km/h, rolling/dynamic
+    radius of the wheel, in m, EM maximum efficiency speed,
     and the slip factor.
-    Returns transmission final ratio.
+    Check to not exceed the maximum vehicle speed when on electric traction,
+    at maximum EM speed, as a safety measure.
+    Returns EM reduction ratio.
     """
 
-    xi_f = (3.6 * r_d * n_max) /  (9.55 * v_max * xi_g * s_f)
+    xi_red = (3.6 * r_d * n_em) /  (9.55 * v * s_f) 
     
-    return xi_f
+    return xi_red
 
-# function call with v_max = 239 km/h, n_max = 5000 rpm, 
-# the ninth gear, xi_g = 0.601, and rolling radius r_d = 0.317 m.
+# function call with v = 90 km/h, n_em = 3200 rpm, 
+# and rolling radius r_d = 0.317 m.
 
-#print(final_ratio(239, 0.601, 0.317, 5000))
-print(final_ratio(90, 1, 0.317, 3200))
+print(reduction_ratio(90, 0.317, 3200))
