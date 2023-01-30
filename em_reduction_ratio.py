@@ -6,12 +6,12 @@ The rationale behind this whole idea is to provide an evently distributed
 maximum possible efficiency for both urban and non-urban driving.
 """
 
-def reduction_ratio(v, r_d, n_em, s_f=1.05):
+def reduction_ratio(v, r_d, n_em, n_max, v_max, s_f=1.05):
     """
     Function to compute engine speed related to vehicle speed.
     Takes as parameters vehicle speed, in km/h, rolling/dynamic
     radius of the wheel, in m, EM maximum efficiency speed,
-    and the slip factor.
+    EM maximum speed, vehicle maximum speed, and the slip factor.
     Check to not exceed the maximum vehicle speed when on electric traction,
     at maximum EM speed, as a safety measure.
     Returns EM reduction ratio.
