@@ -18,6 +18,6 @@
 |14 |EM max speed |- |12 krpm |
 |15 |EM max power |- |75 kW |
 |16 |EM max torque |- |230 Nm |
-|17 |Battery capacity |- |15 kw |
+|17 |Battery power |- |15 kW |
 |18 |EM reduction gear ratio |- |4.04 |
 |19 |
