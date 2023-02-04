@@ -19,5 +19,5 @@
 |15 |EM max power |- |75 kW |
 |16 |EM max torque |- |230 Nm |
 |17 |Battery power |- |15 kW |
-|18 |EM reduction gear ratio |- |4.04 |
-|19 |
+|18 |Battery voltage |- |270 V |
+|19 |EM reduction gear ratio |- |4.04 |
