@@ -16,9 +16,10 @@
 |12 |Aerodynamic coefficient |0.28 |0.28 |
 |13 |Vehicle frontal area |2.19 sqm |2.19 sqm |
 |14 |EM max speed |- |12 krpm |
-|15 |EM max power |- |75 kW |
+|15 |EM max power |- |95 kW |
 |16 |EM max torque |- |230 Nm |
 |17 |Battery power |- |15 kW |
 |18 |Battery voltage |- |270 V |
 |19 |Battery capacity |- |6 Ah |
+|20 |Battery charging power |- |55kW |
 |20 |EM reduction gear ratio |- |4.04 |
