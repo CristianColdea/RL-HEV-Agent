@@ -23,3 +23,4 @@
 |19 |Battery energy |- |18.85 kWh |
 |20 |Battery charging power |- |55kW |
 |20 |EM reduction gear ratio |- |4.04 |
+|22 |Chargin voltage |- |310 V |
