@@ -24,4 +24,4 @@
 |20 |Battery charging power |- |55kW |
 |21 |EM reduction gear ratio |- |4.04 |
 |22 |Charging voltage |- |310 V |
-|23 |Voltage loss due to SoC, 80 - 20% |- |12% |
+|23 |Voltage loss due to SoC drop, 80 - 20% |- |12% |
