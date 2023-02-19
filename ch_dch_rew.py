@@ -8,7 +8,7 @@ def reward(soc):
     """
     Function to compute charge/discharge reward value.
     Takes as input the state of charge, in percent, and
-    returns a the reward value.
+    returns the reward value.
     """
 
     return soc
