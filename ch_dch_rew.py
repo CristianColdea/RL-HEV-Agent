@@ -4,11 +4,13 @@ Script to compute the charge-discharge reward
 
 import sys
 
-def reward(soc, rew_up_lim = 5, rew_low_lim = -1000, soc_low = 40, soc_low = 80):
+def reward(soc, rew_up_lim = 5, rew_low_lim = -1000, soc_up =80, soc_low = 40):
     """
     Function to compute charge/discharge reward value.
-    Takes as input the state of charge, in percent, and
-    returns the reward value.
+    Takes as input the state of charge (SoC), in percent,
+    upper and lower limits of the reward,
+    upper and lower limits of the SoC, and
+    returns the SoC and depth of discharge (DoC) reward values.
     """
 
     return soc
