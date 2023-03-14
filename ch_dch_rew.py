@@ -14,4 +14,4 @@ def reward(soc, prev_rew, rew_up_lim = 5, rew_low_lim = -1000, soc_up =80, soc_l
     returns the SoC and depth of discharge (DoC) reward values.
     """
 
-    return soc
+    return soc_rew, dod_rew
