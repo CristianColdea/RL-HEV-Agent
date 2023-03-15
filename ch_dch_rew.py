@@ -13,5 +13,10 @@ def reward(soc, prev_rew, rew_up_lim = 5, rew_low_lim = -1000, soc_up =80, soc_l
     upper and lower limits of the SoC, and
     returns the SoC and depth of discharge (DoC) reward values.
     """
-
+    
+    if soc > soc_low and soc < soc_up:
+        soc_rew = (-rew_up_lim / (soc_up - soc_low)) * soc + rew_up_lim
+        dod_rew = (rew_up_lim / (soc_up - soc_low)) * soc
+    else:
+        soc_rew = -1000
     return soc_rew, dod_rew
