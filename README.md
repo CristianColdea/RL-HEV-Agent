@@ -54,6 +54,7 @@ To-do list:
 * ~~Rework of the electric motor (EM) efficiency map script to be RL agent ready.~~
 * ~~Code the script for the generator efficiency map.~~
 * ~~Code the charge-discharge reward system.~~
+* Code inverter efficiency script.
 * Code gear shift reward system.
 * Code the data gathering part of the RL agent.
 * Assemble all the reward shaping systems.
