@@ -28,3 +28,4 @@
 |24 |Inverter overall efficiency |- |90% |
 |25 |Rectifier overall efficiency |- |92% |
 |26 |Battery charging efficiency |- |88% |
+|27 |Battery discharging efficiency |- |89% |
