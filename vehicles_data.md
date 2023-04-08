@@ -27,3 +27,4 @@
 |23 |Voltage loss due to SoC drop, 80 - 20% |- |12% |
 |24 |Inverter overall efficiency |- |90% |
 |25 |Rectifier overall efficiency |- |92% |
+|26 |Battery charging efficiency |- |88% |
