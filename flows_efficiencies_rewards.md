@@ -13,6 +13,8 @@
 
 * Combined flows
     * ICE -> main transmission -> wheels AND battery -> EM -> EM transmission -> wheels
+    * ICE -> main transmission -> wheels AND ICE -> EG transmission -> EG
+    * ICE -> main transmission -> wheels AND battery -> EM -> EM transmission -> wheels AND ICE -> EG transmission -> EG
 
 ## Efficiency chains
 
