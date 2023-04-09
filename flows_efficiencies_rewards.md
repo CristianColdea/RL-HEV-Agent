@@ -1,7 +1,7 @@
 # Power flows and their associated efficiency and reward chains
 
 ## Table of contents
-* [Power flows at HEV Powertrain level](#power-flows)
+* [Power flows at HEV Powertrain level](#power flows)
 * [Efficiency chains](#efficiency chain)
 * [Reward chains](#reward chains)
 
