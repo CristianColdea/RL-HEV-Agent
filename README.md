@@ -2,7 +2,7 @@
 > Reinforcement Learning (RL) Agent for intelligent management of a Hybrid Electric Vehicle (HEV) Powertrain
 
 ## Table of contents
-* General info
+* [General info]
 * [Screenshots](#screenshots)
 * [Technologies](#technologies)
 * [Setup](#setup)
