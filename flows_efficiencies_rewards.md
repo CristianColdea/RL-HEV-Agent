@@ -7,10 +7,13 @@
 
 ## Power flows at HEV Powertrain level
 * Elementary flows
-1. ICE -> main transmission -> wheels
-2. Battery -> EM -> EM transmission -> wheels
-3. ICE -> EG transmission -> EG
+ 1. ICE -> main transmission -> wheels
+ 2. Battery -> EM -> EM transmission -> wheels
+ 3. ICE -> EG transmission -> EG
 
+## Efficiency chains
+
+## Reward chains
 
 ### Short abbreviations list and some clarifications
 * Internal Combustion Engine = ICE
