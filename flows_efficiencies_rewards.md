@@ -9,12 +9,16 @@
 * Elementary flows
     * ICE -> main transmission -> wheels
     * Battery -> EM -> EM transmission -> wheels
-    * ICE -> EG transmission -> EG
+    * ICE -> EG transmission -> EG -> battery
 
 * Combined flows
-    * ICE -> main transmission -> wheels AND battery -> EM -> EM transmission -> wheels
-    * ICE -> main transmission -> wheels AND ICE -> EG transmission -> EG
-    * ICE -> main transmission -> wheels AND battery -> EM -> EM transmission -> wheels AND ICE -> EG transmission -> EG
+    * (ICE -> main transmission -> wheels &&
+          battery -> EM -> EM transmission -> wheels)
+    * (ICE -> main transmission -> wheels &&
+          ICE -> EG transmission -> EG -> battery)
+    * (ICE -> main transmission -> wheels &&
+          battery -> EM -> EM transmission -> wheels &&
+          ICE -> EG transmission -> EG -> battery)
 
 ## Efficiency chains
 
