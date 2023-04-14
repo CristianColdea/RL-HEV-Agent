@@ -2,6 +2,7 @@
 
 ## Table of contents
 * [Power flows at HEV Powertrain level](#power-flows)
+* [Subsystem chains](#subsystem-chains)
 * [Efficiency chains](#efficiency-chain)
 * [Reward chains](#reward-chains)
 
@@ -19,6 +20,8 @@
     * (ICE -> main transmission -> wheels &&
           battery -> EM -> EM transmission -> wheels &&
           ICE -> EG transmission -> EG -> battery)
+
+## Subsystem chains
 
 ## Efficiency chains
 
