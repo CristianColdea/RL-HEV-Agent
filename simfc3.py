@@ -321,9 +321,9 @@ def simfc_call(fixs, v_init, xi_g, a, t):
     Function to call all functions and methods previously defined.
     The meaning of function parameters is indicated throughout this script 
     and in the 'passing_args' explanatory document.
-    Returns the specific fuel consumption, in kg/kWh.
+    Returns the fuel consumption tuple.
     CAVEAT: Vehicle speed is limited by the engine maximum speed and the
-            transsmision overall ratio. Vehicle required power is limited by
+            transmission overall ratio. Vehicle required power is limited by
             the maximum engine output for the given engine speed.
     """
     
