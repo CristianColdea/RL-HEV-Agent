@@ -29,3 +29,8 @@
 |25 |Rectifier overall efficiency |- |92% |
 |26 |Battery charging efficiency |- |88% |
 |27 |Battery discharging efficiency |- |89% |
+|28 |EM gear efficiency |- |0.985 |
+|29 |EG gear efficiency |- |0.98 |
+|30 |EG max speed |- |12 krpm |
+|31 |EG max loading torque |- |230 Nm |
+|32 |EG gear ratio |- |0.41 |
