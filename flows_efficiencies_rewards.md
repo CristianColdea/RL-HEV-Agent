@@ -9,7 +9,7 @@
 ## Power flows at HEV Powertrain level
 * Elementary flows
     * ICE -> main transmission -> wheels
-    * Battery -> EM -> EM transmission -> wheels
+    * battery -> EM -> EM transmission -> wheels
     * ICE -> EG transmission -> EG -> battery
 
 * Combined flows
@@ -22,6 +22,9 @@
           ICE -> EG transmission -> EG -> battery)
 
 ## Subsystem chains
+* ICE -> main transmission -> wheels
+* battery -> inverter -> EM -> EM transmission -> wheels
+* ICE -> EG transmission -> EG -> rectifier-transformer -> battery
 
 ## Efficiency chains
 
