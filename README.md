@@ -56,7 +56,6 @@ To-do list:
 * ~~Code the charge-discharge reward system.~~
 * ~~Code inverter efficiency script.~~
 * ~~Code power flows efficiency.~~
-* Code gear shift reward system.
 * Code the data gathering part of the RL agent.
 * Assemble all the reward shaping systems.
 * Code the neural network in order to model the DQ part.
