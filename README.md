@@ -57,8 +57,8 @@ To-do list:
 * ~~Code inverter efficiency script.~~
 * ~~Code power flows efficiency.~~
 * ~~Code the specific fuel consumption reward system.~~
-* Code the EM reward system.
-* Code the EG reward system.
+* ~~Code the EM reward system.~~
+* ~~Code the EG reward system.~~
 * Code the data gathering part of the RL agent.
 * Assemble all the reward shaping systems.
 * Code the neural network in order to model the DQ part.
