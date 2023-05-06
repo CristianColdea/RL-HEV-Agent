@@ -59,6 +59,7 @@ To-do list:
 * ~~Code the specific fuel consumption reward system.~~
 * ~~Code the EM reward system.~~
 * ~~Code the EG reward system.~~
+* Code a function/class in order to get the HEV powertrain status at a certain timestep.
 * Code the data gathering part of the RL agent.
 * Assemble all the reward shaping systems.
 * Code the neural network in order to model the DQ part.
