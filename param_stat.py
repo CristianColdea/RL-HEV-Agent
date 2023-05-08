@@ -13,3 +13,12 @@ class Status:
         self.a = a   #vehicle acceleration
         self.tmstp = tmstp   #timestep
         self.soc = soc   #State of Charge
+
+    # vehicle speed after applied acceleration during timestep
+
+    def final_speed(v_init, a, tmstp):
+        return (v_init + a * tmstp)
+
+    # energy consumption in order to move the vehicle in certain conditions,
+    # per timestep
+    def e_exp():
