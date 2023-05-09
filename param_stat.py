@@ -4,6 +4,7 @@ per timestep.
 """
 
 import simfc3.py as sfc
+import sfc_call.py as sfcc
 
 # Class to determine the whole bunch of parameters of interest
 
