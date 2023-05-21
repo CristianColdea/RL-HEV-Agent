@@ -23,7 +23,7 @@ v_init = 38
 # movement duration in seconds
 t = 20
 
-# transmission finale ratio (fixed)
+# transmission final ratio (fixed)
 xi_f = 4.18
 
 fixs.append(xi_f)
