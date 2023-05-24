@@ -17,5 +17,5 @@ dyns = []   #list for storing tuples
 # first tuple: gear ratio, initial null speed,
 # acceleration 1.2 m/s**2 applied for 12 seconds
 
-a = 0.04, 0, 1.2, 12
+a = 0.94, 0, 1.2, 12
 dyns.append(a)   #append the tuple
