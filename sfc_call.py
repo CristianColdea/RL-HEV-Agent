@@ -13,6 +13,7 @@ order of arguments.
 """
 
 import simfc3 as sfc
+import dyn_secq as dyn
 
 #the 'fixed' vars list
 fixs = []
@@ -112,9 +113,11 @@ if len(fixs) != 15:
 """
 SFC simulator call and results return
 """
-# specific fuel consumption variable
 
-sfc = sfc.simfc_call(fixs, v_init, xi_g, a, t)
-print("The 100 km fuel consumption is: ", sfc[0], "l/100 km")
-print("The hourly fuel consumption is: ", sfc[1], "l/h")
-print("The specific fuel consumption is: ",sfc[2], "kg/kWh")
+# import the dynamic secquences and allocate variables
+
+for secq in dyn.a:
+    sfc = sfc.simfc_call(fixs, secq[1], secq[0], secq[2], secq[3])
+    print("The 100 km fuel consumption is: ", sfc[0], "l/100 km")
+    print("The hourly fuel consumption is: ", sfc[1], "l/h")
+    print("The specific fuel consumption is: ",sfc[2], "kg/kWh")
