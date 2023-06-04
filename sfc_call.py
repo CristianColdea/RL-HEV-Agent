@@ -117,6 +117,9 @@ SFC simulator call and results return
 # import the dynamic secquences and allocate variables
 
 for secq in dyn.a:
+    print(secq)
+
+for secq in dyn.a:
     sfc = sfc.simfc_call(fixs, secq[1], secq[0], secq[2], secq[3])
     print("The 100 km fuel consumption is: ", sfc[0], "l/100 km")
     print("The hourly fuel consumption is: ", sfc[1], "l/h")
