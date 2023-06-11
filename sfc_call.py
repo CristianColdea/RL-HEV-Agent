@@ -119,6 +119,8 @@ SFC simulator call and results return
 for secq in dyn.a:
     print(secq)
 
+print(dyn.a[1])
+
 for secq in dyn.a:
     sfc = sfc.simfc_call(fixs, secq[1], secq[0], secq[2], secq[3])
     print("The 100 km fuel consumption is: ", sfc[0], "l/100 km")
