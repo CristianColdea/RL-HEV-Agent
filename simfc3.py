@@ -7,17 +7,22 @@ and methods.
 
 # engine_speed calculation according to vehicle speed
 
-def engine_speed(v_a, xi_f, xi_g, r_d, s_f, n_max):
+def engine_speed(v_a, xi_f, xi_g, r_d, s_f, n_max, n_idle=800):
     """
     Function to compute engine speed related to vehicle speed.
     Takes as parameters vehicle speed, in m/s, final gear ratio,
-    gearbox ratio, rolling/dynamic radius of the wheel, in m
-    and the slip factor.
+    gearbox ratio, rolling/dynamic radius of the wheel, in m,
+    the slip factor, the engine max speed, in rpm,
+    and the idle speed, in rpm.
     Returns engine speed in rpm.
     CAVEAT: Actual engine speed cannot exceed maximum value
     """
     n_i = (9.55 * v_a * xi_f * xi_g * s_f) / r_d
-    if n_i <= n_max:
+
+    if n_i < n_idle:
+        return n_idle
+
+    if n_i <= n_max and n_i >= n_idle:
         return n_i
     else:
         print("The engine speed exceeded MAX.\n"
@@ -76,12 +81,12 @@ class Mus:
 
     # mu_n function for continuous generation of muN
 
-    def mu_n(n, n_max):
+    def mu_n(n, n_max, n_idle=800):
         """
         Method to continuously compute mu N fraction required for fuel consumption
-        calculation. Takes as parameters the instantaneous engine speed and engine speed
-        at rated/nominal output, computes mu N coefficient through linear intepolation
-        and returns it.
+        calculation. Takes as parameters the instantaneous engine speed, engine speed
+        at rated/nominal output and the engine idle speed, computes mu N coefficient
+        through linear intepolation and returns it.
         Mu N coefficient is meant to highlight engine efficiency distribution over the
         engine speed domain.
         """
@@ -93,12 +98,15 @@ class Mus:
                     1.1:0.93}
 
         keys = list(nmu_dict.keys())
-    
-        for i in range(len(keys) - 1):
-            if n/n_max >= keys[i] and n/n_max < keys[i+1]:
-                rep = (n/n_max - keys[i])/(keys[i+1] - keys[i])
-                return nmu_dict[keys[i]] + (nmu_dict[keys[i+1]] - nmu_dict[keys[i]])*rep
-                break
+        if (n_idle/n_max) <= 0.1:
+            return 0.87
+        else: 
+            for i in range(len(keys) - 1):
+                if n/n_max >= keys[i] and n/n_max < keys[i+1]:
+                    rep = (n/n_max - keys[i])/(keys[i+1] - keys[i])
+                    return nmu_dict[keys[i]] + (nmu_dict[keys[i+1]] -\
+                        nmu_dict[keys[i]])*rep
+                    break
      
 
     # mu_P function for continuous generation of muP
@@ -121,7 +129,12 @@ class Mus:
 
         keys_S = list(PmuS_dict.keys())
         keys_C = list(PmuC_dict.keys())
-    
+
+        # print("Outputs ratio is: ", P_i/P_max)
+        # return fraction if the output is too low
+        if P_i/P_max < 0.1:
+            return 0.56 
+
         if engine_tp == 'SIE':
             for i in range(len(keys_S) - 1):
                 if P_i/P_max >= keys_S[i] and P_i/P_max < keys_S[i+1]:
@@ -321,9 +334,9 @@ def simfc_call(fixs, v_init, xi_g, a, t):
     Function to call all functions and methods previously defined.
     The meaning of function parameters is indicated throughout this script 
     and in the 'passing_args' explanatory document.
-    Returns the fuel consumption tuple.
+    Returns the specific fuel consumption, in kg/kWh.
     CAVEAT: Vehicle speed is limited by the engine maximum speed and the
-            transmission overall ratio. Vehicle required power is limited by
+            transsmision overall ratio. Vehicle required power is limited by
             the maximum engine output for the given engine speed.
     """
     
@@ -381,13 +394,13 @@ def simfc_call(fixs, v_init, xi_g, a, t):
         v = int(v_init + (a * t))
         if v > v_max:
             v = v_max
-            print("The vehicle speed is to high.\n",
+            print("The vehicle speed is too high.\n",
                   "It was automatically readjusted to MAX value possible!")
             
         # engine speed at initial vehicle speed
         n_i_init = engine_speed(v_init, dict_fix['xi_f'], xi_g, dict_fix['r_d'],
                                 dict_fix['s_f'], dict_fix['n_max'])
-        
+        #print(n_i_init)
         
         # engine speed initial penalty
         mu_n_init = Mus.mu_n(n_i_init, dict_fix['n_max'])
