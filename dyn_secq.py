@@ -22,6 +22,6 @@ dyns.append(a)   #append the tuple
 b = 6, 1.72, 2.3, 20
 dyns.append(b)
 
-for secq in dyns:
-    for item in secq:
-        print(item)
+#for secq in dyns:
+#    for item in secq:
+#        print(item)
