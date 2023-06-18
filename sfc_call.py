@@ -114,9 +114,16 @@ if len(fixs) != 15:
 SFC simulator call and results return
 """
 
+# list to store tuple results
+list_res = []
+
 # import the dynamic secquences and allocate variables
 for secq in dyn.dyns:
-    sfc = sfc.simfc_call(fixs, secq[0], secq[1], secq[2], secq[3])
-    print("The 100 km fuel consumption is: ", sfc[0], "l/100 km")
-    print("The hourly fuel consumption is: ", sfc[1], "l/h")
-    print("The specific fuel consumption is: ",sfc[2], "kg/kWh")
+#    sfc = sfc.simfc_call(fixs, secq[0], secq[1], secq[2], secq[3])
+     list_res.append(sfc.simfc_call(fixs, secq[0], secq[1], secq[2], secq[3]))
+    
+print(sfc.simfc_call(fixs, dyn.b[0], dyn.b[1], dyn.b[2], dyn.b[3]))
+
+#print("The 100 km fuel consumption is: ", sfc[0], "l/100 km")
+#print("The hourly fuel consumption is: ", sfc[1], "l/h")
+#print("The specific fuel consumption is: ",sfc[2], "kg/kWh")

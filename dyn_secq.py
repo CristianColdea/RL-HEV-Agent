@@ -19,7 +19,7 @@ dyns = []   #list for storing tuples
 
 a = 0, 0.94, 1.2, 12
 dyns.append(a)   #append the tuple
-b = 6, 1.72, 2.3, 20
+b = 3, 2.94, 0.3, 12
 dyns.append(b)
 
 #for secq in dyns:
