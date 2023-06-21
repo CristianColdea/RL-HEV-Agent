@@ -81,7 +81,7 @@ class Mus:
 
     # mu_n function for continuous generation of muN
 
-    def mu_n(n, n_max, n_idle=800):
+    def mu_n(n, n_max, n_idle=1200):
         """
         Method to continuously compute mu N fraction required for fuel consumption
         calculation. Takes as parameters the instantaneous engine speed, engine speed
