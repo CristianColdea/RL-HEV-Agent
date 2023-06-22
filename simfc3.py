@@ -7,22 +7,22 @@ and methods.
 
 # engine_speed calculation according to vehicle speed
 
-def engine_speed(v_a, xi_f, xi_g, r_d, s_f, n_max, n_idle=800):
+def engine_speed(v_a, xi_f, xi_g, r_d, s_f, n_max, n_stab=1200):
     """
     Function to compute engine speed related to vehicle speed.
     Takes as parameters vehicle speed, in m/s, final gear ratio,
     gearbox ratio, rolling/dynamic radius of the wheel, in m,
     the slip factor, the engine max speed, in rpm,
-    and the idle speed, in rpm.
+    and the engine minimum stable speed under load, in rpm.
     Returns engine speed in rpm.
     CAVEAT: Actual engine speed cannot exceed maximum value
     """
     n_i = (9.55 * v_a * xi_f * xi_g * s_f) / r_d
 
-    if n_i < n_idle:
-        return n_idle
+    if n_i < n_stab:
+        return n_stab
 
-    if n_i <= n_max and n_i >= n_idle:
+    if n_i <= n_max and n_i >= n_stab:
         return n_i
     else:
         print("The engine speed exceeded MAX.\n"
@@ -81,12 +81,12 @@ class Mus:
 
     # mu_n function for continuous generation of muN
 
-    def mu_n(n, n_max, n_idle=1200):
+    def mu_n(n, n_max, n_stab=1200):
         """
         Method to continuously compute mu N fraction required for fuel consumption
         calculation. Takes as parameters the instantaneous engine speed, engine speed
-        at rated/nominal output and the engine idle speed, computes mu N coefficient
-        through linear intepolation and returns it.
+        at rated/nominal output and the engine stable speed under load, computes mu N
+        coefficient through linear intepolation and returns it.
         Mu N coefficient is meant to highlight engine efficiency distribution over the
         engine speed domain.
         """
@@ -98,7 +98,7 @@ class Mus:
                     1.1:0.93}
 
         keys = list(nmu_dict.keys())
-        if (n_idle/n_max) <= 0.1:
+        if (n_stab/n_max) <= 0.1:
             return 0.87
         else: 
             for i in range(len(keys) - 1):
@@ -132,7 +132,7 @@ class Mus:
 
         # print("Outputs ratio is: ", P_i/P_max)
         # return fraction if the output is too low
-        if P_i/P_max < 0.1:
+        if P_i/P_max < 0.1:   #need to be corrected
             return 0.56 
 
         if engine_tp == 'SIE':
