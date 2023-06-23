@@ -132,9 +132,7 @@ class Mus:
 
         # print("Outputs ratio is: ", P_i/P_max)
         # return fraction if the output is too low
-        if P_i/P_max < 0.1:   #need to be corrected
-            return 0.56 
-
+        
         if engine_tp == 'SIE':
             for i in range(len(keys_S) - 1):
                 if P_i/P_max >= keys_S[i] and P_i/P_max < keys_S[i+1]:
@@ -143,6 +141,8 @@ class Mus:
                            PmuS_dict[keys_S[i]])*rep
                     break
         else:
+            if P_i/P_max < 0.1:
+            return 0.56 
             for i in range(len(keys_C) - 1):
                 if P_i/P_max >= keys_C[i] and P_i/P_max < keys_C[i+1]:
                     rep = (P_i/P_max - keys_C[i])/(keys_C[i+1] - keys_C[i])
