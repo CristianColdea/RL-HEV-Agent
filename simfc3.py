@@ -134,6 +134,8 @@ class Mus:
         # return fraction if the output is too low
         
         if engine_tp == 'SIE':
+            if P_i/P_max < 0.1:
+                return 0.37
             for i in range(len(keys_S) - 1):
                 if P_i/P_max >= keys_S[i] and P_i/P_max < keys_S[i+1]:
                     rep = (P_i/P_max - keys_S[i])/(keys_S[i+1] - keys_S[i])
