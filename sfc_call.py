@@ -118,9 +118,9 @@ SFC simulator call and results return
 list_res = []
 
 # import the dynamic secquences and allocate variables
-for secq in dyn.dyns:
+#for secq in dyn.dyns:
 #    sfc = sfc.simfc_call(fixs, secq[0], secq[1], secq[2], secq[3])
-     list_res.append(sfc.simfc_call(fixs, secq[0], secq[1], secq[2], secq[3]))
+#     list_res.append(sfc.simfc_call(fixs, secq[0], secq[1], secq[2], secq[3]))
     
 print(sfc.simfc_call(fixs, dyn.b[0], dyn.b[1], dyn.b[2], dyn.b[3]))
 
