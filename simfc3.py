@@ -18,6 +18,8 @@ def engine_speed(v_a, xi_f, xi_g, r_d, s_f, n_max, n_stab=1200):
     CAVEAT: Actual engine speed cannot exceed maximum value
     """
     n_i = (9.55 * v_a * xi_f * xi_g * s_f) / r_d
+    
+    print("The engine speed is: ", n_i)
 
     if n_i < n_stab:
         return n_stab
