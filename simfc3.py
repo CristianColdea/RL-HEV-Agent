@@ -305,6 +305,7 @@ def required_power(eta_t, m_a, c_r, C_d, A_f, v_a, a, p_maxn, ro_a=1.225):
     P_i = (1/(eta_t * 1000)) * (m_a * 9.81 * c_r + (ro_a/2) * C_d * A_f * v_a**2 +
           m_a * a * 1.08) * v_a
     if P_i <= p_maxn:
+        print("The required engine output is: ", P_i)
         return P_i
     else:
         print("The engine output exceeded MAX for the given conditions.\n"
