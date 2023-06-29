@@ -398,7 +398,7 @@ def simfc_call(fixs, v_init, xi_g, a, t):
     else:
         # vehicle actual speed after acceleration a applied during time t
         v = v_init + (a * t)
-        print("Vehicle speed after acceleration a applied for time t is: ", v)
+        #print("Vehicle speed after acceleration a applied for time t is: ", v)
         if v > v_max:
             v = v_max
             print("The vehicle speed is too high.\n",
