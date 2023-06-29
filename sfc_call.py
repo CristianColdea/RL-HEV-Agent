@@ -19,10 +19,10 @@ import dyn_secq as dyn
 fixs = []
 
 # vehicle speed 
-v_init = 88888888
+v_init = 20
 
 # movement duration in seconds
-t = 20
+t = 1 
 
 # transmission final ratio (fixed)
 xi_f = 4.18
@@ -30,7 +30,7 @@ xi_f = 4.18
 fixs.append(xi_f)
 
 # gearbox ratio (cruising speed)
-xi_g = 0.94
+xi_g = 1.94
 
 # slip factor (fixed)
 s_f = 1.05
@@ -93,7 +93,7 @@ ro_a = 1.225
 fixs.append(ro_a)
 
 # acceleration
-a = 0.6  
+a = 0  
 
 # gasoline calorific value (fixed)
 Q_f = 34200000
@@ -123,12 +123,14 @@ list_res = []
 #    sfc = sfc.simfc_call(fixs, secq[0], secq[1], secq[2], secq[3])
 #     list_res.append(sfc.simfc_call(fixs, secq[0], secq[1], secq[2], secq[3]))
 
-out_c = sfc.simfc_call(fixs, dyn.a[0], dyn.a[1], dyn.a[2], dyn.a[3])
+# out_c = sfc.simfc_call(fixs, dyn.b[0], dyn.b[1], dyn.b[2], dyn.b[3])
 
-print("Fuel consumption per 100 km is: ", out_c[0])
-print("Fuel consumption per hour is: ", out_c[1])
-print("Specific fuel consumption is: ", out_c[2])
+# print("Fuel consumption per 100 km is: ", out_c[0])
+# print("Fuel consumption per hour is: ", out_c[1])
+# print("Specific fuel consumption is: ", out_c[2])
 
-#print("The 100 km fuel consumption is: ", sfc[0], "l/100 km")
-#print("The hourly fuel consumption is: ", sfc[1], "l/h")
-#print("The specific fuel consumption is: ",sfc[2], "kg/kWh")
+csfc = sfc.simfc_call(fixs, v_init, xi_g, a, t)
+
+print("The 100 km fuel consumption is: ", csfc[0], "l/100 km")
+print("The hourly fuel consumption is: ", csfc[1], "l/h")
+print("The specific fuel consumption is: ",csfc[2], "kg/kWh")
