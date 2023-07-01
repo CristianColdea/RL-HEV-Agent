@@ -19,7 +19,7 @@ import dyn_secq as dyn
 fixs = []
 
 # vehicle speed 
-v_init = 20
+v_init = 13.88
 
 # movement duration in seconds
 t = 1 
