@@ -19,7 +19,7 @@ import dyn_secq as dyn
 fixs = []
 
 # vehicle speed 
-v_init = 13.88
+v_init = 41.66
 
 # movement duration in seconds
 t = 1 
@@ -30,7 +30,7 @@ xi_f = 4.18
 fixs.append(xi_f)
 
 # gearbox ratio (cruising speed)
-xi_g = 1.94
+xi_g = 0.94
 
 # slip factor (fixed)
 s_f = 1.05
