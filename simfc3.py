@@ -326,6 +326,7 @@ def fuel_cons(E, Q_f, v_a, P_i, ro_f):
     and in kg/kWh.
     """
     fc_100 = E/Q_f
+    print("FC per 100 km in kg/100 is: ", fc_100*ro_f)
     fc_hour = 0.036 * v_a * fc_100 * ro_f
     fc_s = fc_hour / P_i
     return (fc_100, fc_hour, fc_s)
