@@ -25,11 +25,11 @@ v_init = 41.66
 t = 1 
 
 # transmission final ratio (fixed)
-xi_f = 4.18
+xi_f = 3.961
 
 fixs.append(xi_f)
 
-# gearbox ratio (cruising speed)
+# gearbox ratio
 xi_g = 0.94
 
 # slip factor (fixed)
