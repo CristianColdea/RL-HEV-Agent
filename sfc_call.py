@@ -29,6 +29,9 @@ xi_f = 3.961
 
 fixs.append(xi_f)
 
+# list of gearbox ratios
+xi_gs = [5.503, 3.333, 2.315, 1.661, 1.211, 1.0, 0.717, 0.65, 0.601]
+
 # gearbox ratio
 xi_g = 0.94
 
