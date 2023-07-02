@@ -56,22 +56,22 @@ P_max = 147
 fixs.append(P_max)
 
 # engine type (fixed)
-type = 'SIE'
+type = 'CIE'
 
 fixs.append(type)
 
 # transmission overall efficiency (fixed)
-eta_t = 0.91
+eta_t = 0.95
 
 fixs.append(eta_t)
 
 # engine peak efficiency (fixed)
-eta_max = 0.34
+eta_max = 0.4
 
 fixs.append(eta_max)
 
 # vehicle mass (fixed)
-m_a = 1250
+m_a = 1730
 
 fixs.append(m_a)
 
@@ -81,12 +81,12 @@ c_r = 0.009
 fixs.append(c_r)
 
 # coefficient of aerodynamic drag (wind coefficient) (fixed)
-C_d = 0.26
+C_d = 0.28
 
 fixs.append(C_d)
 
 # vehicle frontal area (fixed)
-A_f = 2.16
+A_f = 2.19
 
 fixs.append(A_f)
 
@@ -96,7 +96,7 @@ ro_a = 1.225
 fixs.append(ro_a)
 
 # acceleration
-a = 0  
+a = 2 
 
 # gasoline calorific value (fixed)
 Q_f = 34200000
