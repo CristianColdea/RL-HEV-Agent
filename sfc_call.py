@@ -19,10 +19,10 @@ import dyn_secq as dyn
 fixs = []
 
 # vehicle speed 
-v_init = 41.66
+v_init = 0
 
 # movement duration in seconds
-t = 1 
+t = 2 
 
 # transmission final ratio (fixed)
 xi_f = 3.961
@@ -33,7 +33,7 @@ fixs.append(xi_f)
 xi_gs = [5.503, 3.333, 2.315, 1.661, 1.211, 1.0, 0.717, 0.65, 0.601]
 
 # gearbox ratio
-xi_g = 0.94
+xi_g = 5.503
 
 # slip factor (fixed)
 s_f = 1.05
@@ -41,17 +41,17 @@ s_f = 1.05
 fixs.append(s_f)
 
 # wheel rolling radius (fixed)
-r_d = 0.32
+r_d = 0.317
 
 fixs.append(r_d)
 
 # engine maximum speed (fixed)
-n_max = 6200
+n_max = 5000
 
 fixs.append(n_max)
 
 # engine maximum output/power (fixed)
-P_max = 120
+P_max = 147
 
 fixs.append(P_max)
 
