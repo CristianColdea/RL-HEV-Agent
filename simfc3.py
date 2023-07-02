@@ -415,7 +415,8 @@ def simfc_call(fixs, v_init, xi_g, a, t):
         mu_n_init = Mus.mu_n(n_i_init, dict_fix['n_max'])
         
         # engine initial maximum power at the given engine speed
-        p_maxn_init = Mus.p_maxn(dict_fix['P_max'], n_i_init, dict_fix['n_max'])
+        p_maxn_init = Mus.p_maxn(dict_fix['P_max'], n_i_init,
+                                 dict_fix['n_max'], engine_tp = 'CIE')
 
         # engine initial instantaneous power
         P_i_init = required_power(dict_fix['eta_t'], dict_fix['m_a'],
@@ -423,7 +424,7 @@ def simfc_call(fixs, v_init, xi_g, a, t):
                                   dict_fix['A_f'], v_init, a, p_maxn_init)
         
         # engine initial output penalty
-        mu_P_init = Mus.mu_P(P_i_init, p_maxn_init)
+        mu_P_init = Mus.mu_P(P_i_init, p_maxn_init, engine_tp = 'CIE')
         
         # engine speed at final vehicle speed
         n_i_fin = engine_speed(v, dict_fix['xi_f'], xi_g, dict_fix['r_d'],
