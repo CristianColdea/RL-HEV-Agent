@@ -376,7 +376,8 @@ def simfc_call(fixs, v_init, xi_g, a, t):
         mu_n = Mus.mu_n(n_i, dict_fix['n_max'])
         
         # engine maximum power at the given engine speed
-        p_maxn = Mus.p_maxn(dict_fix['P_max'], n_i, dict_fix['n_max'])
+        p_maxn = Mus.p_maxn(dict_fix['P_max'], n_i, dict_fix['n_max'],
+                            engine_tp = 'CIE')
 
         # engine instantaneous power
         P_i = required_power(dict_fix['eta_t'], dict_fix['m_a'], dict_fix['c_r'],
@@ -385,7 +386,7 @@ def simfc_call(fixs, v_init, xi_g, a, t):
 
         
         # engine output penalty mu_P
-        mu_P = Mus.mu_P(P_i, p_maxn)
+        mu_P = Mus.mu_P(P_i, p_maxn, engine_tp = 'CIE')
 
         # energy required to overcome resistances at the given constant speed
         e_const = Energy.e_const(dict_fix['eta_t'], dict_fix['eta_max'], mu_n,
@@ -399,7 +400,7 @@ def simfc_call(fixs, v_init, xi_g, a, t):
     else:
         # vehicle actual speed after acceleration a applied during time t
         v = v_init + (a * t)
-        #print("Vehicle speed after acceleration a applied for time t is: ", v)
+        print("Vehicle speed after acceleration a applied for time t is: ", v)
         if v > v_max:
             v = v_max
             print("The vehicle speed is too high.\n",
