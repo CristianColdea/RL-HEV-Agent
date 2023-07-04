@@ -135,5 +135,5 @@ list_res = []
 csfc = sfc.simfc_call(fixs, v_init, xi_g, a, t)
 
 print("The 100 km fuel consumption is: ", csfc[0], "l/100 km")
-print("The hourly fuel consumption is: ", csfc[1], "l/h")
+print("The hourly fuel consumption is: ", csfc[1], "kg/h")
 print("The specific fuel consumption is: ",csfc[2], "kg/kWh")
