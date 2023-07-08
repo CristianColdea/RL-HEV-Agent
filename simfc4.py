@@ -359,8 +359,8 @@ def simfc_call(*fixs, *dyns):
             'eta_max', 'm_a', 'c_r', 'C_d', 'A_f', 'ro_a', 'Q_f', 'ro_f'] 
     dict_fix = {}
     dict_fix = dict(zip(vars, fixs))   this approach gives a type error
-    for index in range(len(vars)):
-        dict_fix[vars[index]] = fixs[index]
+    #for index in range(len(vars)):
+    #    dict_fix[vars[index]] = fixs[index]
     
     # vehicle maximum speed
     v_max = (dict_fix['n_max'] * dict_fix['r_d']) / (9.55 * dict_fix['xi_f'] *
