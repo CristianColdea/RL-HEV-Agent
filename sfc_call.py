@@ -12,7 +12,7 @@ understand which script are belonging to either category and the
 order of arguments.
 """
 
-import simfc3 as sfc
+import simfc4 as sfc
 import dyn_secq as dyn
 
 #the 'fixed' vars list
@@ -132,7 +132,14 @@ list_res = []
 # print("Fuel consumption per hour is: ", out_c[1])
 # print("Specific fuel consumption is: ", out_c[2])
 
-csfc = sfc.simfc_call(fixs, v_init, xi_g, a, t)
+# append the dynamic variables
+dyns = []
+dyns.append(v_init)
+dyns.append(xi_g)
+dyns.append(a)
+dyns.append(t)
+
+csfc = sfc.simfc_call(*fixs, *dyns)
 
 print("The 100 km fuel consumption is: ", csfc[0], "l/100 km")
 print("The hourly fuel consumption is: ", csfc[1], "kg/h")
