@@ -336,7 +336,7 @@ def fuel_cons(E, Q_f, v_a, P_i, ro_f):
 Within this second section the functions and methods are called
 """
 
-def simfc_call(*fixs, *dyns):
+def simfc_call(fixs, dyns):
     """
     Function to call all functions and methods previously defined.
     The meaning of function parameters is indicated throughout this script 
@@ -358,9 +358,9 @@ def simfc_call(*fixs, *dyns):
     vars = ['xi_f', 's_f', 'r_d', 'n_max', 'P_max', 'type', 'eta_t',
             'eta_max', 'm_a', 'c_r', 'C_d', 'A_f', 'ro_a', 'Q_f', 'ro_f'] 
     dict_fix = {}
-    dict_fix = dict(zip(vars, fixs))   this approach gives a type error
-    #for index in range(len(vars)):
-    #    dict_fix[vars[index]] = fixs[index]
+    # dict_fix = dict(zip(vars, fixs))   this approach gives a type error
+    for index in range(len(vars)):
+        dict_fix[vars[index]] = fixs[index]
     
     # vehicle maximum speed
     v_max = (dict_fix['n_max'] * dict_fix['r_d']) / (9.55 * dict_fix['xi_f'] *
