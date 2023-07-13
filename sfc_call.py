@@ -139,7 +139,7 @@ dyns.append(xi_g)
 dyns.append(a)
 dyns.append(t)
 
-csfc = sfc.simfc_call(*fixs, *dyns)
+csfc = sfc.simfc_call(fixs, dyns)
 
 print("The 100 km fuel consumption is: ", csfc[0], "l/100 km")
 print("The hourly fuel consumption is: ", csfc[1], "kg/h")
