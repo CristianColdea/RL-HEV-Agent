@@ -22,6 +22,12 @@ dyns.append(a)   #append the list
 b = [3, 2.94, 0.3, 12]    #second list
 dyns.append(b)
 
-for secq in dyns:
-    for item in secq:
-        print(item)
+"""
+class to process the input list
+"""
+
+class Process_inputs:
+    def __init__(self, input_list):
+        self.input_list[0]
+        self.input_list[1]
+        self.input_
