@@ -399,6 +399,8 @@ def simfc_call(fixs, dyns):
                                  mu_P, dict_fix['m_a'], dict_fix['c_r'],
                                  dict_fix['C_d'], dict_fix['A_f'], v_init)
 
+        print("Energy for constant movement: ", e_const)
+
         # fuel consumption
         f_cons = fuel_cons(e_const, dict_fix['Q_f'], v_init, P_i,
                               dict_fix['ro_f'])
@@ -465,6 +467,9 @@ def simfc_call(fixs, dyns):
 
         # total energy required for accelerated vehicle movement
         e = e_kin + e_roll + e_air
+
+        print("Energy for accelerated movement: ", e)
+
         # fuel consumption
         f_cons = fuel_cons(e, dict_fix['Q_f'], v, P_i_fin, dict_fix['ro_f'])
  
