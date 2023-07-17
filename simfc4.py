@@ -328,11 +328,11 @@ def fuel_cons(E, Q_f, v_a, p_i, ro_f):
     fc_100 = E/Q_f
     print("FC per 100 km in kg/100 is: ", fc_100*ro_f)
     fc_hour = 0.036 * v_a * fc_100 * ro_f
-    fc_s = fc_hour / P_i
+    fc_s = fc_hour / p_i
     return (fc_100, fc_hour, fc_s)
 
 # Torque value double check
-def tcheck(total_e, P_i, xi_f, xi_g, r_d):
+def tcheck(total_e, p_i, xi_f, xi_g, r_d):
     """
     Function to check the torque in action, first, as resulted from energy
     calculation, and second, as delivered by the ICE via transmission.
@@ -343,7 +343,7 @@ def tcheck(total_e, P_i, xi_f, xi_g, r_d):
     # the corresponding torque
     t1 = f_tract * r_d
 
-    return chk
+    return bchk
 # ==========
 
 """
@@ -400,13 +400,13 @@ def simfc_call(fixs, dyns):
                             engine_tp = 'CIE')
 
         # engine instantaneous power
-        P_i = required_power(dict_fix['eta_t'], dict_fix['m_a'], dict_fix['c_r'],
+        p_i = required_power(dict_fix['eta_t'], dict_fix['m_a'], dict_fix['c_r'],
                              dict_fix['C_d'], dict_fix['A_f'], v_init, a,
                              dict_fix['P_max'])
 
         
         # engine output penalty mu_P
-        mu_P = Mus.mu_P(P_i, p_maxn, engine_tp = 'CIE')
+        mu_P = Mus.mu_P(p_i, p_maxn, engine_tp = 'CIE')
 
         # energy required to overcome resistances at the given constant speed
         e_const = Energy.e_const(dict_fix['eta_t'], dict_fix['eta_max'], mu_n,
@@ -416,7 +416,7 @@ def simfc_call(fixs, dyns):
         print("Energy for constant movement: ", e_const)
 
         # fuel consumption
-        f_cons = fuel_cons(e_const, dict_fix['Q_f'], v_init, P_i,
+        f_cons = fuel_cons(e_const, dict_fix['Q_f'], v_init, p_i,
                               dict_fix['ro_f'])
     
     else:
