@@ -302,11 +302,11 @@ def required_power(eta_t, m_a, c_r, C_d, A_f, v_a, a, p_maxn, ro_a=1.225):
     CAVEAT: The required output of the engine cannot exceed maximum value for the
             given engine speed
     """
-    P_i = (1/(eta_t * 1000)) * (m_a * 9.81 * c_r + (ro_a/2) * C_d * A_f * v_a**2 +
+    p_i = (1/(eta_t * 1000)) * (m_a * 9.81 * c_r + (ro_a/2) * C_d * A_f * v_a**2 +
           m_a * a * 1.08) * v_a
-    if P_i <= p_maxn:
-        print("The required engine output is: ", P_i)
-        return P_i
+    if p_i <= p_maxn:
+        print("The required engine output is: ", p_i)
+        return p_i
     else:
         print("The engine output exceeded MAX for the given conditions.\n"
               "Please readjust!")
@@ -315,7 +315,7 @@ def required_power(eta_t, m_a, c_r, C_d, A_f, v_a, a, p_maxn, ro_a=1.225):
     
 # fuel_cons - fuel consumption
 
-def fuel_cons(E, Q_f, v_a, P_i, ro_f):
+def fuel_cons(E, Q_f, v_a, p_i, ro_f):
     """
     Function to compute vehicle fuel consumption per one hundred km,
     hourly and specific.
