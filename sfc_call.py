@@ -135,7 +135,7 @@ list_res = []
 # append the dynamic variables
 dyns = []
 dyns.append(v_init)
-dyns.append(xi_g)
+dyns.append(xi_gs[0])
 dyns.append(a)
 dyns.append(t)
 
