@@ -330,6 +330,20 @@ def fuel_cons(E, Q_f, v_a, P_i, ro_f):
     fc_hour = 0.036 * v_a * fc_100 * ro_f
     fc_s = fc_hour / P_i
     return (fc_100, fc_hour, fc_s)
+
+# Torque value double check
+def tcheck(total_e, P_i, xi_f, xi_g, r_d):
+    """
+    Function to check the torque in action, first, as resulted from energy
+    calculation, and second, as delivered by the ICE via transmission.
+    """
+
+    # tractive force necessary to the wheels
+    f_tract = total_e/10 ** 5
+    # the corresponding torque
+    t1 = f_tract * r_d
+
+    return chk
 # ==========
 
 """
