@@ -496,7 +496,7 @@ def simfc_call(fixs, dyns):
         e = e_kin + e_roll + e_air
 
         print("Energy for accelerated movement: ", e)
-        print(tcheck(e, P_i_fin, n_i_fin, dict_fic['xi_f'], dict_fic['xi_g'],
+        print(tcheck(e, P_i_fin, n_i_fin, dict_fix['xi_f'], dict_fix['xi_g'],
                      dict_fix['r_d']))
 
         # fuel consumption
