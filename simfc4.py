@@ -425,6 +425,7 @@ def simfc_call(fixs, dyns):
                                  dict_fix['C_d'], dict_fix['A_f'], v_init)
 
         print("Energy for constant movement: ", e_const)
+        print(tcheck(e_const, p_i, n_i, xi_f, xi_g, r_d))
 
         # fuel consumption
         f_cons = fuel_cons(e_const, dict_fix['Q_f'], v_init, p_i,
