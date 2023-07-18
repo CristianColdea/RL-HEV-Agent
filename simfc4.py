@@ -332,18 +332,29 @@ def fuel_cons(E, Q_f, v_a, p_i, ro_f):
     return (fc_100, fc_hour, fc_s)
 
 # Torque value double check
-def tcheck(total_e, p_i, xi_f, xi_g, r_d):
+def tcheck(total_e, p_i, rpm, xi_f, xi_g, r_d):
     """
     Function to check the torque in action, first, as resulted from energy
     calculation, and second, as delivered by the ICE via transmission.
+    Takes as parameters the total energy required for the movement of the
+    vehicle, in J/100 km, developed output of the ICE, the ICE speed, in rpm,
+    final trassmision ratio, gearbox ratio, and dynamical radius of the wheels.
+    Returns a tuple with torque resulted from total energy, torque resulted
+    from ICE output and a bool variable resulted by comparison of the latter
+    two.
     """
 
     # tractive force necessary to the wheels
     f_tract = total_e/10 ** 5
     # the corresponding torque
     t1 = f_tract * r_d
+    
+    # torque as resulted from the ICE output
+    t2 = 9549.2 * p_i / (xi_f * xi_g)
 
-    return bchk
+    # check the equality
+    bchk = t1 == t2
+    return t1, t2, bchk
 # ==========
 
 """
