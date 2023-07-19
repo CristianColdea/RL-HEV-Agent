@@ -96,7 +96,7 @@ ro_a = 1.225
 fixs.append(ro_a)
 
 # acceleration
-a = 2 
+a = 0 
 
 # gasoline calorific value (fixed)
 Q_f = 34200000
