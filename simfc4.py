@@ -345,12 +345,12 @@ def tcheck(total_e, p_i, n_i, xi_f, xi_g, r_d):
     """
 
     # tractive force necessary to the wheels
-    f_tract = total_e/*(10 ** 5)
+    f_tract = total_e / (10 ** 5)
     # the corresponding torque
     t1 = f_tract * r_d
     
     # torque as resulted from the ICE output
-    t2 = 9549.2 * p_i * (xi_f * xi_g) / n_i
+    t2 = 9549.2 * p_i / n_i# * (xi_f * xi_g) / n_i
 
     # check the equality
     bchk = t1 == t2
