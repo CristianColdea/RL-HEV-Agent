@@ -19,7 +19,7 @@ import dyn_secq as dyn
 fixs = []
 
 # vehicle speed 
-v_init = 4
+v_init = 66.38
 
 # movement duration in seconds
 t = 2 
@@ -71,7 +71,7 @@ eta_max = 0.4
 fixs.append(eta_max)
 
 # vehicle mass (fixed)
-m_a = 1730
+m_a = 2355
 
 fixs.append(m_a)
 
@@ -135,7 +135,7 @@ list_res = []
 # append the dynamic variables
 dyns = []
 dyns.append(v_init)
-dyns.append(xi_gs[0])
+dyns.append(xi_gs[8])
 dyns.append(a)
 dyns.append(t)
 
