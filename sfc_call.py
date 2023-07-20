@@ -19,7 +19,7 @@ import dyn_secq as dyn
 fixs = []
 
 # vehicle speed 
-v_init = 66.38
+v_init = 4
 
 # movement duration in seconds
 t = 2 
@@ -98,13 +98,13 @@ fixs.append(ro_a)
 # acceleration
 a = 0 
 
-# gasoline calorific value (fixed)
-Q_f = 34200000
+# diesel fuel calorific value, J/l (fixed)
+Q_f = 37200000
 
 fixs.append(Q_f)
 
-# gasoline density (fixed)
-ro_f = 0.74
+# diesel fuel density (fixed)
+ro_f = 0.846
 
 fixs.append(ro_f)
 
@@ -135,7 +135,7 @@ list_res = []
 # append the dynamic variables
 dyns = []
 dyns.append(v_init)
-dyns.append(xi_gs[8])
+dyns.append(xi_gs[2])
 dyns.append(a)
 dyns.append(t)
 
