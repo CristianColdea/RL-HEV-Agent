@@ -18,7 +18,7 @@ precisely in this order.
 """
 
 # initial list of list (list of sequences) for WLTP cycle low speed section
-low_row = [[0, 45, 10, 30], [45, 12,30, 55], [12, 40, 55, 75],
+low_raw = [[0, 45, 10, 30], [45, 12,30, 55], [12, 40, 55, 75],
            [40, 0, 75, 100], [0, 30, 140, 150], [30, 12, 150, 155],
            [12, 38, 155, 170], [38, 25, 170, 175], [25, 30, 175, 180],
            [30, 12, 180, 200], [12, 57, 200, 225], [57, 14, 225, 255],
@@ -30,8 +30,6 @@ low_row = [[0, 45, 10, 30], [45, 12,30, 55], [12, 40, 55, 75],
            [0, 30, 540, 550], [30, 12, 550, 565], [12, 18, 565, 570],
            [18, 0, 570, 575]
            ]
-# first list: initial null speed, gearbox ratio,
-# acceleration 1.2 m/s**2 applied for 12 seconds
 
 """
 class to process the input list
