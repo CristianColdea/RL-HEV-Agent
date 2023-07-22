@@ -13,7 +13,7 @@ order of arguments.
 """
 
 import simfc4 as sfc
-import dyn_secq as dyn
+import dyn_seq as dyn
 
 #the 'fixed' vars list
 fixs = []
