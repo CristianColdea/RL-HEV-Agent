@@ -121,17 +121,6 @@ SFC simulator call and results return
 # list to store tuple results
 list_res = []
 
-# import the dynamic secquences and allocate variables
-#for secq in dyn.dyns:
-#    sfc = sfc.simfc_call(fixs, secq[0], secq[1], secq[2], secq[3])
-#     list_res.append(sfc.simfc_call(fixs, secq[0], secq[1], secq[2], secq[3]))
-
-# out_c = sfc.simfc_call(fixs, dyn.b[0], dyn.b[1], dyn.b[2], dyn.b[3])
-
-# print("Fuel consumption per 100 km is: ", out_c[0])
-# print("Fuel consumption per hour is: ", out_c[1])
-# print("Specific fuel consumption is: ", out_c[2])
-
 # append the dynamic variables
 dyns = []
 dyns.append(v_init)
