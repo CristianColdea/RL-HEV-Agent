@@ -40,9 +40,9 @@ class to process the input list
 class Process_inputs:
     def __init__(self, input_list):
         self.input_list[0] = input_list[0]
-        self.input_list[1] = intpu_list[1]
+        self.input_list[1] = input_list[1]
         self.input_list[2] = input_list[2]
-        self.input_list[3] = intput_list[3]
+        self.input_list[3] = input_list[3]
 
     def raw_proc(input_list):
         """
@@ -54,7 +54,7 @@ class Process_inputs:
         reserved for gearbox ratio, acceleration, in m/s**2, and time, in
         secodns.
         """
-        
+        print(type(input_list[0]))
         finals = []  #list to store the returned results
         finals.append(list[0])
         finals.append(0)
@@ -65,4 +65,5 @@ class Process_inputs:
 
         return finals
 
-print(Process_inputs.raw_proc(low_raw[0]))
+sec = low_raw[0]
+print(Process_inputs.raw_proc(sec))
