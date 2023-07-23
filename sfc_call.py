@@ -119,7 +119,7 @@ SFC simulator call and results return
 """
 
 # list to store tuple results
-list_res = []
+#list_res = []
 
 # append the dynamic variables
 dyns = []
@@ -128,8 +128,8 @@ dyns.append(xi_gs[2])
 dyns.append(a)
 dyns.append(t)
 
-csfc = sfc.simfc_call(fixs, dyns)
+#csfc = sfc.simfc_call(fixs, dyns)
 
-print("The 100 km fuel consumption is: ", csfc[0], "l/100 km")
-print("The hourly fuel consumption is: ", csfc[1], "kg/h")
-print("The specific fuel consumption is: ",csfc[2], "kg/kWh")
+#print("The 100 km fuel consumption is: ", csfc[0], "l/100 km")
+#print("The hourly fuel consumption is: ", csfc[1], "kg/h")
+#print("The specific fuel consumption is: ",csfc[2], "kg/kWh")
