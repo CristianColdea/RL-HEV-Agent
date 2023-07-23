@@ -18,7 +18,7 @@ precisely in this order.
 """
 
 import simfc4 as sfc
-import sfc_call as sc
+#import sfc_call as sc
 
 # initial list of list (list of sequences) for WLTP cycle low speed section
 low_raw = [[0, 45, 10, 30], [45, 12,30, 55], [12, 40, 55, 75],
@@ -47,37 +47,40 @@ def raw_proc(raw_list):
     """
         
     processed = []  #list to store the returned results
-    processed.append(raw_list[0])  #initial speed
+    processed.append(raw_list[0]/3.6)  #initial speed
     processed.append(0)  #0 in the second position
     processed.append((raw_list[1] - raw_list[0]) /\
-                  (raw_list[3] - raw_list[2]))  #acceleration
+                 (3.6 * (raw_list[3] - raw_list[2])))  #acceleration
     processed.append(raw_list[3] - raw_list[2])  #time
 
     return processed
 
 """
-class to process the processed list
+class to handle the processed list
 """
 
 class Process_inputs:
     def __init__(self, processed):
 
-        self.processed[0] = raw_list[0]
-        self.processed[1] = raw_list[1]
-        self.processed[2] = raw_list[2]
-        self.processed[3] = raw_list[3]
+        self.processed[0] = processed[0]
+        self.processed[1] = processed[1]
+        self.processed[2] = processed[2]
+        self.processed[3] = processed[3]
         
 
-    def comp_lst(proc_lst):
+    def comp_lst(processed):
         """
         Method to complete the needed list with gearbox ratio.
-        Takes as argument the list processed with previous method,
+        Takes as argument the list processed with previous function,
         initial speed, in m/s, 0, acceleration, in m/s**2, time, in s.
         Returns the complete list for fuel consumption calculation,
         with gearbox ratio as the second list item.
         """
 
-        if proc_lst[0] == 0:
-            proc_lst.insert(sc.xi_gs[0], 1)
+        if processed[0] == 0:
+            processed[1] = 5.503
+
+        return processed
 
 print(raw_proc(low_raw[0]))
+print(Process_inputs.comp_lst(raw_proc(low_raw[0])))
