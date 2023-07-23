@@ -18,7 +18,7 @@ precisely in this order.
 """
 
 import simfc4 as sfc
-#import sfc_call as sc
+import sfc_call as sc
 
 # initial list of list (list of sequences) for WLTP cycle low speed section
 low_raw = [[0, 45, 10, 30], [45, 12,30, 55], [12, 40, 55, 75],
