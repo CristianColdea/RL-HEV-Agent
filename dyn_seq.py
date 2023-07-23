@@ -18,6 +18,7 @@ precisely in this order.
 """
 
 import simfc4 as sfc
+import sfc_call as sc
 
 # initial list of list (list of sequences) for WLTP cycle low speed section
 low_raw = [[0, 45, 10, 30], [45, 12,30, 55], [12, 40, 55, 75],
@@ -33,38 +34,39 @@ low_raw = [[0, 45, 10, 30], [45, 12,30, 55], [12, 40, 55, 75],
            [18, 0, 570, 575]
            ]
 
+def raw_proc(raw_list):
+    """
+    Function to process the raw list of values as collected
+    from the speed profile.
+    Takes as argument the list of four values, 
+    i.e. initial/final speeds, in km/h,
+    and initial/final time read on the WLTP speed profile time axis.
+    Returns a list with intial speed, in m/s, second place in the list
+    reserved for gearbox ratio, acceleration, in m/s**2, and time, in
+    seconds.
+    """
+        
+    processed = []  #list to store the returned results
+    processed.append(raw_list[0])  #initial speed
+    processed.append(0)  #0 in the second position
+    processed.append((raw_list[1] - raw_list[0]) /\
+                  (raw_list[3] - raw_list[2]))  #acceleration
+    processed.append(raw_list[3] - raw_list[2])  #time
+
+    return processed
+
 """
-class to process the input list
+class to process the processed list
 """
 
 class Process_inputs:
-    def __init__(self, raw_list):
+    def __init__(self, processed):
 
-        self.raw_list[0] = raw_list[0]
-        self.raw_list[1] = raw_list[1]
-        self.raw_list[2] = raw_list[2]
-        self.raw_list[3] = raw_list[3]
+        self.processed[0] = raw_list[0]
+        self.processed[1] = raw_list[1]
+        self.processed[2] = raw_list[2]
+        self.processed[3] = raw_list[3]
         
-    def raw_proc(raw_list):
-        """
-        Method to process the raw list of values as collected
-        from the speed profile.
-        Takes as argument the list of four values, 
-        i.e. initial/final speeds, in km/h,
-        and initial/final time read on the WLTP speed profile time axis.
-        Returns a list with intial speed, in m/s, second place in the list
-        reserved for gearbox ratio, acceleration, in m/s**2, and time, in
-        seconds.
-        """
-        
-        finals = []  #list to store the returned results
-        finals.append(raw_list[0])  #initial speed
-        finals.append(0)  #0 in the second position
-        finals.append((raw_list[1] - raw_list[0]) /\
-                      (raw_list[3] - raw_list[2]))  #acceleration
-        finals.append(raw_list[3] - raw_list[2])  #time
-
-        return finals
 
     def comp_lst(proc_lst):
         """
@@ -75,4 +77,7 @@ class Process_inputs:
         with gearbox ratio as the second list item.
         """
 
-print(Process_inputs.raw_proc(low_raw[0]))
+        if proc_lst[0] == 0:
+            proc_lst.insert(sc.xi_gs[0], 1)
+
+print(raw_proc(low_raw[0]))
