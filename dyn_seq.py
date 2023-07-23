@@ -38,17 +38,19 @@ class to process the input list
 """
 
 class Process_inputs:
-    def __init__(self, input_list):
-        self.input_list[0] = input_list[0]
-        self.input_list[1] = input_list[1]
-        self.input_list[2] = input_list[2]
-        self.input_list[3] = input_list[3]
+    def __init__(self, raw_list):
 
-    def raw_proc(input_list):
+        self.raw_list[0] = raw_list[0]
+        self.raw_list[1] = raw_list[1]
+        self.raw_list[2] = raw_list[2]
+        self.raw_list[3] = raw_list[3]
+        
+    def raw_proc(raw_list):
         """
         Method to process the raw list of values as collected
         from the speed profile.
-        Takes the list of four values, i.e. initial/final speeds, in km/h,
+        Takes as argument the list of four values, 
+        i.e. initial/final speeds, in km/h,
         and initial/final time read on the WLTP speed profile time axis.
         Returns a list with intial speed, in m/s, second place in the list
         reserved for gearbox ratio, acceleration, in m/s**2, and time, in
@@ -56,12 +58,21 @@ class Process_inputs:
         """
         
         finals = []  #list to store the returned results
-        finals.append(input_list[0])  #initial speed
+        finals.append(raw_list[0])  #initial speed
         finals.append(0)  #0 in the second position
-        finals.append((input_list[1] - input_list[0]) /\
-                      (input_list[3] - input_list[2]))  #acceleration
-        finals.append(input_list[3] - input_list[2])  #time
+        finals.append((raw_list[1] - raw_list[0]) /\
+                      (raw_list[3] - raw_list[2]))  #acceleration
+        finals.append(raw_list[3] - raw_list[2])  #time
 
         return finals
+
+    def comp_lst(proc_lst):
+        """
+        Method to complete the needed list with gearbox ratio.
+        Takes as argument the list processed with previous method,
+        initial speed, in m/s, 0, acceleration, in m/s**2, time, in s.
+        Returns the complete list for fuel consumption calculation,
+        with gearbox ratio as the second list item.
+        """
 
 print(Process_inputs.raw_proc(low_raw[0]))
