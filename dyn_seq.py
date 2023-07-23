@@ -52,18 +52,16 @@ class Process_inputs:
         and initial/final time read on the WLTP speed profile time axis.
         Returns a list with intial speed, in m/s, second place in the list
         reserved for gearbox ratio, acceleration, in m/s**2, and time, in
-        secodns.
+        seconds.
         """
-        print(type(input_list[0]))
+        
         finals = []  #list to store the returned results
-        finals.append(list[0])
-        finals.append(0)
-        a = (list[1] - list[0]) / (list[3] - list[2])
-        finals.append(a)
-        t = list[3] - list[2]
-        finals.append(t)
+        finals.append(input_list[0])  #initial speed
+        finals.append(0)  #0 in the second position
+        finals.append((input_list[1] - input_list[0]) /\
+                      (input_list[3] - input_list[2]))  #acceleration
+        finals.append(input_list[3] - input_list[2])  #time
 
         return finals
 
-sec = low_raw[0]
-print(Process_inputs.raw_proc(sec))
+print(Process_inputs.raw_proc(low_raw[0]))
