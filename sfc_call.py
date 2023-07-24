@@ -13,7 +13,7 @@ order of arguments.
 """
 
 import simfc4 as sfc
-import dyn_seq as dyn
+#import dyn_seq as dyn
 
 #the 'fixed' vars list
 fixs = []
@@ -122,11 +122,11 @@ SFC simulator call and results return
 #list_res = []
 
 # append the dynamic variables
-dyns = []
-dyns.append(v_init)
-dyns.append(xi_gs[2])
-dyns.append(a)
-dyns.append(t)
+#dyns = []
+#dyns.append(v_init)
+#dyns.append(xi_gs[2])
+#dyns.append(a)
+#dyns.append(t)
 
 #csfc = sfc.simfc_call(fixs, dyns)
 
