@@ -61,13 +61,8 @@ class to handle the processed list
 
 class Process_inputs:
     def __init__(self, processed):
-
-        self.processed[0] = processed[0]
-        self.processed[1] = processed[1]
-        self.processed[2] = processed[2]
-        self.processed[3] = processed[3]
+        self.processed = processed
         
-
     def comp_lst(processed):
         """
         Method to complete the needed list with gearbox ratio.
