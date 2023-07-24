@@ -331,6 +331,30 @@ def fuel_cons(E, Q_f, v_a, p_i, ro_f):
 Within this second section the functions and methods are called
 """
 
+# class to handle all the methods and functions, even repeteadly
+
+class Callings:
+    def __init__(self, fixs, dyns):
+        self.fixs = fixs
+        self.dyns = dyns
+
+    def unpack(fixs):
+        """
+        Method to upack fixed variables list into a dict.
+        Takes as input the fixed variables, in particular order.
+        Returns a dictionary latter usefull.
+        """
+
+        # variables name list
+        vars = ['xi_f', 's_f', 'r_d', 'n_max', 'P_max', 'type', 'eta_t',
+                'eta_max', 'm_a', 'c_r', 'C_d', 'A_f', 'ro_a', 'Q_f', 'ro_f'] 
+        dict_fix = {}
+        dict_fix = dict(zip(vars, fixs))   this approach gives a type error
+        #for index in range(len(vars)):
+        #    dict_fix[vars[index]] = fixs[index]
+
+        return dict_fix
+
 def simfc_call(fixs, dyns):
     """
     Function to call all functions and methods previously defined.
@@ -348,15 +372,7 @@ def simfc_call(fixs, dyns):
     a = dyns[2]
     t = dyns[3]
 
-    # unpacking the fixed variables list into a dict
-    # vars list
-    vars = ['xi_f', 's_f', 'r_d', 'n_max', 'P_max', 'type', 'eta_t',
-            'eta_max', 'm_a', 'c_r', 'C_d', 'A_f', 'ro_a', 'Q_f', 'ro_f'] 
-    dict_fix = {}
-    # dict_fix = dict(zip(vars, fixs))   this approach gives a type error
-    for index in range(len(vars)):
-        dict_fix[vars[index]] = fixs[index]
-    
+        
     # vehicle maximum speed
     v_max = (dict_fix['n_max'] * dict_fix['r_d']) / (9.55 * dict_fix['xi_f'] *
             xi_g * dict_fix['s_f'])
