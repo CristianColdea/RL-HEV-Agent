@@ -19,8 +19,6 @@ def engine_speed(v_a, xi_f, xi_g, r_d, s_f, n_max, n_stab=1200):
     """
     n_i = (9.55 * v_a * xi_f * xi_g * s_f) / r_d
     
-    print("The engine speed is: ", n_i)
-
     if n_i < n_stab:
         return n_stab
 
@@ -78,7 +76,6 @@ class Mus:
         """
         if engine_tp == 'SIE':
             outS = P_max * ((n_i/n_max) + (n_i/n_max)**2 - (n_i/n_max)**3)
-            print("The SIE output for the given speed is: ", outS)
             return outS
         else:
             outC = P_max * ((n_i/n_max) + 0.5 * (n_i/n_max)**2 - 0.5 * (n_i/n_max)**3)
