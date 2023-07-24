@@ -79,7 +79,6 @@ class Mus:
             return outS
         else:
             outC = P_max * ((n_i/n_max) + 0.5 * (n_i/n_max)**2 - 0.5 * (n_i/n_max)**3)
-            print("The CIE output for the given speed is: ", outC)
             return outC
 
     # mu_n function for continuous generation of muN
