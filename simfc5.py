@@ -325,31 +325,6 @@ def fuel_cons(E, Q_f, v_a, p_i, ro_f):
     fc_hour = 0.036 * v_a * fc_100 * ro_f
     fc_s = fc_hour / p_i
     return (fc_100, fc_hour, fc_s)
-
-# Torque value double check
-def tcheck(total_e, p_i, n_i, xi_f, xi_g, r_d):
-    """
-    Function to check the torque in action, first, as resulted from energy
-    calculation, and second, as delivered by the ICE via transmission.
-    Takes as parameters the total energy required for the movement of the
-    vehicle, in J/100 km, developed output of the ICE, the ICE speed, in rpm,
-    final trassmision ratio, gearbox ratio, and dynamical radius of the wheels.
-    Returns a tuple with torque resulted from total energy, torque resulted
-    from ICE output and a bool variable resulted by comparison of the latter
-    two.
-    """
-
-    # tractive force necessary to the wheels
-    f_tract = total_e / (10 ** 5)
-    # the corresponding torque
-    t1 = f_tract * r_d / (xi_f * xi_g)
-    
-    # torque as resulted from the ICE output
-    t2 = 9549.2 * p_i / n_i  # * xi_f * xi_g / n_i
-
-    # check the equality
-    bchk = t1 == t2
-    return t1, t2, bchk
 # ==========
 
 """
@@ -420,9 +395,7 @@ def simfc_call(fixs, dyns):
                                  dict_fix['C_d'], dict_fix['A_f'], v_init)
 
         print("Energy for constant movement: ", e_const)
-        print(tcheck(e_const, p_i, n_i, dict_fix['xi_f'], xi_g,
-                     dict_fix['r_d']))
-
+         
         # fuel consumption
         f_cons = fuel_cons(e_const, dict_fix['Q_f'], v_init, p_i,
                               dict_fix['ro_f'])
@@ -430,7 +403,6 @@ def simfc_call(fixs, dyns):
     else:
         # vehicle actual speed after acceleration a applied during time t
         v = v_init + (a * t)
-        print("Vehicle speed after acceleration a applied for time t is: ", v)
         if v > v_max:
             v = v_max
             print("The vehicle speed is too high.\n",
