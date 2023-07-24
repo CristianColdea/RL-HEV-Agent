@@ -77,7 +77,7 @@ class Process_inputs:
         with gearbox ratio as the second list item.
         """
         
-        # always start in the 1st gear from null speed
+        # always start in the 1st gear at null speed
         if processed[0] == 0:
             processed[1] = sc.xi_gs[0]
         
