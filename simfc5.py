@@ -83,7 +83,7 @@ class Mus:
 
     # mu_n function for continuous generation of muN
 
-    def mu_n(n, n_max, n_stab=1200):
+    def mu_n(n, n_max, n_stab=1000):
         """
         Method to continuously compute mu N fraction required for fuel consumption
         calculation. Takes as parameters the instantaneous engine speed, engine speed
@@ -301,7 +301,6 @@ def required_power(eta_t, m_a, c_r, C_d, A_f, v_a, a, p_maxn, ro_a=1.225):
     p_i = (1/(eta_t * 1000)) * (m_a * 9.81 * c_r + (ro_a/2) * C_d * A_f * v_a**2 +
           m_a * a * 1.08) * v_a
     if p_i <= p_maxn:
-        print("The required engine output is: ", p_i)
         return p_i
     else:
         print("The engine output exceeded MAX for the given conditions.\n"
