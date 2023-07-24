@@ -76,11 +76,14 @@ class Process_inputs:
         Returns the complete list for fuel consumption calculation,
         with gearbox ratio as the second list item.
         """
-
+        
+        # always start in the 1st gear from null speed
         if processed[0] == 0:
-            processed[1] = 5.503
+            processed[1] = sc.xi_gs[0]
+        
+        # setup flags
 
         return processed
 
-print(raw_proc(low_raw[0]))
+# print(raw_proc(low_raw[0]))
 print(Process_inputs.comp_lst(raw_proc(low_raw[0])))
