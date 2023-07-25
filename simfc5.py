@@ -331,31 +331,36 @@ def fuel_cons(E, Q_f, v_a, p_i, ro_f):
 Within this second section the functions and methods are called
 """
 
-# class to handle all the methods and functions, even repeteadly
+def unpack_f(fixs):
+    """
+    Function to upack fixed variables list into a dict.
+    Takes as input the fixed variables, in particular order.
+    Returns a dictionary latter usefull.
+    """
 
-class Callings:
-    def __init__(self, fixs, dyns):
-        self.fixs = fixs
-        self.dyns = dyns
-
-    def unpack(fixs):
-        """
-        Method to upack fixed variables list into a dict.
-        Takes as input the fixed variables, in particular order.
-        Returns a dictionary latter usefull.
-        """
-
-        # variables name list
-        vars = ['xi_f', 's_f', 'r_d', 'n_max', 'P_max', 'type', 'eta_t',
+    names_f = ['xi_f', 's_f', 'r_d', 'n_max', 'P_max', 'type', 'eta_t',
                 'eta_max', 'm_a', 'c_r', 'C_d', 'A_f', 'ro_a', 'Q_f', 'ro_f'] 
-        dict_fix = {}
-        dict_fix = dict(zip(vars, fixs))   this approach gives a type error
-        #for index in range(len(vars)):
-        #    dict_fix[vars[index]] = fixs[index]
+    dict_fix = {}
+    dict_fix = dict(zip(names_f, fixs))
+        
+    return dict_fix
+   
 
-        return dict_fix
+def unpack_d(dyns):
+    """
+    Function to unpack dynamic variables.
+    Takes as input the dynamic variables, in particular order.
+    Returns a list latter useful.
+    """
 
-def simfc_call(fixs, dyns):
+    names_d = ['v_init', 'xi_g', 'a', 't']
+    dict_dyn = {}
+    dict_dyn = dict(zip(names_d, dyns))
+
+    return dict_dyn
+
+
+def simfc_call(dict_fix, dict_dyn):
     """
     Function to call all functions and methods previously defined.
     The meaning of function parameters is indicated throughout this script 
@@ -366,26 +371,19 @@ def simfc_call(fixs, dyns):
             the maximum engine output for the given engine speed.
     """
     
-    # allocating dynamic variables
-    v_init = dyns[0]
-    xi_g = dyns[1]
-    a = dyns[2]
-    t = dyns[3]
-
-        
     # vehicle maximum speed
     v_max = (dict_fix['n_max'] * dict_fix['r_d']) / (9.55 * dict_fix['xi_f'] *
-            xi_g * dict_fix['s_f'])
-    if v_init >= v_max:
-        v_init = v_max
+             dict_dyn['xi_g'] * dict_fix['s_f'])
+    if dict_dyn['v_init'] >= v_max:
+        dict_dyn['v_init'] = v_max
         print("Initial speed is too high.\n",
               "It was automatically readjusted to MAX value possible!")
-
-    
+ 
     # 1) the case of uniform vehicle movement (i.e., a = 0)
     if a == 0:
         # engine speed
-        n_i = engine_speed(v_init, dict_fix['xi_f'], xi_g, dict_fix['r_d'],
+        n_i = engine_speed(dict_dyn['v_init'], dict_fix['xi_f'],
+                           dict_dyn['xi_g'], dict_fix['r_d'],
                            dict_fix['s_f'], dict_fix['n_max'])
 
         
@@ -398,7 +396,8 @@ def simfc_call(fixs, dyns):
 
         # engine instantaneous power
         p_i = required_power(dict_fix['eta_t'], dict_fix['m_a'], dict_fix['c_r'],
-                             dict_fix['C_d'], dict_fix['A_f'], v_init, a,
+                             dict_fix['C_d'], dict_fix['A_f'],
+                             dict_dyn['v_init'],dict_dyn['a'],
                              dict_fix['P_max'])
 
         
@@ -408,27 +407,26 @@ def simfc_call(fixs, dyns):
         # energy required to overcome resistances at the given constant speed
         e_const = Energy.e_const(dict_fix['eta_t'], dict_fix['eta_max'], mu_n,
                                  mu_P, dict_fix['m_a'], dict_fix['c_r'],
-                                 dict_fix['C_d'], dict_fix['A_f'], v_init)
+                                 dict_fix['C_d'], dict_fix['A_f'],
+                                 dict_dyn['v_init'])
 
-        print("Energy for constant movement: ", e_const)
-         
         # fuel consumption
-        f_cons = fuel_cons(e_const, dict_fix['Q_f'], v_init, p_i,
+        f_cons = fuel_cons(e_const, dict_fix['Q_f'], dict_dyn['v_init'], p_i,
                               dict_fix['ro_f'])
     
     else:
         # vehicle actual speed after acceleration a applied during time t
-        v = v_init + (a * t)
+        v = dict_dyn['v_init'] + (dict_dyn['a'] * dict_dyn['t'])
         if v > v_max:
             v = v_max
             print("The vehicle speed is too high.\n",
                   "It was automatically readjusted to MAX value possible!")
             
         # engine speed at initial vehicle speed
-        n_i_init = engine_speed(v_init, dict_fix['xi_f'], xi_g, dict_fix['r_d'],
+        n_i_init = engine_speed(dict_dyn['v_init'], dict_fix['xi_f'],
+                                dict_dyn['xi_g'], dict_fix['r_d'],
                                 dict_fix['s_f'], dict_fix['n_max'])
-        #print(n_i_init)
-        
+               
         # engine speed initial penalty
         mu_n_init = Mus.mu_n(n_i_init, dict_fix['n_max'])
         
@@ -439,13 +437,14 @@ def simfc_call(fixs, dyns):
         # engine initial instantaneous power
         P_i_init = required_power(dict_fix['eta_t'], dict_fix['m_a'],
                                   dict_fix['c_r'], dict_fix['C_d'],
-                                  dict_fix['A_f'], v_init, a, p_maxn_init)
+                                  dict_fix['A_f'], dict_dyn['v_init'],
+                                  dict_dyn['a'], p_maxn_init)
         
         # engine initial output penalty
         mu_P_init = Mus.mu_P(P_i_init, p_maxn_init, engine_tp = 'CIE')
         
         # engine speed at final vehicle speed
-        n_i_fin = engine_speed(v, dict_fix['xi_f'], xi_g, dict_fix['r_d'],
+        n_i_fin = engine_speed(v, dict_fix['xi_f'], dict_dyn['xi_g'], dict_fix['r_d'],
                                dict_fix['s_f'], dict_fix['n_max'])
         
         # engine speed final penalty
@@ -457,7 +456,7 @@ def simfc_call(fixs, dyns):
         # engine final instantaneous power
         P_i_fin = required_power(dict_fix['eta_t'], dict_fix['m_a'],
                                  dict_fix['c_r'], dict_fix['C_d'],
-                                 dict_fix['A_f'], v, a, p_maxn_fin)
+                                 dict_fix['A_f'], v, dict_dyn['a'], p_maxn_fin)
 
         # engine final output penalty
         mu_P_fin = Mus.mu_P(P_i_fin, p_maxn_fin)
@@ -465,15 +464,17 @@ def simfc_call(fixs, dyns):
         # energy required to accelerate the vehicle
         e_kin = Energy.e_kin(dict_fix['eta_t'], dict_fix['eta_max'], mu_n_init,
                              mu_n_fin, mu_P_init, mu_P_fin, dict_fix['m_a'],
-                             v_init, a, t)
+                             dict_dyn['v_init'], dict_dyn['a'], dict_dyn['t'])
 
         # energy required to overcome rolling resistance
         e_roll = Energy.e_roll(dict_fix['eta_t'], dict_fix['eta_max'], mu_n_fin,
-                               mu_P_fin, dict_fix['m_a'], v, dict_fix['c_r'],a, t)
+                               mu_P_fin, dict_fix['m_a'], v,
+                               dict_fix['c_r'],dict_dyn['a'], dict_dyn['t'])
 
         # energy required to overcome air resistance
         e_air = Energy.e_air(dict_fix['eta_t'], dict_fix['eta_max'], mu_n_fin,
-                             mu_P_fin, v, dict_fix['C_d'], dict_fix['A_f'], a, t)
+                             mu_P_fin, v, dict_fix['C_d'], dict_fix['A_f'],
+                             dict_dyn['a'], dict_dyn['t'])
 
         # total energy required for accelerated vehicle movement
         e = e_kin + e_roll + e_air
