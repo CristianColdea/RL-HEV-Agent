@@ -17,7 +17,7 @@ The values are intial speed, final speed, initial time, final time,
 precisely in this order.
 """
 
-import simfc4 as sfc
+import simfc5 as sfc
 import sfc_call as sc
 
 # initial list of list (list of sequences) for WLTP cycle low speed section
@@ -42,16 +42,16 @@ def raw_proc(raw_list):
     i.e. initial/final speeds, in km/h,
     and initial/final time read on the WLTP speed profile time axis.
     Returns a list with intial speed, in m/s, second place in the list
-    reserved for gearbox ratio, acceleration, in m/s**2, and time, in
-    seconds.
+    is always complete with lowest gearbox ratio, acceleration, in m/s**2,
+    and time, in seconds.
     """
         
     processed = []  #list to store the returned results
-    processed.append(raw_list[0]/3.6)  #initial speed
-    processed.append(0)  #0 in the second position
+    processed.append(raw_list[0]/3.6)  # initial speed
+    processed.append(sc.xi_gs[-1])  # the second position
     processed.append((raw_list[1] - raw_list[0]) /\
-                 (3.6 * (raw_list[3] - raw_list[2])))  #acceleration
-    processed.append(raw_list[3] - raw_list[2])  #time
+                 (3.6 * (raw_list[3] - raw_list[2])))  # acceleration
+    processed.append(raw_list[3] - raw_list[2])  # time
 
     return processed
 
@@ -62,7 +62,10 @@ class to handle the processed list
 class Process_inputs:
     def __init__(self, processed):
         self.processed = processed
-        
+    
+    def tmstp(processed):
+        steps = 0
+        return processed, steps
     def comp_lst(processed):
         """
         Method to complete the needed list with gearbox ratio.
@@ -76,8 +79,17 @@ class Process_inputs:
         if processed[0] == 0:
             processed[1] = sc.xi_gs[0]
         
-        # setup flags
+        dict_fix = sfc.unpack_f(sc.fixes)
+        dict_dyn = sfc.unpack_d(processed)
 
+        # setup flags based on max engine speed 2400 rpm, min 1400 rpm
+        n_i = sfc.engine_speed(dict_dyn['v_init'], dict_fix['xi_f'],
+                               dict_dyn['xi_g'], dict_fix['r_d'],
+                               dict_fix['s_f'], dict_fix['n_max'])
+        if(n_i <= 2400 and n_i >= 1400):
+            flg = True
+        else:
+            flg = False
         return processed
 
 # print(raw_proc(low_raw[0]))
