@@ -60,12 +60,20 @@ class to handle the processed list
 """
 
 class Process_inputs:
-    def __init__(self, processed):
+    def __init__(self, processed, steps):
         self.processed = processed
+        self.steps = steps
     
     def tmstp(processed):
         steps = 0
-        return processed, steps
+        if(processed[-1]%0.5 == 0):
+            steps = processed[-1] / 0.5
+            return steps
+        else:
+            steps = processed[-1] / 0.5
+            rem = processed[-1]%0.5
+            return steps+1
+
     def comp_lst(processed):
         """
         Method to complete the needed list with gearbox ratio.
