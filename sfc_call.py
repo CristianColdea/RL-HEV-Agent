@@ -12,7 +12,7 @@ understand which script are belonging to either category and the
 order of arguments.
 """
 
-import simfc4 as sfc
+import simfc5 as sfc
 #import dyn_seq as dyn
 
 #the 'fixed' vars list
@@ -114,6 +114,8 @@ if len(fixs) != 15:
     exit()
 # ==========
 
+print(sfc.unpack_f(fixs))
+print(sfc.unpack_d([0, 3.6, 0.6, 2]))
 """
 SFC simulator call and results return
 """
