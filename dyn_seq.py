@@ -48,7 +48,7 @@ def raw_proc(raw_list):
         
     processed = []  #list to store the returned results
     processed.append(raw_list[0]/3.6)  # initial speed
-    processed.append(sc.xi_gs[-1])  # the second position
+    processed.append(0)  # the second position reserved
     processed.append((raw_list[1] - raw_list[0]) /\
                  (3.6 * (raw_list[3] - raw_list[2])))  # acceleration
     processed.append(raw_list[3] - raw_list[2])  # time
