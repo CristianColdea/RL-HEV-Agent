@@ -55,7 +55,7 @@ def raw_proc(raw_list):
 
     return processed
 
-def process_inputs(processed, step=0.5):
+def process_input(processed, step=0.5):
     """
     Function to handle the processed list. It has two objectives:
     1) Fragment the sequence in time steps, and 
@@ -75,24 +75,23 @@ def process_inputs(processed, step=0.5):
         steps = processed[-1] / step
         rem = processed[-1] % step
     
-    def comp_lst(processed):
-                
-        # always start in the 1st gear at null speed
-        if processed[0] == 0:
-            processed[1] = sc.xi_gs[0]
+    # always start in the 1st gear at null speed
+    if processed[0] == 0:
+        processed[1] = sc.xi_gs[0]
         
-        dict_fix = sfc.unpack_f(sc.fixes)
-        dict_dyn = sfc.unpack_d(processed)
+    dict_fix = sfc.unpack_f(sc.fixes)
+    dict_dyn = sfc.unpack_d(processed)
 
-        # setup flags based on max engine speed 2400 rpm, min 1400 rpm
-        n_i = sfc.engine_speed(dict_dyn['v_init'], dict_fix['xi_f'],
-                               dict_dyn['xi_g'], dict_fix['r_d'],
-                               dict_fix['s_f'], dict_fix['n_max'])
-        if(n_i <= 2400 and n_i >= 1400):
-            flg = True
-        else:
-            flg = False
-        return processed
+    # setup flags based on max engine speed 2400 rpm, min 1400 rpm
+    n_i = sfc.engine_speed(dict_dyn['v_init'], dict_fix['xi_f'],
+                           dict_dyn['xi_g'], dict_fix['r_d'],
+                           dict_fix['s_f'], dict_fix['n_max'])
+    if(n_i <= 2400 and n_i >= 1400):
+        flg = True
+    else:
+        flg = False
+    
+    return processed
 
 # print(raw_proc(low_raw[0]))
-print(Process_inputs.comp_lst(raw_proc(low_raw[0])))
+print(process_input(raw_proc(low_raw[0])))
