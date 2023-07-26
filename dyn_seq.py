@@ -64,9 +64,8 @@ def process_inputs(processed, step=0.5):
     Takes as arguments the list processed with previous function,
     initial speed, in m/s, 0, acceleration, in m/s**2, time, in s,
     and the time step size (default 0.5 s).
-    Returns the complete list for fuel consumption calculation,
-    with gearbox ratio as the second list item, and the number of fragmented
-    sublists to be appended.
+    Returns the complete list of sublists for fuel consumption calculation,
+    with gearbox ratio as the second list item, to be appended.
     """
 
     steps = 0
