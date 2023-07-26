@@ -42,7 +42,7 @@ def raw_proc(raw_list):
     i.e. initial/final speeds, in km/h,
     and initial/final time read on the WLTP speed profile time axis.
     Returns a list with intial speed, in m/s, second place in the list
-    is always complete with lowest gearbox ratio, acceleration, in m/s**2,
+    is always complete with 0, acceleration, in m/s**2,
     and time, in seconds.
     """
         
@@ -55,34 +55,29 @@ def raw_proc(raw_list):
 
     return processed
 
-"""
-class to handle the processed list
-"""
+def process_inputs(processed, step=0.5):
+    """
+    Function to handle the processed list. It has two objectives:
+    1) Fragment the sequence in time steps, and 
+    2) Complete the needed list with gearbox ratio, according to the rule
+    of MAX and MIN engine speed limits.
+    Takes as arguments the list processed with previous function,
+    initial speed, in m/s, 0, acceleration, in m/s**2, time, in s,
+    and the time step size (default 0.5 s).
+    Returns the complete list for fuel consumption calculation,
+    with gearbox ratio as the second list item, and the number of fragmented
+    sublists to be appended.
+    """
 
-class Process_inputs:
-    def __init__(self, processed, steps):
-        self.processed = processed
-        self.steps = steps
+    steps = 0
+    if(processed[-1] % step == 0):
+        steps = processed[-1] / step
+    else:
+        steps = processed[-1] / step
+        rem = processed[-1] % step
     
-    def tmstp(processed):
-        steps = 0
-        if(processed[-1]%0.5 == 0):
-            steps = processed[-1] / 0.5
-            return steps
-        else:
-            steps = processed[-1] / 0.5
-            rem = processed[-1]%0.5
-            return steps+1
-
     def comp_lst(processed):
-        """
-        Method to complete the needed list with gearbox ratio.
-        Takes as argument the list processed with previous function,
-        initial speed, in m/s, 0, acceleration, in m/s**2, time, in s.
-        Returns the complete list for fuel consumption calculation,
-        with gearbox ratio as the second list item.
-        """
-        
+                
         # always start in the 1st gear at null speed
         if processed[0] == 0:
             processed[1] = sc.xi_gs[0]
