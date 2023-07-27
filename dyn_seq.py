@@ -83,7 +83,7 @@ def process_input(processed, steps, max_lim=2400, min_lim=1400):
     if processed[0] == 0:
         processed[1] = sc.xi_gs[0]
         
-    dict_fix = sfc.unpack_f(sc.fixes)
+    dict_fix = sfc.unpack_f(sc.fixs)
     dict_dyn = sfc.unpack_d(processed)
     
     step = 0
