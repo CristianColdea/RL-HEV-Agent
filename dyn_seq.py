@@ -55,43 +55,51 @@ def raw_proc(raw_list):
 
     return processed
 
-def process_input(processed, step=0.5):
+def tmstp(time, step=0.5):
     """
-    Function to handle the processed list. It has two objectives:
-    1) Fragment the sequence in time steps, and 
-    2) Complete the needed list with gearbox ratio, according to the rule
-    of MAX and MIN engine speed limits.
-    Takes as arguments the list processed with previous function,
-    initial speed, in m/s, 0, acceleration, in m/s**2, time, in s,
-    and the time step size (default 0.5 s).
-    Returns the complete list of sublists for fuel consumption calculation,
-    with gearbox ratio as the second list item, to be appended.
+    Function to fragment the sequence in time steps, and 
+    Takes as arguments the time, in s, and the time step size (default 0.5 s).
+    Returns the number of time steps.
     """
 
-    steps = 0
-    if(processed[-1] % step == 0):
-        steps = processed[-1] / step
-    else:
-        steps = processed[-1] / step
-        rem = processed[-1] % step
+    if(time % step == 0):
+        return (time / step, 0)
+    else:  # time float value
+        return (time / step, time % step)
+
+def process_input(processed, steps, max_lim=2400, min_lim=1400):
+    """
+    Function to handle the processed list in order to get the
+    gearbox ratio, according to the rule of MAX and MIN engine speed limits.
+    Takes as arguments the list processed with previous function,
+    initial speed, in m/s, 0, acceleration, in m/s**2, time, in s, the number
+    of time steps, MAX and MIN engine speed limits.
+    Returns the complete list of sublists for fuel consumption calculation.
+    """
     
+    ret = []  # collect each time step sublist
+
     # always start in the 1st gear at null speed
     if processed[0] == 0:
         processed[1] = sc.xi_gs[0]
         
     dict_fix = sfc.unpack_f(sc.fixes)
     dict_dyn = sfc.unpack_d(processed)
-
-    # setup flags based on max engine speed 2400 rpm, min 1400 rpm
-    n_i = sfc.engine_speed(dict_dyn['v_init'], dict_fix['xi_f'],
-                           dict_dyn['xi_g'], dict_fix['r_d'],
-                           dict_fix['s_f'], dict_fix['n_max'])
-    if(n_i <= 2400 and n_i >= 1400):
-        flg = True
-    else:
-        flg = False
     
-    return processed
+    step = 0
+    while(step <= steps):
+        for gear in sc.xi_gs:
+            n_i = sfc.engine_speed(dict_dyn['v_init'], dict_fix['xi_f'],
+                                   gear, dict_fix['r_d'],
+                                   dict_fix['s_f'], dict_fix['n_max'])
+            # check engine speed conditions
+            if(n_i <= max_lim and n_i >= min_lim):
+                processed[1] = gear
+                ret.append(processed)
+                break
+        step += 1
+        
+    return ret
 
 # print(raw_proc(low_raw[0]))
-print(process_input(raw_proc(low_raw[0])))
+print(process_input(tmstp(raw_proc(low_raw[0]))))
