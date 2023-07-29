@@ -82,7 +82,7 @@ def process_input(processed, steps, max_lim=2400, min_lim=1400, tstep=0.5):
     ret = []  # collect each time step sublist
             
     dict_fix = sfc.unpack_f(sc.fixs)
-    dict_dyn = sfc.unpack_d(processed)
+    # dict_dyn = sfc.unpack_d(processed)
     
     # print(dict_fix, '\n', dict_dyn)
 
@@ -99,7 +99,7 @@ def process_input(processed, steps, max_lim=2400, min_lim=1400, tstep=0.5):
 
         """
         for gear in sc.xi_gs:
-            n_i = sfc.engine_speed(dict_dyn['v_init'], dict_fix['xi_f'],
+            n_i = sfc.engine_speed(processed[0], dict_fix['xi_f'],
                                    gear, dict_fix['r_d'],
                                    dict_fix['s_f'], dict_fix['n_max'])
             # check engine speed conditions
