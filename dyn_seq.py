@@ -67,13 +67,13 @@ def tmstp(time, step=0.5):
     else:  # time float value
         return (time / step, time % step)
 
-def process_input(processed, steps, max_lim=2400, min_lim=1400):
+def process_input(processed, steps, max_lim=2400, min_lim=1400, tstep=0.5):
     """
     Function to handle the processed list in order to get the
     gearbox ratio, according to the rule of MAX and MIN engine speed limits.
     Takes as arguments the list processed with previous function,
     initial speed, in m/s, 0, acceleration, in m/s**2, time, in s, the number
-    of time steps, MAX and MIN engine speed limits.
+    of time steps, MAX and MIN engine speed limits, time step, in s.
     Returns the complete list of sublists for fuel consumption calculation.
     """
     
@@ -88,12 +88,17 @@ def process_input(processed, steps, max_lim=2400, min_lim=1400):
 
     step = 0
     while(step <= steps):
-        for gear in sc.xi_gs:
-            # always start in the 1st gear at null speed
-            if processed[0] == 0:
-                processed[1] = sc.xi_gs[0]
-                continue
+        # always start in the 1st gear at null speed
+        if processed[0] == 0:
+            processed[1] = sc.xi_gs[0]
+            # print(processed)
+            print(step)
+            processed[0] = processed[0] + tstep * processed[2]
+            print(processed)
+            ret.append(processed)
 
+        """
+        for gear in sc.xi_gs:
             n_i = sfc.engine_speed(dict_dyn['v_init'], dict_fix['xi_f'],
                                    gear, dict_fix['r_d'],
                                    dict_fix['s_f'], dict_fix['n_max'])
@@ -102,6 +107,10 @@ def process_input(processed, steps, max_lim=2400, min_lim=1400):
                 processed[1] = gear
                 ret.append(processed)
                 break
+        print(processed[0], processed[2])        
+        processed[0] = processed[0] + step * processed[2]
+        print(processed[0])
+        """
         step += 1
         
     return ret
