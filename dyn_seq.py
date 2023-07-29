@@ -77,7 +77,7 @@ def process_input(processed, steps, max_lim=2400, min_lim=1400):
     Returns the complete list of sublists for fuel consumption calculation.
     """
     
-    print(steps)
+    # print(steps)
 
     ret = []  # collect each time step sublist
 
@@ -88,7 +88,7 @@ def process_input(processed, steps, max_lim=2400, min_lim=1400):
     dict_fix = sfc.unpack_f(sc.fixs)
     dict_dyn = sfc.unpack_d(processed)
     
-    print(dict_fix, '\n', dict_dyn)
+    # print(dict_fix, '\n', dict_dyn)
 
     step = 0
     while(step <= steps):
