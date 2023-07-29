@@ -91,11 +91,11 @@ def process_input(processed, steps, max_lim=2400, min_lim=1400, tstep=0.5):
         # always start in the 1st gear at null speed
         if processed[0] == 0:
             processed[1] = sc.xi_gs[0]
-            # print(processed)
-            print(step)
+            processed[3] = tstep 
+            ret.append(processed) 
             processed[0] = processed[0] + tstep * processed[2]
             print(processed)
-            ret.append(processed)
+            continue
 
         """
         for gear in sc.xi_gs:
