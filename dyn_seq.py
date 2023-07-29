@@ -77,6 +77,8 @@ def process_input(processed, steps, max_lim=2400, min_lim=1400):
     Returns the complete list of sublists for fuel consumption calculation.
     """
     
+    print(steps)
+
     ret = []  # collect each time step sublist
 
     # always start in the 1st gear at null speed
@@ -86,6 +88,8 @@ def process_input(processed, steps, max_lim=2400, min_lim=1400):
     dict_fix = sfc.unpack_f(sc.fixs)
     dict_dyn = sfc.unpack_d(processed)
     
+    print(dict_fix, '\n', dict_dyn)
+
     step = 0
     while(step <= steps):
         for gear in sc.xi_gs:
@@ -103,6 +107,8 @@ def process_input(processed, steps, max_lim=2400, min_lim=1400):
 
 # print(raw_proc(low_raw[0]))
 # print(process_input(raw_proc(low_raw[0]), tmstp(raw_proc(low_raw[0])[-1])[0]))
-# proc = raw_proc(low_raw[0])
-# print(proc[-1])
-print(raw_proc(low_raw[0])[-1])
+# print(low_raw[0])
+# print(raw_proc(low_raw[0]))
+# print(int(tmstp(raw_proc(low_raw[0])[-1])[0]))
+print(process_input(raw_proc(low_raw[0]),
+                    int(tmstp(raw_proc(low_raw[0])[-1])[0])))
