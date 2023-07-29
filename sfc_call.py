@@ -114,8 +114,8 @@ if len(fixs) != 15:
     exit()
 # ==========
 
-print(sfc.unpack_f(fixs))
-print(sfc.unpack_d([0, 3.6, 0.6, 2]))
+#print(sfc.unpack_f(fixs))
+#print(sfc.unpack_d([0, 3.6, 0.6, 2]))
 """
 SFC simulator call and results return
 """
