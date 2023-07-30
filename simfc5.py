@@ -22,7 +22,7 @@ def engine_speed(v_a, xi_f, xi_g, r_d, s_f, n_max, n_stab=1200):
     if n_i < n_stab:
         return n_stab
 
-    if n_i <= n_max and n_i >= n_stab:
+    if n_i <= n_max:
         return n_i
     else:
         print("The engine speed exceeded MAX.\n"
