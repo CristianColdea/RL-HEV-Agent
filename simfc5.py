@@ -7,7 +7,7 @@ and methods.
 
 # engine_speed calculation according to vehicle speed
 
-def engine_speed(v_a, xi_f, xi_g, r_d, s_f, n_max, n_stab=1200):
+def engine_speed(v_a, xi_f, xi_g, r_d, s_f, n_max, n_stab=800):
     """
     Function to compute engine speed related to vehicle speed.
     Takes as parameters vehicle speed, in m/s, final gear ratio,
@@ -83,7 +83,7 @@ class Mus:
 
     # mu_n function for continuous generation of muN
 
-    def mu_n(n, n_max, n_stab=1000):
+    def mu_n(n, n_max, n_stab=800):
         """
         Method to continuously compute mu N fraction required for fuel consumption
         calculation. Takes as parameters the instantaneous engine speed, engine speed
