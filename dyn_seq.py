@@ -93,19 +93,23 @@ def process_input(processed, steps, max_lim=2400, min_lim=1400, tstep=0.5):
             processed[1] = sc.xi_gs[0]
             processed[3] = tstep 
             ret.append(processed)
-            print(processed)
+            #print(processed)
             processed[0] = processed[0] + tstep * processed[2]
-            print(processed)
+            #print(processed)
             continue
 
         
         for gear in sc.xi_gs:
-            print(processed)
+            # print(processed)
             n_i = sfc.engine_speed(processed[0], dict_fix['xi_f'],
                                    gear, dict_fix['r_d'],
                                    dict_fix['s_f'], dict_fix['n_max'])
+            print(n_i, processed[1], processed[0])
             # check engine speed conditions
             if(n_i <= max_lim and n_i >= min_lim):
+                b = (n_i <= max_lim and n_i >=  min_lim)
+                print(b)
+            #if(n_i <= max_lim):
                 processed[1] = gear
                 processed[3] = tstep
                 ret.append(processed)
