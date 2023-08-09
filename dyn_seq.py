@@ -55,17 +55,17 @@ def raw_proc(raw_list):
 
     return processed
 
-def tmstp(time, step=0.5):
+def tmstp(time, tstep=0.5):
     """
     Function to fragment the sequence in time steps, and 
     Takes as arguments the time, in s, and the time step size (default 0.5 s).
     Returns the number of time steps.
     """
 
-    if(time % step == 0):
-        return (time / step, 0)
+    if(time % tstep == 0):
+        return (time / tstep, 0)
     else:  # time float value
-        return (time / step, time % step)
+        return (time / tstep, time % tstep)
 
 def process_input(processed, steps, max_lim=2400, min_lim=1400, tstep=0.5):
     """
