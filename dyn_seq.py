@@ -42,7 +42,7 @@ def raw_proc(raw_list):
     i.e. initial/final speeds, in km/h,
     and initial/final time read on the WLTP speed profile time axis.
     Returns a list with intial speed, in m/s, second place in the list
-    is always complete with 0, acceleration, in m/s**2,
+    is always completed with 0, acceleration, in m/s**2,
     and time, in seconds.
     """
         
