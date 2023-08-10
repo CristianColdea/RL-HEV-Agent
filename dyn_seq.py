@@ -108,7 +108,7 @@ def process_input(processed, steps, max_lim=2400, min_lim=1400, tstep=0.5):
             # check engine speed conditions
             if(n_i <= max_lim and n_i >= min_lim):
                 b = (n_i <= max_lim and n_i >=  min_lim)
-                print(b)
+#                print(b)
             #if(n_i <= max_lim):
                 processed[1] = gear
                 processed[3] = tstep
@@ -122,12 +122,12 @@ def process_input(processed, steps, max_lim=2400, min_lim=1400, tstep=0.5):
         
     return ret
 
-# print(raw_proc(low_raw[0]))
-# print(process_input(raw_proc(low_raw[0]), tmstp(raw_proc(low_raw[0])[-1])[0]))
+print(raw_proc(low_raw[0]))
+print(process_input(raw_proc(low_raw[0]), tmstp(raw_proc(low_raw[0])[-1])[0]))
 # print(low_raw[0])
 # print(raw_proc(low_raw[0]))
 # print(int(tmstp(raw_proc(low_raw[0])[-1])[0]))
 #print(process_input(raw_proc(low_raw[0]),
 #                    int(tmstp(raw_proc(low_raw[0])[-1])[0])))
-process_input(raw_proc(low_raw[0]),
-                    int(tmstp(raw_proc(low_raw[0])[-1])[0]))
+# process_input(raw_proc(low_raw[0]),
+#                    int(tmstp(raw_proc(low_raw[0])[-1])[0]))
