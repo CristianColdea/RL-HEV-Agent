@@ -50,7 +50,7 @@ List of features ready and TODOs for future development
 To-do list:
 * ~~Get ready the README file, with project outline.~~
 * ~~Compute transmission final ratio based on vehicle max speed, rolling radius and ICE max speed.~~
-* Collect/determine the needed technical data of both the classical (ICE) and HE vehicles.
+* ~~Collect/determine the needed technical data of both the classical (ICE) and HE vehicles.~~
 * ~~Rework of the electric motor (EM) efficiency map script to be RL agent ready.~~
 * ~~Code the script for the generator efficiency map.~~
 * ~~Code the charge-discharge reward system.~~
@@ -59,6 +59,7 @@ To-do list:
 * ~~Code the specific fuel consumption reward system.~~
 * ~~Code the EM reward system.~~
 * ~~Code the EG reward system.~~
+* Code the torque vs engine speed curve.
 * Code a function/class in order to get the HEV powertrain status at a certain timestep.
 * Code the data gathering part of the RL agent.
 * Assemble all the reward shaping systems.
