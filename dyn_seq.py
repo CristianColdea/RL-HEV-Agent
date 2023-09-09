@@ -67,7 +67,7 @@ def tmstp(time, tstep=0.5):
     else:  # time float value
         return (time / tstep, time % tstep)
 
-def process_input(processed, steps, max_lim=2400, min_lim=1400, tstep=0.5):
+def process_input(processed, steps, max_lim=3100, min_lim=1800, tstep=0.5):
     """
     Function to handle the processed list in order to get the
     gearbox ratio, according to the rule of MAX and MIN engine speed limits.
