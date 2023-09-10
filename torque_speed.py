@@ -24,4 +24,13 @@ for n in range(n_min, n_max, 50):
     P_i = sfc.Mus.p_maxn(P_max, n, n_max, engine_tp = 'CIE')
     trq[n] = (9549.2 * P_i) / n
 
+print(max(trq, key=trq.get))
 print(trq)
+
+"""
+The engine speed corresponding to maximum torque is 2500 rpm.
+Anyway, up to 3100 rpm there is only a minor torque loss => gear up shift
+is going to take place at 3100 rpm.
+Symmetrical, the same torque loss from the maximum is at 1800 rpm => gear down
+shift is at 1800 rpm.
+"""
