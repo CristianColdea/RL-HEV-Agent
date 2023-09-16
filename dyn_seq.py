@@ -98,7 +98,7 @@ def process_input(processed, steps, max_lim=3100, min_lim=1800, tstep=0.5):
             #print(processed)
             continue
 
-        
+"""
         for gear in sc.xi_gs:
             # print(processed)
             n_i = sfc.engine_speed(processed[0], dict_fix['xi_f'],
@@ -117,7 +117,7 @@ def process_input(processed, steps, max_lim=3100, min_lim=1800, tstep=0.5):
         #print(processed)        
         processed[0] = processed[0] + tstep * processed[2]
         #print(processed)
-        
+"""        
         step += 1
         
     return ret
