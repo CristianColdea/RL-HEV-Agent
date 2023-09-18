@@ -68,7 +68,6 @@ def tmstp(time, tstep=0.5):
         return (time / tstep, time % tstep)
 
 def null_speed(processed, tstep=0.5):
-    # always start in the 1st gear at null speed
     """
     Function to ensure that the vehicle starts in first gear
     at null speed.
