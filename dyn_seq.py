@@ -82,7 +82,7 @@ def null_speed(processed, tstep=0.5):
         processed[3] = tstep 
         print("Processed before acceleration applied, ", processed)
         processed[0] = processed[0] + tstep * processed[2]
-        print("Processed after accelerationo applied, ", processed)
+        print("Processed after acceleration applied, ", processed)
     return processed
 
 def process_input(processed, steps, max_lim=3100, min_lim=1800, tstep=0.5):
@@ -95,7 +95,7 @@ def process_input(processed, steps, max_lim=3100, min_lim=1800, tstep=0.5):
     Returns the complete list of sublists for fuel consumption calculation.
     """
     
-   ret = []  # collect each time step sublist
+    ret = []  # collect each time step sublist
             
     dict_fix = sfc.unpack_f(sc.fixs)
     
@@ -105,8 +105,9 @@ def process_input(processed, steps, max_lim=3100, min_lim=1800, tstep=0.5):
             processed = null_speed(processed)
             ret.append(processed)
             continue
-
-"""
+        
+        step += 1
+    """
         for gear in sc.xi_gs:
             # print(processed)
             n_i = sfc.engine_speed(processed[0], dict_fix['xi_f'],
@@ -116,23 +117,25 @@ def process_input(processed, steps, max_lim=3100, min_lim=1800, tstep=0.5):
             # check engine speed conditions
             if(n_i <= max_lim and n_i >= min_lim):
                 b = (n_i <= max_lim and n_i >=  min_lim)
-#                print(b)
-            #if(n_i <= max_lim):
+            print(b)
+            if(n_i <= max_lim):
                 processed[1] = gear
                 processed[3] = tstep
                 ret.append(processed)
                 break
-        #print(processed)        
+        print(processed)        
         processed[0] = processed[0] + tstep * processed[2]
-        #print(processed)
-"""        
-        step += 1
+        print(processed)
+    """        
+    # step += 1
         
     return ret
 
-print(raw_proc(low_raw[0]))
+print("Raw values, first sequence, from the speed profile, ", low_raw[0])
+print("First sequence processed for speed, acceleration, time, ", 
+       raw_proc(low_raw[0]))
 print(process_input(raw_proc(low_raw[0]), tmstp(raw_proc(low_raw[0])[-1])[0]))
-print(low_raw[0])
+# print(low_raw[0])
 # print(raw_proc(low_raw[0]))
 # print(int(tmstp(raw_proc(low_raw[0])[-1])[0]))
 #print(process_input(raw_proc(low_raw[0]),
