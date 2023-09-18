@@ -67,19 +67,38 @@ def tmstp(time, tstep=0.5):
     else:  # time float value
         return (time / tstep, time % tstep)
 
+def null_speed(processed, tstep=0.5):
+    # always start in the 1st gear at null speed
+    """
+    Function to ensure that the vehicle starts in first gear
+    at null speed.
+    Takes as arguments the list of processed with above functions,
+    namely initial speed, in m/s, 0, acceleration, in m/s**2, time, in s,
+    and the time step, in s.
+    Returns the processed with non null initial speed.
+    """
+    ret = []   # collect each time step sublist
+
+    if processed[0] == 0:
+        processed[1] = sc.xi_gs[0]
+        processed[3] = tstep 
+        ret.append(processed)
+        print("Processed before acceleration applied, ", processed)
+        processed[0] = processed[0] + tstep * processed[2]
+        print("Processed after accelerationo applied, ", processed)
+    return processed
+
 def process_input(processed, steps, max_lim=3100, min_lim=1800, tstep=0.5):
     """
     Function to handle the processed list in order to get the
     gearbox ratio, according to the rule of MAX and MIN engine speed limits.
-    Takes as arguments the list processed with previous function,
-    initial speed, in m/s, 0, acceleration, in m/s**2, time, in s, the number
+    Takes as arguments the list processed with above functions,
+    namely initial speed, in m/s, 0, acceleration, in m/s**2, time, in s, the number
     of time steps, MAX and MIN engine speed limits, time step, in s.
     Returns the complete list of sublists for fuel consumption calculation.
     """
     
-    # print(steps)
-
-    ret = []  # collect each time step sublist
+   ret = []  # collect each time step sublist
             
     dict_fix = sfc.unpack_f(sc.fixs)
     # dict_dyn = sfc.unpack_d(processed)
@@ -88,15 +107,7 @@ def process_input(processed, steps, max_lim=3100, min_lim=1800, tstep=0.5):
 
     step = 0
     while(step <= steps):
-        # always start in the 1st gear at null speed
-        if processed[0] == 0:
-            processed[1] = sc.xi_gs[0]
-            processed[3] = tstep 
-            ret.append(processed)
-            #print(processed)
-            processed[0] = processed[0] + tstep * processed[2]
-            #print(processed)
-            continue
+                    continue
 
 """
         for gear in sc.xi_gs:
