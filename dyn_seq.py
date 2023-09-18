@@ -76,12 +76,10 @@ def null_speed(processed, tstep=0.5):
     and the time step, in s.
     Returns the processed with non null initial speed.
     """
-    ret = []   # collect each time step sublist
-
+    
     if processed[0] == 0:
         processed[1] = sc.xi_gs[0]
         processed[3] = tstep 
-        ret.append(processed)
         print("Processed before acceleration applied, ", processed)
         processed[0] = processed[0] + tstep * processed[2]
         print("Processed after accelerationo applied, ", processed)
@@ -100,13 +98,13 @@ def process_input(processed, steps, max_lim=3100, min_lim=1800, tstep=0.5):
    ret = []  # collect each time step sublist
             
     dict_fix = sfc.unpack_f(sc.fixs)
-    # dict_dyn = sfc.unpack_d(processed)
     
-    # print(dict_fix, '\n', dict_dyn)
-
     step = 0
     while(step <= steps):
-                    continue
+        if processed[0] == 0:
+            processed = null_speed(processed)
+            ret.append(processed)
+            continue
 
 """
         for gear in sc.xi_gs:
