@@ -135,7 +135,9 @@ def process_input(processed, steps, max_lim=3100, min_lim=1800, tstep=0.5):
 print("Raw values, first sequence, from the speed profile, ", low_raw[0])
 print("First sequence processed for speed, acceleration, time, ", 
        raw_proc(low_raw[0]))
-print(process_input(raw_proc(low_raw[0]), tmstp(raw_proc(low_raw[0])[-1])[0]))
+"""print(process_input(raw_proc(low_raw[0]),
+      tmstp(raw_proc(low_raw[0])[-1])[0]))"""
+print("Timesteps, ", tmstp(raw_proc(low_raw[0])[-1])[0])
 # print(low_raw[0])
 # print(raw_proc(low_raw[0]))
 # print(int(tmstp(raw_proc(low_raw[0])[-1])[0]))
