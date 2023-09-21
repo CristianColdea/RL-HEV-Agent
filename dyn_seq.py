@@ -83,6 +83,7 @@ def null_speed(processed, tstep=0.5, n_stab=800):
         print("Processed before acceleration applied, ", processed)
         accelerated = processed[0] + tstep * processed[2]
         dict_fix = sfc.unpack_f(sc.fixs)
+        # kinematic link between engine and wheels
         idle = (n_stab * dict_fix['r_d']) /\
                (9.55 * dict_fix['xi_f'] * sc.xi_gs[0] * dict_fix['s_f'])
         processed[0] = max(accelerated, idle)
