@@ -67,7 +67,7 @@ def tmstp(time, tstep=0.5):
     else:  # time float value
         return (time / tstep, time % tstep)
 
-def null_speed(processed, tstep=0.5):
+def null_speed(processed, tstep=0.5, n_stab=800):
     """
     Function to ensure that the vehicle starts in first gear
     at null speed.
@@ -81,8 +81,13 @@ def null_speed(processed, tstep=0.5):
         processed[1] = sc.xi_gs[0]
         processed[3] = tstep 
         print("Processed before acceleration applied, ", processed)
-        processed[0] = processed[0] + tstep * processed[2]
-        print("Processed after acceleration applied, ", processed)
+        accelerated = processed[0] + tstep * processed[2]
+        dict_fix = sfc.unpack_f(sc.fixs)
+        idle = (n_stab * dict_fix['r_d']) /\
+               (9.55 * dict_fix['xi_f'] * dict_fix['xi_g'] * dict_fix['s_f'])
+        processed[0] = max(accelerated, idle)
+        print("Processed as a result of acceleration applied, ", accelerated)
+        print("Processed as a result at idle engine speed, ", idle
     return processed
 
 def process_input(processed, steps, max_lim=3100, min_lim=1800, tstep=0.5):
