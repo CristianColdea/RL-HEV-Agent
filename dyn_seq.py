@@ -87,7 +87,7 @@ def null_speed(processed, tstep=0.5, n_stab=800):
                (9.55 * dict_fix['xi_f'] * dict_fix['xi_g'] * dict_fix['s_f'])
         processed[0] = max(accelerated, idle)
         print("Processed as a result of acceleration applied, ", accelerated)
-        print("Processed as a result at idle engine speed, ", idle
+        print("Processed as a result at idle engine speed, ", idle)
     return processed
 
 def process_input(processed, steps, max_lim=3100, min_lim=1800, tstep=0.5):
@@ -143,6 +143,7 @@ print("First sequence processed for speed, acceleration, time, ",
 """print(process_input(raw_proc(low_raw[0]),
       tmstp(raw_proc(low_raw[0])[-1])[0]))"""
 print("Timesteps, ", tmstp(raw_proc(low_raw[0])[-1])[0])
+print("Null speed, ", null_speed(raw_proc(low_row[0])))
 # print(low_raw[0])
 # print(raw_proc(low_raw[0]))
 # print(int(tmstp(raw_proc(low_raw[0])[-1])[0]))
