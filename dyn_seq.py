@@ -105,8 +105,9 @@ def process_input(processed, steps, max_lim=3100, min_lim=1800, tstep=0.5):
             
     dict_fix = sfc.unpack_f(sc.fixs)
     
+    v_max = processed[0] + (tstep * steps) * processed[2]
     step = 0
-    while(step <= steps):
+    while(processed[0] <= v_max):
         if processed[0] == 0:
             processed = null_speed(processed)
             ret.append(processed)
