@@ -96,12 +96,13 @@ def process_input(processed, max_lim=3100, min_lim=1800, tstep=0.5):
     v_max = processed[0] + processed[3] * processed[2]
     step = 0
     print("Processed before cycle, ", processed)
-    processed = []
+    # processed = []
     while(processed[0] <= v_max):
         if processed[0] == 0:
             processed = null_speed(processed)
             ret.append(processed)
-            continue
+            # continue
+        """
         for gear in sc.xi_gs:
             n_i = sfc.engine_speed(processed[0], dict_fix['xi_f'],
                                    gear, dict_fix['r_d'],
@@ -119,7 +120,7 @@ def process_input(processed, max_lim=3100, min_lim=1800, tstep=0.5):
                 processed[3] = tstep
                 ret.append(processed)
                 break
-                        
+        """                
         step += 1
         
     return ret
