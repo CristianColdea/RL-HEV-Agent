@@ -95,6 +95,8 @@ def process_input(processed, max_lim=3100, min_lim=1800, tstep=0.5):
     
     v_max = processed[0] + processed[3] * processed[2]
     step = 0
+    print("Processed before cycle, ", processed)
+    processed = []
     while(processed[0] <= v_max):
         if processed[0] == 0:
             processed = null_speed(processed)
@@ -104,14 +106,15 @@ def process_input(processed, max_lim=3100, min_lim=1800, tstep=0.5):
             n_i = sfc.engine_speed(processed[0], dict_fix['xi_f'],
                                    gear, dict_fix['r_d'],
                                    dict_fix['s_f'], dict_fix['n_max'])
-            print(n_i, processed[1], processed[0])
+            print(n_i, processed)
             # check engine speed conditions
             if (n_i < min_lim):
                 processed[0] = processed[0] + tstep * processed[2]
                 processed[3] = tstep
                 ret.append(processed)
-                continue
-            if(n_i <= max_lim and n_i >= min_lim):
+                break
+            if (n_i >= min_lim and n_i <= max_lim):
+                processed[0] = processed[0] + tstep * processed[2]
                 processed[1] = gear
                 processed[3] = tstep
                 ret.append(processed)
