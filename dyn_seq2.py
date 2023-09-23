@@ -75,8 +75,8 @@ def null_speed(processed, tstep=0.5, n_stab=800):
         idle = (n_stab * dict_fix['r_d']) /\
                (9.55 * dict_fix['xi_f'] * sc.xi_gs[0] * dict_fix['s_f'])
         processed[0] = max(accelerated, idle)
-        print("Processed as a result of acceleration applied, ", accelerated)
-        print("Processed as a result at idle engine speed, ", idle)
+        print("Speed as a result of acceleration applied, ", accelerated)
+        print("Speed as a result at idle engine speed, ", idle)
     return processed
 
 def process_input(processed, max_lim=3100, min_lim=1800, tstep=0.5):
@@ -100,35 +100,32 @@ def process_input(processed, max_lim=3100, min_lim=1800, tstep=0.5):
             processed = null_speed(processed)
             ret.append(processed)
             continue
-        """
         for gear in sc.xi_gs:
-            # print(processed)
             n_i = sfc.engine_speed(processed[0], dict_fix['xi_f'],
                                    gear, dict_fix['r_d'],
                                    dict_fix['s_f'], dict_fix['n_max'])
             print(n_i, processed[1], processed[0])
             # check engine speed conditions
+            if (n_i < min_lim):
+                processed[0] = processed[0] + tstep * processed[2]
+                processed[3] = tstep
+                ret.append(processed)
+                continue
             if(n_i <= max_lim and n_i >= min_lim):
-                b = (n_i <= max_lim and n_i >=  min_lim)
-            print(b)
-            if(n_i <= max_lim):
                 processed[1] = gear
                 processed[3] = tstep
                 ret.append(processed)
                 break
-        print(processed)        
-        processed[0] = processed[0] + tstep * processed[2]
-        print(processed)
-        """        
+                        
         step += 1
         
     return ret
 
-print("Raw values, first sequence, from the speed profile, ", low_raw[0])
-print("First sequence processed for speed, acceleration, time, ", 
-       raw_proc(low_raw[0]))
-# print(process_input(raw_proc(low_raw[0])a))
-print("Null speed, ", null_speed(raw_proc(low_raw[0])))
+# print("Raw values, first sequence, from the speed profile, ", low_raw[0])
+# print("First sequence processed for speed, acceleration, time, ", 
+#       raw_proc(low_raw[0]))
+print(process_input(raw_proc(low_raw[0])))
+# print("Null speed, ", null_speed(raw_proc(low_raw[0])))
 # print(low_raw[0])
 # print(raw_proc(low_raw[0]))
 # print(int(tmstp(raw_proc(low_raw[0])[-1])[0]))
