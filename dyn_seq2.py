@@ -79,13 +79,13 @@ def null_speed(processed, tstep=0.5, n_stab=800):
         print("Processed as a result at idle engine speed, ", idle)
     return processed
 
-def process_input(processed, steps, max_lim=3100, min_lim=1800, tstep=0.5):
+def process_input(processed, max_lim=3100, min_lim=1800, tstep=0.5):
     """
     Function to handle the processed list in order to get the
     gearbox ratio, according to the rule of MAX and MIN engine speed limits.
     Takes as arguments the list processed with above functions,
-    namely initial speed, in m/s, 0, acceleration, in m/s**2, time, in s, the number
-    of time steps, MAX and MIN engine speed limits, time step, in s.
+    namely initial speed, in m/s, 0, acceleration, in m/s**2, time, in s,
+    MAX and MIN engine speed limits, time step, in s.
     Returns the complete list of sublists for fuel consumption calculation.
     """
     
@@ -93,16 +93,13 @@ def process_input(processed, steps, max_lim=3100, min_lim=1800, tstep=0.5):
             
     dict_fix = sfc.unpack_f(sc.fixs)
     
-    v_max = processed[0] + (tstep * steps) * processed[2]
+    v_max = processed[0] + processed[3] * processed[2]
     step = 0
     while(processed[0] <= v_max):
         if processed[0] == 0:
             processed = null_speed(processed)
             ret.append(processed)
             continue
-        # print(step)
-        # print(processed)
-        # step += 1
         """
         for gear in sc.xi_gs:
             # print(processed)
