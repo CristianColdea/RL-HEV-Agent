@@ -94,12 +94,13 @@ def process_input(processed, max_lim=3100, min_lim=1800, tstep=0.5):
     dict_fix = sfc.unpack_f(sc.fixs)
     
     v_max = processed[0] + processed[3] * processed[2]
+    print("Msx speed, ", v_max)
     step = 0
     v = 0
     gr = 0
     print("Processed before cycle, ", processed)
 
-    while(processed[0] <= v_max):
+    while(processed[0] < v_max):
         if processed[0] == 0:
             processed = null_speed(processed)
             ret.append(processed)
@@ -122,7 +123,11 @@ def process_input(processed, max_lim=3100, min_lim=1800, tstep=0.5):
                 processed[3] = tstep
                 ret.append(processed)
                 break
-        """                
+        """
+        processed[0] = processed[0] + tstep * processed[2]
+        if (processed[0] >= v_max):   # for the last iteration
+            processed[0] = v_max
+        print("Speed, ", processed[0])
         step += 1
         
     return ret
