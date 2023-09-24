@@ -68,15 +68,15 @@ def null_speed(processed, tstep=0.5, n_stab=800):
     if processed[0] == 0:
         processed[1] = sc.xi_gs[0]
         processed[3] = tstep 
-        print("Processed before acceleration applied, ", processed)
+        # print("Processed before acceleration applied, ", processed)
         accelerated = processed[0] + tstep * processed[2]
         dict_fix = sfc.unpack_f(sc.fixs)
         # kinematic link between engine and wheels
         idle = (n_stab * dict_fix['r_d']) /\
                (9.55 * dict_fix['xi_f'] * sc.xi_gs[0] * dict_fix['s_f'])
         processed[0] = max(accelerated, idle)
-        print("Speed as a result of acceleration applied, ", accelerated)
-        print("Speed as a result at idle engine speed, ", idle)
+        # print("Speed as a result of acceleration applied, ", accelerated)
+        # print("Speed as a result at idle engine speed, ", idle)
     return processed
 
 def process_input(processed, max_lim=3100, min_lim=1800, tstep=0.5):
@@ -95,8 +95,10 @@ def process_input(processed, max_lim=3100, min_lim=1800, tstep=0.5):
     
     v_max = processed[0] + processed[3] * processed[2]
     step = 0
+    v = 0
+    gr = 0
     print("Processed before cycle, ", processed)
-    # processed = []
+
     while(processed[0] <= v_max):
         if processed[0] == 0:
             processed = null_speed(processed)
