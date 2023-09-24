@@ -94,40 +94,66 @@ def process_input(processed, max_lim=3100, min_lim=1800, tstep=0.5):
     dict_fix = sfc.unpack_f(sc.fixs)
     
     v_max = processed[0] + processed[3] * processed[2]
-    print("Msx speed, ", v_max)
+    # print("Max speed, ", v_max)
     step = 0
-    v = 0
-    gr = 0
-    print("Processed before cycle, ", processed)
-
-    while(processed[0] < v_max):
+    # print("Processed before cycle, ", processed)
+    
+    while (processed[0] < v_max):
         if processed[0] == 0:
             processed = null_speed(processed)
             ret.append(processed)
-            # continue
-        """
+            continue
+        #print("Before 'for' cycle, ", processed)
+
         for gear in sc.xi_gs:
+            print("processed[0]A, ", processed[0])
+            print("current gear, ", gear)
             n_i = sfc.engine_speed(processed[0], dict_fix['xi_f'],
                                    gear, dict_fix['r_d'],
                                    dict_fix['s_f'], dict_fix['n_max'])
-            print(n_i, processed)
+            print("n_iA, ", n_i)
+            # print("n_iA2, ", sfc.engine_speed(processed[0], dict_fix['xi_f'],
+            #                       sc.xi_gs[0], dict_fix['r_d'],
+            #                       dict_fix['s_f'], dict_fix['n_max']))
+
+            # print("n_iB, ", (9.55 * processed[0] * dict_fix['xi_f'] *
+            #                sc.xi_gs[0] * dict_fix['s_f'])/dict_fix['r_d'])
+            
+            #print("Engine speed early, ", n_i)   
+            # print(n_i, processed)
             # check engine speed conditions
-            if (n_i < min_lim):
+            while (n_i < min_lim):
+                print("processed[0]B, ", processed[0])
+                print("current gear B, ", gear)
                 processed[0] = processed[0] + tstep * processed[2]
+                if (processed[0] >= v_max):   # for the last iteration
+                    processed[0] = v_max
+                    break
+                if (processed[1] == 0):
+                    processed[1] = gear
                 processed[3] = tstep
                 ret.append(processed)
-                break
+                n_i = sfc.engine_speed(processed[0], dict_fix['xi_f'],
+                                       gear, dict_fix['r_d'],
+                                       dict_fix['s_f'], dict_fix['n_max'])
+
+            print("processed[0]C, ", processed[0])
+            n_i = sfc.engine_speed(processed[0], dict_fix['xi_f'],
+                                   gear, dict_fix['r_d'],
+                                   dict_fix['s_f'], dict_fix['n_max'])
+            print("n_iC, ", n_i)
+
+            
             if (n_i >= min_lim and n_i <= max_lim):
                 processed[0] = processed[0] + tstep * processed[2]
                 processed[1] = gear
                 processed[3] = tstep
                 ret.append(processed)
-                break
-        """
-        processed[0] = processed[0] + tstep * processed[2]
-        if (processed[0] >= v_max):   # for the last iteration
-            processed[0] = v_max
-        print("Speed, ", processed[0])
+
+                           
+        # processed[0] = processed[0] + tstep * processed[2]
+        # print("Speed, ", processed[0])
+        # print("Engine speed, ", n_i)
         step += 1
         
     return ret
