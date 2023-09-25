@@ -95,7 +95,6 @@ def process_input(processed, max_lim=3100, min_lim=1800, tstep=0.5):
     
     v_max = processed[0] + processed[3] * processed[2]
     # print("Max speed, ", v_max)
-    step = 0
     # print("Processed before cycle, ", processed)
     
     while (processed[0] < v_max):
@@ -157,8 +156,7 @@ def process_input(processed, max_lim=3100, min_lim=1800, tstep=0.5):
         # processed[0] = processed[0] + tstep * processed[2]
         # print("Speed, ", processed[0])
         # print("Engine speed, ", n_i)
-        step += 1
-        
+                
     return ret
 
 # print("Raw values, first sequence, from the speed profile, ", low_raw[0])
