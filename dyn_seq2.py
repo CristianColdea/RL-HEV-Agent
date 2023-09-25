@@ -126,17 +126,20 @@ def process_input(processed, max_lim=3100, min_lim=1800, tstep=0.5):
                 print("processed[0]B, ", processed[0])
                 print("current gear B, ", gear)
                 processed[0] = processed[0] + tstep * processed[2]
-                if (processed[0] >= v_max):   # for the last iteration
-                    processed[0] = v_max
-                    break
-                if (processed[1] == 0):
-                    processed[1] = gear
+                processed[1] = gear
                 processed[3] = tstep
                 ret.append(processed)
+
                 n_i = sfc.engine_speed(processed[0], dict_fix['xi_f'],
                                        gear, dict_fix['r_d'],
                                        dict_fix['s_f'], dict_fix['n_max'])
 
+                if (processed[0] >= v_max):   # for the last iteration
+                    processed[0] = v_max
+                    break
+            
+            
+                               
             print("processed[0]C, ", processed[0])
             n_i = sfc.engine_speed(processed[0], dict_fix['xi_f'],
                                    gear, dict_fix['r_d'],
