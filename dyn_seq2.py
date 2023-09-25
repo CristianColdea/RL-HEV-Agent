@@ -106,7 +106,7 @@ def process_input(processed, max_lim=3100, min_lim=1800, tstep=0.5):
 
         for gear in sc.xi_gs:
             print("processed[0]A, ", processed[0])
-            print("current gear, ", gear)
+            # print("current gear, ", gear)
             n_i = sfc.engine_speed(processed[0], dict_fix['xi_f'],
                                    gear, dict_fix['r_d'],
                                    dict_fix['s_f'], dict_fix['n_max'])
@@ -133,7 +133,7 @@ def process_input(processed, max_lim=3100, min_lim=1800, tstep=0.5):
                                        gear, dict_fix['r_d'],
                                        dict_fix['s_f'], dict_fix['n_max'])
 
-                if (processed[0] >= v_max):   # for the last iteration
+                if (processed[0] >= v_max):   # reached the max speed
                     processed[0] = v_max
                     break
             
