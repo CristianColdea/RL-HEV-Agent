@@ -135,7 +135,7 @@ def process_input(processed, max_lim=3100, min_lim=1800, tstep=0.5):
 
                 if (processed[0] >= v_max):   # reached the max speed
                     processed[0] = v_max
-                    break
+                    break   # finish the inner while
             
             
                                
@@ -151,6 +151,11 @@ def process_input(processed, max_lim=3100, min_lim=1800, tstep=0.5):
                 processed[1] = gear
                 processed[3] = tstep
                 ret.append(processed)
+
+                if (processed[0] >= v_max):   # reached the max speed
+                    processed[0] = v_max
+
+                    break  # finish of the sequence
 
                            
         # processed[0] = processed[0] + tstep * processed[2]
