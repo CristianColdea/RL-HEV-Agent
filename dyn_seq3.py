@@ -97,29 +97,18 @@ def process_input(processed, max_lim=3100, min_lim=1800, tstep=0.5):
     # print("Max speed, ", v_max)
     # print("Processed before cycle, ", processed)
     
-    while (processed[0] < v_max):
-        if processed[0] == 0:
-            processed = null_speed(processed)
-            ret.append(processed)
-            # continue
+    if processed[0] == 0:
+        processed = null_speed(processed)
+        ret.append(processed)
         #print("Before 'for' cycle, ", processed)
 
         for gear in sc.xi_gs:
-            print("processed[0]A, ", processed[0])
-            # print("current gear, ", gear)
+            print("processedA, ", processed[0])
             n_i = sfc.engine_speed(processed[0], dict_fix['xi_f'],
                                    gear, dict_fix['r_d'],
                                    dict_fix['s_f'], dict_fix['n_max'])
             print("n_iA, ", n_i)
-            # print("n_iA2, ", sfc.engine_speed(processed[0], dict_fix['xi_f'],
-            #                       sc.xi_gs[0], dict_fix['r_d'],
-            #                       dict_fix['s_f'], dict_fix['n_max']))
 
-            # print("n_iB, ", (9.55 * processed[0] * dict_fix['xi_f'] *
-            #                sc.xi_gs[0] * dict_fix['s_f'])/dict_fix['r_d'])
-            
-            #print("Engine speed early, ", n_i)   
-            # print(n_i, processed)
             # check engine speed conditions
             while (n_i < min_lim):
                 print("processed[0]B, ", processed[0])
