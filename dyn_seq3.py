@@ -112,23 +112,23 @@ def process_input(processed, max_lim=3100, min_lim=1800, tstep=0.5):
         
         print("n_iA, ", n_i)
 
-            # check engine speed conditions
-            while (n_i < min_lim):
-                print("processed[0]B, ", processed[0])
-                print("current gear B, ", gear)
-                processed[0] = processed[0] + tstep * processed[2]
-                processed[1] = gear
-                processed[3] = tstep
-                ret.append(processed)
+        # check engine speed conditions
+        while (n_i < min_lim):
+            print("processed[0]B, ", processed[0])
+            print("current gear B, ", gear)
+            processed[0] = processed[0] + tstep * processed[2]
+            processed[1] = gear
+            processed[3] = tstep
+            ret.append(processed)
 
-                n_i = sfc.engine_speed(processed[0], dict_fix['xi_f'],
-                                       gear, dict_fix['r_d'],
-                                       dict_fix['s_f'], dict_fix['n_max'])
+            n_i = sfc.engine_speed(processed[0], dict_fix['xi_f'],
+                                   gear, dict_fix['r_d'],
+                                   dict_fix['s_f'], dict_fix['n_max'])
 
-                if (processed[0] >= v_max):   # reached the end of sequence
-                    # processed[0] = v_max
-                    # break   # finish the inner while
-                    return ret
+            if (processed[0] >= v_max):   # reached the end of sequence
+                # processed[0] = v_max
+                # break   # finish the inner while
+                return ret
                 
                                          
             print("processed[0]C, ", processed[0])
