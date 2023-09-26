@@ -101,7 +101,7 @@ def process_input(processed, max_lim=3100, min_lim=1800, tstep=0.5):
         if processed[0] == 0:
             processed = null_speed(processed)
             ret.append(processed)
-            continue
+            # continue
         #print("Before 'for' cycle, ", processed)
 
         for gear in sc.xi_gs:
@@ -133,12 +133,12 @@ def process_input(processed, max_lim=3100, min_lim=1800, tstep=0.5):
                                        gear, dict_fix['r_d'],
                                        dict_fix['s_f'], dict_fix['n_max'])
 
-                if (processed[0] >= v_max):   # reached the max speed
-                    processed[0] = v_max
-                    break   # finish the inner while
-            
-            
-                               
+                if (processed[0] >= v_max):   # reached the end of sequence
+                    # processed[0] = v_max
+                    # break   # finish the inner while
+                    return ret
+                
+                                         
             print("processed[0]C, ", processed[0])
             n_i = sfc.engine_speed(processed[0], dict_fix['xi_f'],
                                    gear, dict_fix['r_d'],
@@ -152,17 +152,20 @@ def process_input(processed, max_lim=3100, min_lim=1800, tstep=0.5):
                 processed[3] = tstep
                 ret.append(processed)
 
-                if (processed[0] >= v_max):   # reached the max speed
-                    processed[0] = v_max
+                if (processed[0] >= v_max):   # reached the the end of sequence
+                    # processed[0] = v_max
 
-                    break  # finish of the sequence
-
+                    # break  # finish of the sequence
+                    return ret
+                if (processed[0]< v_max and gear == sc.xi_gs[-1]):
+                    print("The final speed is too high.")
+                    exit()
                            
         # processed[0] = processed[0] + tstep * processed[2]
         # print("Speed, ", processed[0])
         # print("Engine speed, ", n_i)
                 
-    return ret
+    # return ret
 
 # print("Raw values, first sequence, from the speed profile, ", low_raw[0])
 # print("First sequence processed for speed, acceleration, time, ", 
