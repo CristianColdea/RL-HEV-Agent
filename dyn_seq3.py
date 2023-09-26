@@ -149,7 +149,8 @@ def process_input(processed, max_lim=3100, min_lim=1800, tstep=0.5):
             if (processed[0]< v_max and gear == sc.xi_gs[-1]):
                 print("The final speed is too high.")
                 exit()
-                           
+                          
+        print("Returned, ", ret)
        
 # print("Raw values, first sequence, from the speed profile, ", low_raw[0])
 # print("First sequence processed for speed, acceleration, time, ", 
