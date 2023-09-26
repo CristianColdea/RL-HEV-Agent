@@ -114,8 +114,7 @@ def process_input(processed, max_lim=3100, min_lim=1800, tstep=0.5):
 
         # check engine speed conditions
         while (n_i < min_lim):
-            print("processed[0]B, ", processed[0])
-            print("current gear B, ", gear)
+            print("processedB, ", processed)
             processed[0] = processed[0] + tstep * processed[2]
             processed[1] = gear
             processed[3] = tstep
@@ -130,7 +129,7 @@ def process_input(processed, max_lim=3100, min_lim=1800, tstep=0.5):
                 # break   # finish the inner while
                 return ret
                                                    
-        print("processed[0]C, ", processed[0])
+        print("processedC, ", processed)
     
         n_i = sfc.engine_speed(processed[0], dict_fix['xi_f'],
                                    gear, dict_fix['r_d'],
