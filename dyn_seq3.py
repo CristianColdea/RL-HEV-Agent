@@ -145,14 +145,11 @@ def process_input(processed, max_lim=3100, min_lim=1800, tstep=0.5):
             ret.append(processed)
 
             if (processed[0] >= v_max):   # reached the the end of sequence
-                # processed[0] = v_max
-
-                # break  # finish of the sequence
                 return ret
         
-                if (processed[0]< v_max and gear == sc.xi_gs[-1]):
-                    print("The final speed is too high.")
-                    exit()
+            if (processed[0]< v_max and gear == sc.xi_gs[-1]):
+                print("The final speed is too high.")
+                exit()
                            
        
 # print("Raw values, first sequence, from the speed profile, ", low_raw[0])
