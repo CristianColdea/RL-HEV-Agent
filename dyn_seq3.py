@@ -100,14 +100,17 @@ def process_input(processed, max_lim=3100, min_lim=1800, tstep=0.5):
     if processed[0] == 0:
         processed = null_speed(processed)
         ret.append(processed)
-        #print("Before 'for' cycle, ", processed)
-
-        for gear in sc.xi_gs:
-            print("processedA, ", processed[0])
-            n_i = sfc.engine_speed(processed[0], dict_fix['xi_f'],
-                                   gear, dict_fix['r_d'],
-                                   dict_fix['s_f'], dict_fix['n_max'])
-            print("n_iA, ", n_i)
+       
+       #print("Before 'for' cycle, ", processed)
+ 
+    for gear in sc.xi_gs:
+        print("processedA, ", processed)
+        
+        n_i = sfc.engine_speed(processed[0], dict_fix['xi_f'],
+                               gear, dict_fix['r_d'],
+                               dict_fix['s_f'], dict_fix['n_max'])
+        
+        print("n_iA, ", n_i)
 
             # check engine speed conditions
             while (n_i < min_lim):
