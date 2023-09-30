@@ -93,7 +93,7 @@ def process_input(processed, max_lim=3100, min_lim=1800, tstep=0.5):
             
     dict_fix = sfc.unpack_f(sc.fixs)
     
-    # the initial time per sequence
+    # the initial total time per sequence
     t_init = processed[3]
     
     # max speed per sequence
@@ -106,23 +106,27 @@ def process_input(processed, max_lim=3100, min_lim=1800, tstep=0.5):
        #print("Before 'for' cycle, ", processed)
  
     for gear in sc.xi_gs:
-        print("processedA, ", processed)
+        # print("processedA, ", processed)
         
         n_i = sfc.engine_speed(processed[0], dict_fix['xi_f'],
                                gear, dict_fix['r_d'],
                                dict_fix['s_f'], dict_fix['n_max'])
         
         print("n_iA, ", n_i)
-
+        # print("Returned before 'while', ", ret)
+        
+        t = 0
         # check engine speed conditions
         while (n_i < min_lim):
-            print("processedB, ", processed)
+            # print("processedB, ", processed)
             processed[0] = processed[0] + tstep * processed[2]
             processed[1] = gear
             processed[3] = tstep
             ret.append(processed)
-
+            print("Proc, ", processed)   
             print("Returned, ", ret)
+            t += 1
+            print("t, ", t)
             n_i = sfc.engine_speed(processed[0], dict_fix['xi_f'],
                                    gear, dict_fix['r_d'],
                                    dict_fix['s_f'], dict_fix['n_max'])
@@ -132,9 +136,11 @@ def process_input(processed, max_lim=3100, min_lim=1800, tstep=0.5):
                 if (t_init % tstep > 0):
                     processed[3] = t_init % tstep
 
+            
                 return ret
-                                                   
-        print("processedC, ", processed)
+            
+                                               
+        # print("processedC, ", processed)
     
         n_i = sfc.engine_speed(processed[0], dict_fix['xi_f'],
                                    gear, dict_fix['r_d'],
