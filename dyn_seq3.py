@@ -93,10 +93,12 @@ def process_input(processed, max_lim=3100, min_lim=1800, tstep=0.5):
             
     dict_fix = sfc.unpack_f(sc.fixs)
     
-    v_max = processed[0] + processed[3] * processed[2]
-    # print("Max speed, ", v_max)
-    # print("Processed before cycle, ", processed)
+    # the initial time per sequence
+    t_init = processed[3]
     
+    # max speed per sequence
+    v_max = processed[0] + processed[3] * processed[2]
+       
     if processed[0] == 0:
         processed = null_speed(processed)
         ret.append(processed)
@@ -127,7 +129,7 @@ def process_input(processed, max_lim=3100, min_lim=1800, tstep=0.5):
 
             if (processed[0] >= v_max):   # reached the end of sequence
                 processed[0] = v_max
-                
+                if (
                 return ret
                                                    
         print("processedC, ", processed)
