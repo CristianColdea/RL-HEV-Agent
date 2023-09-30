@@ -141,19 +141,18 @@ def process_input(processed, max_lim=3100, min_lim=1800, tstep=0.5):
                                    dict_fix['s_f'], dict_fix['n_max'])
         print("n_iC, ", n_i)
 
-            
-        if (n_i >= min_lim and n_i <= max_lim):
-            processed[0] = processed[0] + tstep * processed[2]
-            processed[1] = gear
-            processed[3] = tstep
-            ret.append(processed)
+        # engine speed betwenn MIN and MAX now    
+        processed[0] = processed[0] + tstep * processed[2]
+        processed[1] = gear
+        processed[3] = tstep
+        ret.append(processed)
 
-            if (processed[0] >= v_max):   # reached the the end of sequence
-                return ret
+        if (processed[0] >= v_max):   # reached the the end of sequence
+            return ret
         
-            if (processed[0]< v_max and gear == sc.xi_gs[-1]):
-                print("The final speed is too high.")
-                exit()
+        if (processed[0]< v_max and gear == sc.xi_gs[-1]):
+            print("The final speed is too high.")
+            exit()
                           
         #print("Returned, ", ret)
        
