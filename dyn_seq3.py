@@ -129,7 +129,9 @@ def process_input(processed, max_lim=3100, min_lim=1800, tstep=0.5):
 
             if (processed[0] >= v_max):   # reached the end of sequence
                 processed[0] = v_max
-                if (
+                if (t_init % tstep > 0):
+                    processed[3] = t_init % tstep
+
                 return ret
                                                    
         print("processedC, ", processed)
