@@ -120,13 +120,14 @@ def process_input(processed, max_lim=3100, min_lim=1800, tstep=0.5):
             processed[3] = tstep
             ret.append(processed)
 
+            print("Returned, ", ret)
             n_i = sfc.engine_speed(processed[0], dict_fix['xi_f'],
                                    gear, dict_fix['r_d'],
                                    dict_fix['s_f'], dict_fix['n_max'])
 
             if (processed[0] >= v_max):   # reached the end of sequence
-                # processed[0] = v_max
-                # break   # finish the inner while
+                processed[0] = v_max
+                
                 return ret
                                                    
         print("processedC, ", processed)
@@ -150,12 +151,13 @@ def process_input(processed, max_lim=3100, min_lim=1800, tstep=0.5):
                 print("The final speed is too high.")
                 exit()
                           
-        print("Returned, ", ret)
+        #print("Returned, ", ret)
        
 # print("Raw values, first sequence, from the speed profile, ", low_raw[0])
 # print("First sequence processed for speed, acceleration, time, ", 
 #       raw_proc(low_raw[0]))
-print(process_input(raw_proc(low_raw[0])))
+#print(process_input(raw_proc(low_raw[0])))
+process_input(raw_proc(low_raw[0]))
 # print("Null speed, ", null_speed(raw_proc(low_raw[0])))
 # print(low_raw[0])
 # print(raw_proc(low_raw[0]))
