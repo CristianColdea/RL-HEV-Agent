@@ -112,7 +112,7 @@ def process_input(processed, min_lim=1800, tstep=0.5):
                                gear, dict_fix['r_d'],
                                dict_fix['s_f'], dict_fix['n_max'])
         
-        print("n_iA, ", n_i)
+        # print("n_iA, ", n_i)
         # print("Returned before 'while', ", ret)
         
         # t = 0
@@ -124,7 +124,7 @@ def process_input(processed, min_lim=1800, tstep=0.5):
             processed[3] = tstep
             ret.append(processed[:])
             # print("Proc, ", processed)   
-            print("Returned, ", ret)
+            # print("Returned, ", ret)
             # t += 1
             # print("t, ", t)
             n_i = sfc.engine_speed(processed[0], dict_fix['xi_f'],
@@ -145,7 +145,7 @@ def process_input(processed, min_lim=1800, tstep=0.5):
         n_i = sfc.engine_speed(processed[0], dict_fix['xi_f'],
                                    gear, dict_fix['r_d'],
                                    dict_fix['s_f'], dict_fix['n_max'])
-        print("n_iC, ", n_i)
+        # print("n_iC, ", n_i)
 
         # engine speed greater than MIN now    
         processed[0] = processed[0] + tstep * processed[2]
@@ -166,7 +166,7 @@ def process_input(processed, min_lim=1800, tstep=0.5):
 # print("First sequence processed for speed, acceleration, time, ", 
 #       raw_proc(low_raw[0]))
 #print(process_input(raw_proc(low_raw[0])))
-process_input(raw_proc(low_raw[0]))
+print(process_input(raw_proc(low_raw[0])))
 # print("Null speed, ", null_speed(raw_proc(low_raw[0])))
 # print(low_raw[0])
 # print(raw_proc(low_raw[0]))
