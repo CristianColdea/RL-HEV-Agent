@@ -147,7 +147,7 @@ def process_input(processed, min_lim=1800, tstep=0.5):
                                    dict_fix['s_f'], dict_fix['n_max'])
         print("n_iC, ", n_i)
 
-        # engine speed betwenn MIN and MAX now    
+        # engine speed greater than MIN now    
         processed[0] = processed[0] + tstep * processed[2]
         processed[1] = gear
         processed[3] = tstep
