@@ -162,15 +162,16 @@ def process_input(processed, min_lim=1800, tstep=0.5):
                           
         #print("Returned, ", ret)
 
+for seq in low_raw:
+    print(process_input(raw_proc(seq)))
 # collect sublist from the entire low speed profile
 # the list for the final sublists
-fin = []
-for seq in low_raw:
-    fin.extend(process_input(raw_proc(seq)))
+# fin = []
+# for seq in low_raw:
+#    fin.extend(process_input(raw_proc(seq)))
 
-print(fin)
+# print(fin)
 # print("Raw values, first sequence, from the speed profile, ", low_raw[0])
 # print("First sequence processed for speed, acceleration, time, ", 
 #       raw_proc(low_raw[0]))
-#print(process_input(raw_proc(low_raw[0])))
 print(process_input(raw_proc(low_raw[0])))
