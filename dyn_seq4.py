@@ -178,4 +178,4 @@ def process_input(processed, min_lim=1800, tstep=0.5):
 # print("Raw values, first sequence, from the speed profile, ", low_raw[0])
 # print("First sequence processed for speed, acceleration, time, ", 
 #       raw_proc(low_raw[0]))
-print(process_input(raw_proc(low_raw[1])))
+print(process_input(raw_proc(low_raw[0])))
