@@ -101,7 +101,7 @@ def process_input(processed, max_lim=3100, min_lim=1800, tstep=0.5):
        
     if processed[0] == 0:
         processed = null_speed(processed)
-        ret.append(processed)
+        ret.append(processed[:])
        
        #print("Before 'for' cycle, ", processed)
  
@@ -115,18 +115,18 @@ def process_input(processed, max_lim=3100, min_lim=1800, tstep=0.5):
         print("n_iA, ", n_i)
         # print("Returned before 'while', ", ret)
         
-        t = 0
+        # t = 0
         # check engine speed conditions
         while (n_i < min_lim):
             # print("processedB, ", processed)
             processed[0] = processed[0] + tstep * processed[2]
             processed[1] = gear
             processed[3] = tstep
-            ret.append(processed)
-            print("Proc, ", processed)   
+            ret.append(processed[:])
+            # print("Proc, ", processed)   
             print("Returned, ", ret)
-            t += 1
-            print("t, ", t)
+            # t += 1
+            # print("t, ", t)
             n_i = sfc.engine_speed(processed[0], dict_fix['xi_f'],
                                    gear, dict_fix['r_d'],
                                    dict_fix['s_f'], dict_fix['n_max'])
@@ -151,7 +151,7 @@ def process_input(processed, max_lim=3100, min_lim=1800, tstep=0.5):
         processed[0] = processed[0] + tstep * processed[2]
         processed[1] = gear
         processed[3] = tstep
-        ret.append(processed)
+        ret.append(processed[:])
 
         if (processed[0] >= v_max):   # reached the the end of sequence
             return ret
