@@ -20,7 +20,7 @@ precisely in this order.
 import simfc5 as sfc
 import sfc_call as sc
 
-# initial list of list (list of sequences) for WLTP cycle low speed section
+# initial list of lists (list of sequences) for WLTP cycle low speed section
 low_raw = [[0, 45, 10, 30], [45, 12,30, 55], [12, 40, 55, 75],
            [40, 0, 75, 100], [0, 30, 140, 150], [30, 12, 150, 155],
            [12, 38, 155, 170], [38, 25, 170, 175], [25, 30, 175, 180],
@@ -161,17 +161,16 @@ def process_input(processed, min_lim=1800, tstep=0.5):
             exit()
                           
         #print("Returned, ", ret)
-       
+
+# collect sublist from the entire low speed profile
+# the list for the final sublists
+fin = []
+for seq in low_raw:
+    fin.extend(process_input(raw_proc(seq)))
+
+print(fin)
 # print("Raw values, first sequence, from the speed profile, ", low_raw[0])
 # print("First sequence processed for speed, acceleration, time, ", 
 #       raw_proc(low_raw[0]))
 #print(process_input(raw_proc(low_raw[0])))
 print(process_input(raw_proc(low_raw[0])))
-# print("Null speed, ", null_speed(raw_proc(low_raw[0])))
-# print(low_raw[0])
-# print(raw_proc(low_raw[0]))
-# print(int(tmstp(raw_proc(low_raw[0])[-1])[0]))
-#print(process_input(raw_proc(low_raw[0]),
-#                    int(tmstp(raw_proc(low_raw[0])[-1])[0])))
-# process_input(raw_proc(low_raw[0]),
-#                    int(tmstp(raw_proc(low_raw[0])[-1])[0]))
