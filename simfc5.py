@@ -25,9 +25,10 @@ def engine_speed(v_a, xi_f, xi_g, r_d, s_f, n_max, n_stab=800):
     if n_i <= n_max:
         return n_i
     else:
-        print("The engine speed exceeded MAX.\n"
-              "Please readjust!")
-        exit()
+        return n_i
+        #print("The engine speed exceeded MAX.\n"
+        #      "Please readjust!")
+        #exit()
 
 
 # rolling_resistance calculation (if not provided)
