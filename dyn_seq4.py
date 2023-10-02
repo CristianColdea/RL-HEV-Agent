@@ -79,13 +79,14 @@ def null_speed(processed, tstep=0.5, n_stab=800):
         # print("Speed as a result at idle engine speed, ", idle)
     return processed
 
-def process_input(processed, min_lim=1800, tstep=0.5):
+def process_input(processed, ini_g, min_lim=1800, max_lim=3100, tstep=0.5):
     """
     Function to handle the processed list in order to get the
     gearbox ratio, according to the rule of MAX and MIN engine speed limits.
     Takes as arguments the list processed with above functions,
     namely initial speed, in m/s, 0, acceleration, in m/s**2, time, in s,
-    MIN engine speed limit, time step, in s.
+    the last allocated gear of the previous sequence,
+    MIN and MAX engine speed limits, time step, in s.
     Returns the complete list of sublists for fuel consumption calculation.
     """
     
