@@ -87,7 +87,8 @@ def process_input(processed, ini_g, min_lim=1800, max_lim=3100, tstep=0.5):
     namely initial speed, in m/s, 0, acceleration, in m/s**2, time, in s,
     the last allocated gear of the previous sequence,
     MIN and MAX engine speed limits, time step, in s.
-    Returns the complete list of sublists for fuel consumption calculation.
+    Returns the complete list of sublists for fuel consumption calculation
+    and the last allocated gear of the current sequence.
     """
     
     ret = []  # collect each time step sublist
@@ -97,8 +98,8 @@ def process_input(processed, ini_g, min_lim=1800, max_lim=3100, tstep=0.5):
     # the initial total time per sequence
     t_init = processed[3]
     
-    # max speed per sequence
-    v_max = processed[0] + processed[3] * processed[2]
+    # reference speed per sequence
+    v_ref = processed[0] + processed[3] * processed[2]
        
     if processed[0] == 0:
         processed = null_speed(processed)
