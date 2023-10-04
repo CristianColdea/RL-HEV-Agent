@@ -79,7 +79,7 @@ def null_speed(processed, tstep=0.5, n_stab=800):
         # print("Speed as a result at idle engine speed, ", idle)
     return processed
 
-def process_input(processed, ini_g, min_lim=1800, max_lim=3100, tstep=0.5):
+def process_input(processed, gear_ini, min_lim=1800, max_lim=3100, tstep=0.5):
     """
     Function to handle the processed list in order to get the
     gearbox ratio, according to the rule of MAX and MIN engine speed limits.
@@ -100,13 +100,16 @@ def process_input(processed, ini_g, min_lim=1800, max_lim=3100, tstep=0.5):
     
     # reference speed per sequence
     v_ref = processed[0] + processed[3] * processed[2]
-       
+    
+    gear_i = 0
+    gear_i = gear_ini
+
     if processed[0] == 0:
         processed = null_speed(processed)
         ret.append(processed[:])
+        gear_i = sc.xi_gs[0]
        
-       #print("Before 'for' cycle, ", processed)
- 
+     
     for gear in sc.xi_gs:
         # print("processedA, ", processed)
         
