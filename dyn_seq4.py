@@ -79,6 +79,11 @@ def null_speed(processed, tstep=0.5, n_stab=800):
         # print("Speed as a result at idle engine speed, ", idle)
     return processed
 
+# accelerated sequence
+def accelerated(processed):
+    return None
+
+
 def process_input(processed, gear_ini, min_lim=1800, max_lim=3100, tstep=0.5):
     """
     Function to handle the processed list in order to get the
@@ -115,7 +120,7 @@ def process_input(processed, gear_ini, min_lim=1800, max_lim=3100, tstep=0.5):
         if gear == gear_i
             pos = index 
 
-    # accelerated movement
+    # accelerated movement, starting from the current gear
     for gear in sc.xi_gs[pos:]:
         # print("processedA, ", processed)
         
