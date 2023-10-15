@@ -79,13 +79,6 @@ def null_speed(processed, tstep=0.5, n_stab=800):
         # print("Speed as a result at idle engine speed, ", idle)
     return processed
 
-# accelerated sequence
-def accelerated(processed):
-    return None
-
-# decelerated sequence
-def declerated(processed):
-    return None
 
 def process_input(processed, gear_ini, min_lim=1800, max_lim=3100, tstep=0.5):
     """
