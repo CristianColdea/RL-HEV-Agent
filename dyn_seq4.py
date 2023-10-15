@@ -117,7 +117,7 @@ def process_input(processed, gear_ini, min_lim=1800, max_lim=3100, tstep=0.5):
             pos = index 
 
     # accelerated movement, starting from the current gear
-    for gear in sc.xi_gs[pos:]:
+    for posi, gear in enumeerate(sc.xi_gs[pos:]):
         # print("processedA, ", processed)
         
         n_i = sfc.engine_speed(processed[0], dict_fix['xi_f'],
