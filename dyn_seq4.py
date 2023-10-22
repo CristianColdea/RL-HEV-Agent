@@ -127,11 +127,6 @@ def process_input(processed, gear_ini, min_lim=1800, max_lim=3100, tstep=0.5):
         if (n_i > dict_fix['n_max']):
             continue
 
-        # print("n_iA, ", n_i)
-        # print("Returned before 'while', ", ret)
-        
-        # t = 0
-        # check engine speed conditions
         while (n_i < min_lim):
             # print("processedB, ", processed)
             processed[0] = processed[0] + tstep * processed[2]
