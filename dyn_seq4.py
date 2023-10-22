@@ -97,7 +97,7 @@ def process_input(processed, gear_ini, min_lim=1800, max_lim=3100, tstep=0.5):
     dict_fix = sfc.unpack_f(sc.fixs)
     
     # the initial total time per sequence
-    # t_init = processed[3]
+    t_init = processed[3]
     
     # reference speed per sequence
     v_ref = processed[0] + processed[3] * processed[2]
@@ -127,54 +127,49 @@ def process_input(processed, gear_ini, min_lim=1800, max_lim=3100, tstep=0.5):
         if (n_i > dict_fix['n_max']):
             continue
         
-        # next gear engine speed
-        n_next = sfc.engine_speed(processed[0], dict_fix['xi_f'],
+        if gear != sc.xi_gs[-1]:    # while not in the last gear
+            # next gear engine speed
+            n_next = sfc.engine_speed(processed[0], dict_fix['xi_f'],
                                    sc.xi_gs[posi+1], dict_fix['r_d'],
                                    dict_fix['s_f'], dict_fix['n_max'])
-        # increase speed by timestep, within engine speed limits
+            
+            # increase speed by timestep, within engine speed limits
+            while (n_next < min_lim):
+                processed[0] = processed[0] + tstep * processed[2]
+                processed[1] = gear
+                processed[3] = tstep
+                ret.append(processed[:])
         
-        processed[0] = processed[0] + tstep * processed[2]
-        processed[1] = gear
-        processed[3] = tstep
-        ret.append(processed[:])
-        
-        # current engine speed
-        n_i = sfc.engine_speed(processed[0], dict_fix['xi_f'],
-                                   gear, dict_fix['r_d'],
-                                   dict_fix['s_f'], dict_fix['n_max'])
-
+            
         
             if (processed[0] >= v_ref):   # reached the end of sequence
                 processed[0] = v_ref
                 if (t_init % tstep > 0):
                     processed[3] = t_init % tstep
-
-            
                 return ret
             
-                                               
-        # print("processedC, ", processed)
-    
-        n_i = sfc.engine_speed(processed[0], dict_fix['xi_f'],
+            return ret
+        else:   # in the last gear
+            # current engine speed
+            n_i = sfc.engine_speed(processed[0], dict_fix['xi_f'],
                                    gear, dict_fix['r_d'],
                                    dict_fix['s_f'], dict_fix['n_max'])
-        # print("n_iC, ", n_i)
 
-        # engine speed greater than MIN now    
-        processed[0] = processed[0] + tstep * processed[2]
-        processed[1] = gear
-        processed[3] = tstep
-        ret.append(processed[:])
+            # increase speed by timestep up to MAX limit
+            while (n_i <= max_lim):
+                processed[0] = processed[0] + tstep * processed[2]
+                processed[1] = gear
+                processed[3] = tstep
+                ret.append(processed[:])
 
         if (processed[0] >= v_max):   # reached the the end of sequence
             return ret
-        
-        if (processed[0]< v_max and gear == sc.xi_gs[-1]):
-            print("The final speed is too high.")
-            exit()
-                          
-        #print("Returned, ", ret)
-
+      
+      
+            if (processed[0]< v_ref):
+                print("The final speed is too high.")
+                exit()
+                            
 #for seq in low_raw:
 #    print(process_input(raw_proc(seq)))
 # collect sublist from the entire low speed profile
