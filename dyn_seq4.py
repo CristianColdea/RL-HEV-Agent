@@ -126,7 +126,13 @@ def process_input(processed, gear_ini, min_lim=1800, max_lim=3100, tstep=0.5):
                 
         if (n_i > dict_fix['n_max']):
             continue
-
+        
+        # next gear engine speed
+        n_next = sfc.engine_speed(processed[0], dict_fix['xi_f'],
+                                   sc.xi_gs[posi+1], dict_fix['r_d'],
+                                   dict_fix['s_f'], dict_fix['n_max'])
+        # increase speed by timestep, within engine speed limits
+        
         processed[0] = processed[0] + tstep * processed[2]
         processed[1] = gear
         processed[3] = tstep
@@ -137,11 +143,7 @@ def process_input(processed, gear_ini, min_lim=1800, max_lim=3100, tstep=0.5):
                                    gear, dict_fix['r_d'],
                                    dict_fix['s_f'], dict_fix['n_max'])
 
-        # next gear engine speed
-        n_next = sfc.engine_speed(processed[0], dict_fix['xi_f'],
-                                   sc.xi_gs[posi+1], dict_fix['r_d'],
-                                   dict_fix['s_f'], dict_fix['n_max'])
-
+        
             if (processed[0] >= v_ref):   # reached the end of sequence
                 processed[0] = v_ref
                 if (t_init % tstep > 0):
