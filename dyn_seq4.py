@@ -127,18 +127,19 @@ def process_input(processed, gear_ini, min_lim=1800, max_lim=3100, tstep=0.5):
         if (n_i > dict_fix['n_max']):
             continue
 
-        while (n_i < min_lim):
-            # print("processedB, ", processed)
-            processed[0] = processed[0] + tstep * processed[2]
-            processed[1] = gear
-            processed[3] = tstep
-            ret.append(processed[:])
-            # print("Proc, ", processed)   
-            # print("Returned, ", ret)
-            # t += 1
-            # print("t, ", t)
-            n_i = sfc.engine_speed(processed[0], dict_fix['xi_f'],
+        processed[0] = processed[0] + tstep * processed[2]
+        processed[1] = gear
+        processed[3] = tstep
+        ret.append(processed[:])
+        
+        # current engine speed
+        n_i = sfc.engine_speed(processed[0], dict_fix['xi_f'],
                                    gear, dict_fix['r_d'],
+                                   dict_fix['s_f'], dict_fix['n_max'])
+
+        # next gear engine speed
+        n_next = sfc.engine_speed(processed[0], dict_fix['xi_f'],
+                                   sc.xi_gs[posi+1], dict_fix['r_d'],
                                    dict_fix['s_f'], dict_fix['n_max'])
 
             if (processed[0] >= v_max):   # reached the end of sequence
