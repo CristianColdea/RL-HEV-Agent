@@ -134,22 +134,21 @@ def process_input(processed, gear_ini, min_lim=1800, max_lim=3100, tstep=0.5):
                                    dict_fix['s_f'], dict_fix['n_max'])
             
             # increase speed by timestep, within engine speed limits
-            while (n_next < min_lim):
+            while (n_next <= min_lim):
                 processed[0] = processed[0] + tstep * processed[2]
                 processed[1] = gear
                 processed[3] = tstep
+
+                if (processed[0] >= v_ref):   # reached the end of sequence
+                    processed[0] = v_ref
+                    if (t_init % tstep > 0):
+                        processed[3] = t_init % tstep
+                    ret.append(processed[:])
+                    return ret
+
                 ret.append(processed[:])
         
-            
-        
-            if (processed[0] >= v_ref):   # reached the end of sequence
-                processed[0] = v_ref
-                if (t_init % tstep > 0):
-                    processed[3] = t_init % tstep
-                return ret
-            
-            return ret
-        else:   # in the last gear
+           else:   # in the last gear
             # current engine speed
             n_i = sfc.engine_speed(processed[0], dict_fix['xi_f'],
                                    gear, dict_fix['r_d'],
@@ -160,16 +159,19 @@ def process_input(processed, gear_ini, min_lim=1800, max_lim=3100, tstep=0.5):
                 processed[0] = processed[0] + tstep * processed[2]
                 processed[1] = gear
                 processed[3] = tstep
-                ret.append(processed[:])
 
-        if (processed[0] >= v_max):   # reached the the end of sequence
-            return ret
-      
-      
+                if (processed[0] >= v_ref):   # reached the end of sequence
+                    processed[0] = v_ref
+                    if (t_init % tstep > 0):
+                        processed[3] = t_init % tstep
+
+                ret.append(processed[:])
+                
             if (processed[0]< v_ref):
                 print("The final speed is too high.")
                 exit()
-                            
+                
+                return ret
 #for seq in low_raw:
 #    print(process_input(raw_proc(seq)))
 # collect sublist from the entire low speed profile
@@ -187,7 +189,7 @@ def process_input(processed, gear_ini, min_lim=1800, max_lim=3100, tstep=0.5):
 # the list to store expanded values
 expand = []
 
-for sequence in low_raw:
+for sequence in low_raw[:2]:
     # if expand empty
     if not expand:
         expand.extend(process_input(raw_proc(low_raw[sequence], sequence[1])))
@@ -196,3 +198,5 @@ for sequence in low_raw:
                                              expand[-1][1])))
 
 print(process_input(raw_proc(low_raw[0])))
+print("**********")
+print(expand)
