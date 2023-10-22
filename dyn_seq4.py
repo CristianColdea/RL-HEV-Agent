@@ -112,7 +112,7 @@ def process_input(processed, gear_ini, min_lim=1800, max_lim=3100, tstep=0.5):
     # get the current gear index
     pos = 0
     for index, gear in enumerate(sc.xi_gs):
-        if gear == gear_i
+        if gear == gear_i:
             pos = index 
 
     # accelerated movement, starting from the current gear
@@ -148,7 +148,7 @@ def process_input(processed, gear_ini, min_lim=1800, max_lim=3100, tstep=0.5):
 
                 ret.append(processed[:])
         
-           else:   # in the last gear
+        else:   # in the last gear
             # current engine speed
             n_i = sfc.engine_speed(processed[0], dict_fix['xi_f'],
                                    gear, dict_fix['r_d'],
