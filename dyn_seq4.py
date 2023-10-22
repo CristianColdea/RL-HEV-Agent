@@ -142,8 +142,8 @@ def process_input(processed, gear_ini, min_lim=1800, max_lim=3100, tstep=0.5):
                                    sc.xi_gs[posi+1], dict_fix['r_d'],
                                    dict_fix['s_f'], dict_fix['n_max'])
 
-            if (processed[0] >= v_max):   # reached the end of sequence
-                processed[0] = v_max
+            if (processed[0] >= v_ref):   # reached the end of sequence
+                processed[0] = v_ref
                 if (t_init % tstep > 0):
                     processed[3] = t_init % tstep
 
