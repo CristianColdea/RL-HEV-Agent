@@ -148,6 +148,11 @@ def process_input(processed, gear_ini, min_lim=1800, max_lim=3100, tstep=0.5):
                     return ret
 
                 ret.append(processed[:])
+
+                n_next = sfc.engine_speed(processed[0], dict_fix['xi_f'],
+                                   sc.xi_gs[posi+1], dict_fix['r_d'],
+                                   dict_fix['s_f'], dict_fix['n_max'])
+
         
         else:   # in the last gear
             # current engine speed
@@ -173,6 +178,11 @@ def process_input(processed, gear_ini, min_lim=1800, max_lim=3100, tstep=0.5):
                 exit()
                 
                 return ret
+
+                n_i = sfc.engine_speed(processed[0], dict_fix['xi_f'],
+                                   gear, dict_fix['r_d'],
+                                   dict_fix['s_f'], dict_fix['n_max'])
+
 #for seq in low_raw:
 #    print(process_input(raw_proc(seq)))
 # collect sublist from the entire low speed profile
