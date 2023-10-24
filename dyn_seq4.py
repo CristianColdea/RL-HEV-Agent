@@ -149,6 +149,7 @@ def process_input(processed, gear_ini, min_lim=1800, max_lim=3100, tstep=0.5):
 
                 ret.append(processed[:])
 
+                print("n_next as control variable, ", n_next)
                 n_next = sfc.engine_speed(processed[0], dict_fix['xi_f'],
                                    sc.xi_gs[posi+1], dict_fix['r_d'],
                                    dict_fix['s_f'], dict_fix['n_max'])
@@ -178,10 +179,11 @@ def process_input(processed, gear_ini, min_lim=1800, max_lim=3100, tstep=0.5):
                 exit()
                 
                 return ret
-
+                """
                 n_i = sfc.engine_speed(processed[0], dict_fix['xi_f'],
                                    gear, dict_fix['r_d'],
                                    dict_fix['s_f'], dict_fix['n_max'])
+                """
 
 #for seq in low_raw:
 #    print(process_input(raw_proc(seq)))
@@ -203,11 +205,13 @@ expand = []
 for sequence in low_raw[:2]:
     # if expand empty
     if not expand:
-        expand.extend(process_input(raw_proc(sequence), sequence[1]))
+    #    expand.extend(process_input(raw_proc(sequence), sequence[1]))
+    print("Seq 1, ", sequence)
     else:   # use the previous sequence gear
-        expand.extend(process_input(raw_proc(sequence),
-                                             expand[-1][1]))
+    #    expand.extend(process_input(raw_proc(sequence),
+    #                                         expand[-1][1]))
+    print("Seq 2, ", sequence)
 
 print(process_input(raw_proc(low_raw[0]), low_raw[0][1]))
 print("**********")
-print(expand)
+# print(expand)
