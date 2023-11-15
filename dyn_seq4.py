@@ -90,6 +90,8 @@ def process_input(processed, gear_ini, min_lim=1800, max_lim=3100, tstep=0.5):
     MIN and MAX engine speed limits, time step, in s.
     Returns the complete list of sublists for fuel consumption calculation
     and the last allocated gear of the current sequence.
+    Importan note for a better understanding of this function: accelerated and
+    deccelerated vehicle movements require two different approaches.
     """
     
     ret = []  # collect each time step sublist
