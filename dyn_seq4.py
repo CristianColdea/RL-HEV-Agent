@@ -175,7 +175,7 @@ def process_input(processed, gear_ini, min_lim=1800, max_lim=3100, tstep=0.5):
                 ret.append(processed[:])
                 
             if (processed[0]< v_ref):
-                print("The final speed is too high.")
+                print("The final imposed speed is too high.")
                 exit()
                 
                 return ret
