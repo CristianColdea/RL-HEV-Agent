@@ -61,7 +61,8 @@ def null_speed(processed, tstep=0.5, n_stab=800):
     at null speed.
     Takes as arguments the list of processed with above functions,
     namely initial speed, in m/s, 0, acceleration, in m/s**2, time, in s,
-    and the time step, in s.
+    and the time step, in s,
+    engine stable working speed.
     Returns the processed with non null initial speed.
     """
     
@@ -80,14 +81,17 @@ def null_speed(processed, tstep=0.5, n_stab=800):
     return processed
 
 
-def process_input(processed, gear_ini, min_lim=1800, max_lim=3100, tstep=0.5):
+def process_input(processed, gear_ini, min_lim=1800, max_lim=3100, tstep=0.5,
+                  n_stab=800):
     """
     Function to handle the processed list in order to get the
     gearbox ratio, according to the rule of MAX and MIN engine speed limits.
     Takes as arguments the list processed with above functions,
     namely initial speed, in m/s, 0, acceleration, in m/s**2, time, in s,
     the initial (last known or imposed) gear,
-    MIN and MAX engine speed limits, time step, in s.
+    MIN and MAX engine speed limits,
+    time step, in s,
+    engine stable working speed.
     Returns the complete list of sublists for fuel consumption calculation
     and the last allocated gear of the current sequence.
     Importan note for a better understanding of this function: accelerated and
@@ -130,8 +134,15 @@ def process_input(processed, gear_ini, min_lim=1800, max_lim=3100, tstep=0.5):
         if (n_i > dict_fix['n_max']):
             continue
         
+        # if engine speed is less than stable working speed
+        if(n_i <= n_stab):
+            processed[0] = (n_stab * dict_fix['r_d']) /\
+               (9.55 * dict_fix['xi_f'] * sc.xi_gs[0] * dict_fix['s_f'])
+
+
         if gear != sc.xi_gs[-1]:    # while not in the last gear
             # next gear engine speed
+            print("Processed[0], ", processed[0])
             n_next = sfc.engine_speed(processed[0], dict_fix['xi_f'],
                                    sc.xi_gs[posi+1], dict_fix['r_d'],
                                    dict_fix['s_f'], dict_fix['n_max'])
@@ -148,7 +159,7 @@ def process_input(processed, gear_ini, min_lim=1800, max_lim=3100, tstep=0.5):
                         processed[3] = t_init % tstep
                     ret.append(processed[:])
                     return ret
-
+                
                 ret.append(processed[:])
 
                 print("n_next as control variable, ", n_next)
