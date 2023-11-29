@@ -143,6 +143,7 @@ def process_input(processed, gear_ini, min_lim=1800, max_lim=3100, tstep=0.5,
                (9.55 * dict_fix['xi_f'] * sc.xi_gs[0] * dict_fix['s_f'])
 
         print("engine speed after stab, ", n_i)
+        print("processed[0] after stab, ", processed[0])
 
         if gear != sc.xi_gs[-1]:    # while not in the last gear
             # next gear engine speed
