@@ -170,7 +170,7 @@ def process_input(processed, gear_ini, min_lim=1800, max_lim=3100, tstep=0.5,
                 
                 ret.append(processed[:])
 
-                print("n_next as control variable, ", n_next)
+                print("n_next as control variable not in the last gear, ", n_next)
                 n_next = sfc.engine_speed(processed[0], dict_fix['xi_f'],
                                    sc.xi_gs[posi+1], dict_fix['r_d'],
                                    dict_fix['s_f'], dict_fix['n_max'])
