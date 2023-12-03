@@ -134,7 +134,7 @@ def process_input(processed, gear_ini, min_lim=1800, max_lim=3100, tstep=0.5,
         if (n_i > dict_fix['n_max']):
             continue
 
-        # print("engine speed before stab, ", n_i)
+        print("engine speed before stab, ", n_i)
         # print("processed[0] before stab, ", processed[0])
 
         # if engine speed is less than stable working speed
