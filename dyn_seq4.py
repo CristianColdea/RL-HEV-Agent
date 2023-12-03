@@ -204,7 +204,7 @@ def process_input(processed, gear_ini, min_lim=1800, max_lim=3100, tstep=0.5,
                 n_i = sfc.engine_speed(processed[0], dict_fix['xi_f'],
                                    gear, dict_fix['r_d'],
                                    dict_fix['s_f'], dict_fix['n_max'])
-                print("n_i as a control variable, ", n_i)
+                print("n_i as a control variable in the last gear, ", n_i)
 
 #for seq in low_raw:
 #    print(process_input(raw_proc(seq)))
