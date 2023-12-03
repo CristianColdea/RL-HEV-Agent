@@ -19,8 +19,8 @@ def engine_speed(v_a, xi_f, xi_g, r_d, s_f, n_max, n_stab=800):
     """
     n_i = (9.55 * v_a * xi_f * xi_g * s_f) / r_d
     
-    #if n_i < n_stab:
-    #    return n_stab
+    if n_i < n_stab:
+        return n_stab
 
     if n_i <= n_max:
         return n_i
