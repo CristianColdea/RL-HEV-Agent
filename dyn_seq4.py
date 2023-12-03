@@ -107,7 +107,7 @@ def process_input(processed, gear_ini, min_lim=1800, max_lim=3100, tstep=0.5,
     
     # reference speed per sequence
     v_ref = processed[0] + processed[3] * processed[2]
-    print("v_ref is, ", v_ref)
+    # print("v_ref is, ", v_ref)
 
     gear_i = gear_ini
 
@@ -138,14 +138,14 @@ def process_input(processed, gear_ini, min_lim=1800, max_lim=3100, tstep=0.5,
         print("processed[0] before stab, ", processed[0])
 
         # if engine speed is less than stable working speed
-        if(n_i <= n_stab):
-            processed[0] = (n_stab * dict_fix['r_d']) /\
-               (9.55 * dict_fix['xi_f'] * sc.xi_gs[0] * dict_fix['s_f'])
+        # if(n_i <= n_stab):
+        #    processed[0] = (n_stab * dict_fix['r_d']) /\
+        #       (9.55 * dict_fix['xi_f'] * sc.xi_gs[0] * dict_fix['s_f'])
 
         # print("engine speed after stab, ", n_i)
         # print("processed[0] after stab, ", processed[0])
-        print((n_stab * dict_fix['r_d']) /\
-              (9.55 * dict_fix['xi_f'] * sc.xi_gs[0] * dict_fix['s_f']))
+        # print((n_stab * dict_fix['r_d']) /\
+        #       (9.55 * dict_fix['xi_f'] * sc.xi_gs[0] * dict_fix['s_f']))
 
 
         if gear != sc.xi_gs[-1]:    # while not in the last gear
@@ -157,6 +157,7 @@ def process_input(processed, gear_ini, min_lim=1800, max_lim=3100, tstep=0.5,
             
             # increase speed by timestep, within engine speed limits
             while (n_next <= min_lim):
+                # print("processed inside while, ", processed)
                 processed[0] = processed[0] + tstep * processed[2]
                 processed[1] = gear
                 processed[3] = tstep
@@ -171,6 +172,7 @@ def process_input(processed, gear_ini, min_lim=1800, max_lim=3100, tstep=0.5,
                 ret.append(processed[:])
 
                 print("n_next as control variable not in the last gear, ", n_next)
+                print("processed[0], ", processed[0])
                 n_next = sfc.engine_speed(processed[0], dict_fix['xi_f'],
                                    sc.xi_gs[posi+1], dict_fix['r_d'],
                                    dict_fix['s_f'], dict_fix['n_max'])
