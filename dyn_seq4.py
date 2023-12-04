@@ -82,7 +82,7 @@ def null_speed(processed, tstep=0.5, n_stab=800):
 
 
 def process_input(processed, gear_ini, min_lim=1800, max_lim=3100, tstep=0.5,
-                  n_stab=800):
+                  n_stab=1000, n_nom=5000):
     """
     Function to handle the processed list in order to get the
     gearbox ratio, according to the rule of MAX and MIN engine speed limits.
@@ -91,7 +91,8 @@ def process_input(processed, gear_ini, min_lim=1800, max_lim=3100, tstep=0.5,
     the initial (last known or imposed) gear,
     MIN and MAX engine speed limits,
     time step, in s,
-    engine stable working speed.
+    engine stable working speed,
+    and engine nominal (max) speed.
     Returns the complete list of sublists for fuel consumption calculation
     and the last allocated gear of the current sequence.
     Importan note for a better understanding of this function: accelerated and
@@ -184,7 +185,7 @@ def process_input(processed, gear_ini, min_lim=1800, max_lim=3100, tstep=0.5,
                                    dict_fix['s_f'], dict_fix['n_max'])
 
             # increase speed by timestep up to MAX limit
-            while (n_i <= max_lim):
+            while (n_i <= n_nom):
                 processed[0] = processed[0] + tstep * processed[2]
                 processed[1] = gear
                 processed[3] = tstep
