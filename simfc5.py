@@ -7,7 +7,7 @@ and methods.
 
 # engine_speed calculation according to vehicle speed
 
-def engine_speed(v_a, xi_f, xi_g, r_d, s_f, n_max, n_stab=800):
+def engine_speed(v_a, xi_f, xi_g, r_d, s_f, n_max, n_stab=1000):
     """
     Function to compute engine speed related to vehicle speed.
     Takes as parameters vehicle speed, in m/s, final gear ratio,
