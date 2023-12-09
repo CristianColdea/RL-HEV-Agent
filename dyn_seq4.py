@@ -213,6 +213,93 @@ def process_input(processed, gear_ini, min_lim=1800, max_lim=3100, tstep=0.5,
     # deccelerated movement, starting from the current gear
     else:                
 
+    for posi, gear in enumerate(sc.xi_gs[pos:]):
+                        
+                n_i = sfc.engine_speed(processed[0], dict_fix['xi_f'],
+                                       gear, dict_fix['r_d'],
+                                       dict_fix['s_f'], dict_fix['n_max'])
+                
+                        
+                if (n_i > dict_fix['n_max']):
+                    continue
+
+                # print("engine speed before stab, ", n_i)
+                # print("processed[0] before stab, ", processed[0])
+
+                # if engine speed is less than stable working speed
+                # if(n_i <= n_stab):
+                #    processed[0] = (n_stab * dict_fix['r_d']) /\
+                #       (9.55 * dict_fix['xi_f'] * sc.xi_gs[0] * dict_fix['s_f'])
+
+                # print("engine speed after stab, ", n_i)
+                # print("processed[0] after stab, ", processed[0])
+                # print((n_stab * dict_fix['r_d']) /\
+                #       (9.55 * dict_fix['xi_f'] * sc.xi_gs[0] * dict_fix['s_f']))
+
+
+                if gear != sc.xi_gs[-1]:    # while not in the last gear
+                    # next gear engine speed
+                    # print("Processed[0], ", processed[0])
+                    n_next = sfc.engine_speed(processed[0], dict_fix['xi_f'],
+                                           sc.xi_gs[posi+1], dict_fix['r_d'],
+                                           dict_fix['s_f'], dict_fix['n_max'])
+                    
+                    # increase speed by timestep, within engine speed limits
+                    while (n_next <= min_lim):
+                        # print("processed inside while, ", processed)
+                        processed[0] = processed[0] + tstep * processed[2]
+                        processed[1] = gear
+                        processed[3] = tstep
+
+                        if (processed[0] >= v_ref):   # reached the end of sequence
+                            processed[0] = v_ref
+                            if (t_init % tstep > 0):
+                                processed[3] = t_init % tstep
+                            ret.append(processed[:])
+                            return ret
+                        
+                        ret.append(processed[:])
+
+                        # print("n_next as control variable not in the last gear, ", n_next)
+                        # print("processed[0], ", processed[0])
+                        n_next = sfc.engine_speed(processed[0], dict_fix['xi_f'],
+                                           sc.xi_gs[posi+1], dict_fix['r_d'],
+                                           dict_fix['s_f'], dict_fix['n_max'])
+
+                
+                else:   # in the last gear
+                    # current engine speed
+                    n_i = sfc.engine_speed(processed[0], dict_fix['xi_f'],
+                                           gear, dict_fix['r_d'],
+                                           dict_fix['s_f'], dict_fix['n_max'])
+
+                    # increase speed by timestep up to MAX limit
+                    while (n_i <= n_max):
+                        processed[0] = processed[0] + tstep * processed[2]
+                        processed[1] = gear
+                        processed[3] = tstep
+
+                        if (processed[0] >= v_ref):   # reached the end of sequence
+                            processed[0] = v_ref
+                            if (t_init % tstep > 0):
+                                processed[3] = t_init % tstep
+
+                        ret.append(processed[:])
+                        
+                    if (processed[0]< v_ref):
+                        print("The final imposed speed is too high.")
+                        exit()
+                        
+                        return ret
+                        
+                        n_i = sfc.engine_speed(processed[0], dict_fix['xi_f'],
+                                           gear, dict_fix['r_d'],
+                                           dict_fix['s_f'], dict_fix['n_max'])
+                        # print("n_i as a control variable in the last gear, ", n_i)
+    
+    # deccelerated movement, starting from the current gear
+
+
 #for seq in low_raw:
 #    print(process_input(raw_proc(seq)))
 # collect sublist from the entire low speed profile
