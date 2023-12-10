@@ -203,7 +203,7 @@ def process_input(processed, gear_ini, min_lim=1800, max_lim=3100, tstep=0.5,
 
                     ret.append(processed[:])
                     
-                if (processed[0]< v_ref):
+                if (processed[0] < v_ref):
                     print("The final imposed speed is too high.")
                     exit()
                     
@@ -282,20 +282,20 @@ def process_input(processed, gear_ini, min_lim=1800, max_lim=3100, tstep=0.5,
                                        dict_fix['s_f'], dict_fix['n_max'])
 
                 # decrease speed by timestep down to stable speed limit
-                while (n_i <= n_max):
+                while (n_i >= n_stab):
                     processed[0] = processed[0] + tstep * processed[2]
                     processed[1] = gear
                     processed[3] = tstep
 
-                    if (processed[0] >= v_ref):   # reached the end of sequence
+                    if (processed[0] <= v_ref):   # reached the end of sequence
                         processed[0] = v_ref
                         if (t_init % tstep > 0):
                             processed[3] = t_init % tstep
 
                     ret.append(processed[:])
                     
-                if (processed[0]< v_ref):
-                    print("The final imposed speed is too high.")
+                if (processed[0] > v_ref):
+                    print("The final imposed speed is too low.")
                     exit()
                     
                     return ret
