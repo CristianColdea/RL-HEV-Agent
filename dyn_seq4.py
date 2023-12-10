@@ -136,6 +136,10 @@ def process_input(processed, gear_ini, min_lim=1800, max_lim=3100, tstep=0.5,
             if (n_i > dict_fix['n_max']):
                 continue
 
+            if(n_i < n_stab):
+                print("Engine speed is too low. Please adjust!")
+                exit()
+
             # print("engine speed before stab, ", n_i)
             # print("processed[0] before stab, ", processed[0])
 
@@ -221,6 +225,10 @@ def process_input(processed, gear_ini, min_lim=1800, max_lim=3100, tstep=0.5,
             
                     
             if (n_i > dict_fix['n_max']):
+                print("The engine speed is too high. Please adjust!")
+                exit()
+
+            if(n_i < n_stab):
                 continue
 
             # print("engine speed before stab, ", n_i)
