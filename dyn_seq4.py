@@ -245,7 +245,7 @@ def process_input(processed, gear_ini, min_lim=1800, max_lim=3100, tstep=0.5,
             #       (9.55 * dict_fix['xi_f'] * sc.xi_gs[0] * dict_fix['s_f']))
 
 
-            if gear != sc.xi_gs[-1]:    # while not in the last gear
+            if gear != sc.xi_gs[0]:    # while not in the first gear
                 # next gear engine speed
                 
                 n_next = sfc.engine_speed(processed[0], dict_fix['xi_f'],
