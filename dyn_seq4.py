@@ -246,10 +246,10 @@ def process_input(processed, gear_ini, min_lim=1800, max_lim=3100, tstep=0.5,
 
 
             if gear != sc.xi_gs[0]:    # while not in the first gear
-                # next gear engine speed
+                # backward (descending) next gear engine speed
                 
                 n_next = sfc.engine_speed(processed[0], dict_fix['xi_f'],
-                                       sc.xi_gs[posi+1], dict_fix['r_d'],
+                                       sc.xi_gs[posi-1], dict_fix['r_d'],
                                        dict_fix['s_f'], dict_fix['n_max'])
                 
                 # increase speed by timestep, within engine speed limits
