@@ -326,13 +326,13 @@ expand = []
 for sequence in low_raw[:2]:
     # if expand empty
     if not expand:
-    #    expand.extend(process_input(raw_proc(sequence), sequence[1]))
-        print("Seq 1, ", sequence)
+        expand.extend(process_input(raw_proc(sequence), sequence[1]))
+        print("expand[0], ", expand)
     else:   # use the previous sequence gear
     #    expand.extend(process_input(raw_proc(sequence),
     #                                         expand[-1][1]))
         print("Seq 2, ", sequence)
 
 #print(process_input(raw_proc(low_raw[0]), low_raw[0][1]))
-print("**********")
+#print("**********")
 # print(expand)
