@@ -108,7 +108,7 @@ def process_input(processed, gear_ini, min_lim=1800, max_lim=3100, tstep=0.5,
     
     # reference speed per sequence
     v_ref = processed[0] + processed[3] * processed[2]
-    # print("v_ref is, ", v_ref)
+    print("v_ref is, ", v_ref)
 
     gear_i = gear_ini
 
@@ -283,6 +283,9 @@ def process_input(processed, gear_ini, min_lim=1800, max_lim=3100, tstep=0.5,
                                        gear, dict_fix['r_d'],
                                        dict_fix['s_f'], dict_fix['n_max'])
 
+                print("current gear is, ", gear)
+                print("current engine speed is, ", n_i)
+
                 # decrease speed by timestep down to stable speed limit
                 while (n_i >= n_stab):
                     processed[0] = processed[0] + tstep * processed[2]
@@ -329,11 +332,11 @@ for sequence in low_raw[:2]:
     # if expand empty
     if not expand:
         # expand.extend(process_input(raw_proc(sequence), sequence[1]))
-        # print(expand)
+        print(expand)
     else:   # use the previous sequence gear
     #    expand.extend(process_input(raw_proc(sequence),
     #                                         expand[-1][1]))
-        # print("Seq 2, ", sequence)
+        print("Seq 2, ", sequence)
 
 #print(process_input(raw_proc(low_raw[0]), low_raw[0][1]))
 print(process_input(raw_proc(low_raw[1]), 1.211))
