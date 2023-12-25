@@ -55,7 +55,7 @@ def raw_proc(raw_list):
 
     return processed
 
-def null_speed(processed, tstep=0.5, n_stab=800):
+def null_speed(processed, tstep=0.5, n_stab=1000):
     """
     Function to ensure that the vehicle starts in first gear
     at null speed.
