@@ -110,6 +110,8 @@ def process_input(processed, gear_ini, min_lim=1800, max_lim=3100, tstep=0.5,
     v_ref = processed[0] + processed[3] * processed[2]
     print("v_ref is, ", v_ref)
 
+    print("processed, ", processed)
+
     gear_i = gear_ini
 
     if processed[0] == 0:
@@ -220,7 +222,6 @@ def process_input(processed, gear_ini, min_lim=1800, max_lim=3100, tstep=0.5,
         for posi, gear in reversed(list(enumerate(sc.xi_gs[:(pos+1)]))):
             
             print("deccelerated movement gears, ", gear)
-            print("current gear, ", gear)
             print("current posi, ", posi)
 
             n_i = sfc.engine_speed(processed[0], dict_fix['xi_f'],
@@ -310,7 +311,7 @@ def process_input(processed, gear_ini, min_lim=1800, max_lim=3100, tstep=0.5,
                     n_i = sfc.engine_speed(processed[0], dict_fix['xi_f'],
                                        gear, dict_fix['r_d'],
                                        dict_fix['s_f'], dict_fix['n_max'])
-                    # print("n_i as a control variable in the last gear, ", n_i)
+                    print("n_i as a control variable in the first gear, ", n_i)
     
 
 #for seq in low_raw:
