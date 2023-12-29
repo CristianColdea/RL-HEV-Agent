@@ -305,7 +305,9 @@ def process_input(processed, gear_ini, min_lim=1800, max_lim=3100, tstep=0.5,
                         if (t_init % tstep > 0):
                             processed[3] = t_init % tstep
 
-                    ret.append(processed[:])
+                        ret.append(processed[:])
+
+                        return ret
                     
                 if (processed[0] > v_ref):
                     print("The final imposed speed is too low.")
