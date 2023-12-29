@@ -308,6 +308,8 @@ def process_input(processed, gear_ini, min_lim=1800, max_lim=3100, tstep=0.5,
                         ret.append(processed[:])
 
                         return ret
+
+                ret.append(processed[:])
                     
                     n_i = sfc.engine_speed(processed[0], dict_fix['xi_f'],
                                        gear, dict_fix['r_d'],
