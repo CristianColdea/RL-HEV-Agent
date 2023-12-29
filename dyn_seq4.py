@@ -232,8 +232,8 @@ def process_input(processed, gear_ini, min_lim=1800, max_lim=3100, tstep=0.5,
             n_i = sfc.engine_speed(processed[0], dict_fix['xi_f'],
                                    gear, dict_fix['r_d'],
                                    dict_fix['s_f'], dict_fix['n_max'])
-            
-                    
+           
+                                
             if (n_i > dict_fix['n_max']):
                 print("The engine speed is too high. Please adjust!")
                 exit()
@@ -262,6 +262,8 @@ def process_input(processed, gear_ini, min_lim=1800, max_lim=3100, tstep=0.5,
                                        sc.xi_gs[posi-1], dict_fix['r_d'],
                                        dict_fix['s_f'], dict_fix['n_max'])
                 
+                print("n_next, ", n_next)
+
                 # decrease speed by timestep, within engine speed limits
                 while (n_next >= max_lim):
                     # print("processed inside while, ", processed)
@@ -309,7 +311,7 @@ def process_input(processed, gear_ini, min_lim=1800, max_lim=3100, tstep=0.5,
 
                         return ret
 
-                ret.append(processed[:])
+                    ret.append(processed[:])
                     
                     n_i = sfc.engine_speed(processed[0], dict_fix['xi_f'],
                                        gear, dict_fix['r_d'],
