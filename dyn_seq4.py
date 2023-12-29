@@ -309,17 +309,15 @@ def process_input(processed, gear_ini, min_lim=1800, max_lim=3100, tstep=0.5,
 
                         return ret
                     
-                if (processed[0] > v_ref):
-                    print("The final imposed speed is too low.")
-                    exit()
-                    
-                    return ret
-                    
                     n_i = sfc.engine_speed(processed[0], dict_fix['xi_f'],
                                        gear, dict_fix['r_d'],
                                        dict_fix['s_f'], dict_fix['n_max'])
                     #print("n_i as a control variable in the first gear, ", n_i)
-    
+
+                if (processed[0] > v_ref):
+                    print("The final imposed speed is too low.")
+                    exit()
+                                                         
 
 #for seq in low_raw:
 #    print(process_input(raw_proc(seq)))
