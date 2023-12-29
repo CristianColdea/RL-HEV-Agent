@@ -205,7 +205,13 @@ def process_input(processed, gear_ini, min_lim=1800, max_lim=3100, tstep=0.5,
 
                         ret.append(processed[:])
 
-                    return ret
+                        return ret
+                    
+                    ret.append(processed[:])
+                    
+                    n_i = sfc.engine_speed(processed[0], dict_fix['xi_f'],
+                                       gear, dict_fix['r_d'],
+                                       dict_fix['s_f'], dict_fix['n_max'])
 
                                             
                 if (processed[0] < v_ref):
@@ -213,10 +219,7 @@ def process_input(processed, gear_ini, min_lim=1800, max_lim=3100, tstep=0.5,
                     exit()
                     
                                         
-                    n_i = sfc.engine_speed(processed[0], dict_fix['xi_f'],
-                                       gear, dict_fix['r_d'],
-                                       dict_fix['s_f'], dict_fix['n_max'])
-                    # print("n_i as a control variable in the last gear, ", n_i)
+    # print("n_i as a control variable in the last gear, ", n_i)
     
     # deccelerated movement, starting from the current gear
     else:                
