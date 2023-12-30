@@ -126,6 +126,10 @@ def process_input(processed, gear_ini, min_lim=1800, max_lim=3100, tstep=0.5,
             pos = index 
 
     # uniform movement
+    n_i = sfc.engine_speed(processed[0], dict_fix['xi_f'],
+                           gear_i, dict_fix['r_d'],
+                           dict_fix['s_f'], dict_fix['n_max'])
+
     if(processed[2] == 0):
         if(processed[1] != 0):  #in a certain gear
             if(n_i > n_stab) and (n_i < n_max): #within proper speed
