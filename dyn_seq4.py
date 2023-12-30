@@ -125,6 +125,19 @@ def process_input(processed, gear_ini, min_lim=1800, max_lim=3100, tstep=0.5,
         if gear == gear_i:
             pos = index 
 
+    # uniform movement
+    if(processed[2] == 0):
+        if(processed[1] != 0):  #in a certain gear
+            if(n_i > n_stab) and (n_i < n_max): #within proper speed
+                return processed
+            else:
+                print("Engine speed is either too low or too high. Please
+                adjust!")
+                exit()
+        else:
+            print("Please provide the desired gear.")
+            exit()
+
     # accelerated movement, starting from the current gear
     if(processed[2] > 0):
         
