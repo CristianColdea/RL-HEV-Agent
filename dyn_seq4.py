@@ -131,7 +131,7 @@ def process_input(processed, gear_ini, min_lim=1800, max_lim=3100, tstep=0.5,
                            dict_fix['s_f'], dict_fix['n_max'])
 
     if(processed[2] == 0):
-        if(processed[1] != 0):  #in a certain gear
+        if(processed[1] > 0):  #in a certain gear
             if(n_i > n_stab) and (n_i < n_max): #within proper speed
                 return processed
             else:
@@ -139,7 +139,7 @@ def process_input(processed, gear_ini, min_lim=1800, max_lim=3100, tstep=0.5,
                 adjust!")
                 exit()
         else:
-            print("Please provide the desired gear.")
+            print("Please provide a proper gear.")
             exit()
 
     # accelerated movement, starting from the current gear
