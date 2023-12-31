@@ -108,11 +108,13 @@ def process_input(processed, gear_ini, min_lim=1800, max_lim=3100, tstep=0.5,
     
     # reference speed per sequence
     v_ref = processed[0] + processed[3] * processed[2]
-    print("v_ref is, ", v_ref)
+    print("v_ref , ", v_ref)
 
     print("processed, ", processed)
 
     gear_i = gear_ini
+
+    print("gear_i, ", gear_i)
 
     if processed[0] == 0:
         processed = null_speed(processed)
@@ -130,9 +132,10 @@ def process_input(processed, gear_ini, min_lim=1800, max_lim=3100, tstep=0.5,
                            gear_i, dict_fix['r_d'],
                            dict_fix['s_f'], dict_fix['n_max'])
 
-    processed[1] = gear_i   # allocate the gear for uniform movement
-
+    
     if(processed[2] == 0):
+        processed[1] = gear_i   # allocate the gear for uniform movement
+
         if(processed[1] > 0):  #in a certain gear
             if(n_i > n_stab) and (n_i < n_max): #within proper speed
                 return processed
@@ -348,18 +351,18 @@ expand = []
 for sequence in low_raw[:2]:
     # if expand empty
     if not expand:
-        # expand.extend(process_input(raw_proc(sequence), sequence[1]))
+        expand.extend(process_input(raw_proc(sequence), sequence[1]))
         print(expand)
     else:   # use the previous sequence gear
-    #    expand.extend(process_input(raw_proc(sequence),
-    #                                         expand[-1][1]))
-        print("Seq 2, ", sequence)
+        expand.extend(process_input(raw_proc(sequence),
+                                             expand[-1][1]))
+        print(expand)
 
 #print(process_input(raw_proc(low_raw[0]), low_raw[0][1]))
 # print(process_input(raw_proc(low_raw[1]), 1.211))
 # print(process_input([3.333, 0, 0, 10], 5.503))
 
-print(process_input(raw_proc([12, 12, 0, 10]), 5.503))
+# print(process_input(raw_proc([12, 12, 0, 10]), 5.503))
 
 #print("**********")
 # print(expand)
