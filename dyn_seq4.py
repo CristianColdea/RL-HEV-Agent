@@ -296,8 +296,8 @@ def process_input(processed, gear_ini, min_lim=1800, max_lim=3100, tstep=0.5,
                                        gear, dict_fix['r_d'],
                                        dict_fix['s_f'], dict_fix['n_max'])
 
-                print("current gear is, ", gear)
-                print("current engine speed is, ", n_i)
+                # print("current gear is, ", gear)
+                # print("current engine speed is, ", n_i)
 
                 # decrease speed by timestep down to stable speed limit
                 while (n_i >= n_stab):
