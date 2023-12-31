@@ -130,12 +130,14 @@ def process_input(processed, gear_ini, min_lim=1800, max_lim=3100, tstep=0.5,
                            gear_i, dict_fix['r_d'],
                            dict_fix['s_f'], dict_fix['n_max'])
 
+    processed[1] = gear_i   # allocate the gear for uniform movement
+
     if(processed[2] == 0):
         if(processed[1] > 0):  #in a certain gear
             if(n_i > n_stab) and (n_i < n_max): #within proper speed
                 return processed
             else:
-                print("Engine speed is either too low or too high. Please
+                print("Engine speed is either too low or too high. Please\
                 adjust!")
                 exit()
         else:
@@ -354,6 +356,8 @@ for sequence in low_raw[:2]:
         print("Seq 2, ", sequence)
 
 #print(process_input(raw_proc(low_raw[0]), low_raw[0][1]))
-print(process_input(raw_proc(low_raw[1]), 1.211))
+# print(process_input(raw_proc(low_raw[1]), 1.211))
+print(process_input([3.333, 0, 0, 10], 5.503))
+
 #print("**********")
 # print(expand)
