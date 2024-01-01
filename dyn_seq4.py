@@ -353,10 +353,13 @@ for sequence in low_raw[:2]:
     if not expand:
         expand.extend(process_input(raw_proc(sequence), sequence[1]))
         print(expand)
+        print("**********")
+
     else:   # use the previous sequence gear
         expand.extend(process_input(raw_proc(sequence),
                                              expand[-1][1]))
         print(expand)
+        print("**********")
 
 #print(process_input(raw_proc(low_raw[0]), low_raw[0][1]))
 # print(process_input(raw_proc(low_raw[1]), 1.211))
