@@ -112,6 +112,8 @@ def process_input(processed, gear_ini, min_lim=1800, max_lim=3100, tstep=0.5,
 
     print("processed, ", processed)
 
+    print("gear_ini, ", gear_ini)
+
     gear_i = gear_ini
 
     print("gear_i, ", gear_i)
@@ -358,6 +360,7 @@ for sequence in low_raw[:2]:
     else:   # use the previous sequence gear
         expand.extend(process_input(raw_proc(sequence),
                                              expand[-1][1]))
+        print("last gear, ", expand[-1][1])
         print(expand)
         print("**********")
 
