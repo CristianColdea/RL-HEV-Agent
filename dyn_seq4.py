@@ -353,6 +353,7 @@ expand = []
 for sequence in low_raw[:2]:
     # if expand empty
     if not expand:
+        print("expand bool, ", not expand)
         expand.extend(process_input(raw_proc(sequence), raw_proc(sequence)[1]))
         print(expand)
         print("**********")
