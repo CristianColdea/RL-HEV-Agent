@@ -350,7 +350,7 @@ def process_input(processed, gear_ini, min_lim=1800, max_lim=3100, tstep=0.5,
 # the list to store expanded values
 expand = []
 
-for count, sequence in enumerate(low_raw[:2]):
+for sequence in low_raw[:2]:
     # if expand empty
     if not expand:
         expand.extend(process_input(raw_proc(sequence), raw_proc(sequence)[1]))
@@ -359,8 +359,8 @@ for count, sequence in enumerate(low_raw[:2]):
 
     else:   # use the previous sequence gear
         expand.extend(process_input(raw_proc(sequence),
-                                             expand[count-1][1]))
-        print("last gear, ", expand[-1][1])
+                                             expand[-1][1]))
+        print("last sequence, ", expand[-1])
         print(expand)
         print("**********")
 
