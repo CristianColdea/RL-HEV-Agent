@@ -352,11 +352,11 @@ expand = []
 
 # print("expand, ", expand)
 
-for sequence in low_raw[:2]:
+for sequence in low_raw[:4]:
     # if expand empty
     if not expand:
-        print("expand bool, ", not expand)
-        print("current sequence, ", sequence)
+        # print("expand bool, ", not expand)
+        # print("current sequence, ", sequence)
         expand.extend(process_input(raw_proc(sequence),
                                     raw_proc(sequence)[1]))
         print(expand)
@@ -366,7 +366,7 @@ for sequence in low_raw[:2]:
         print("last gear, ", expand[-1][1])    
         expand.extend(process_input(raw_proc(sequence),
                                     expand[-1][1]))
-        print("current sequence, ", sequence)
+        # print("current sequence, ", sequence)
 
         print(expand)
         print("**********")
