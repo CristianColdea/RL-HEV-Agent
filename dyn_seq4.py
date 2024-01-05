@@ -357,13 +357,14 @@ for sequence in low_raw[:2]:
     if not expand:
         print("expand bool, ", not expand)
         print("current sequence, ", sequence)
-        expand.extend(process_input(raw_proc(sequence), raw_proc(sequence)[1]))
+        expand.extend(process_input(raw_proc(sequence),
+                                    raw_proc(sequence)[1]))
         print(expand)
         print("**********")
 
     else:   # use the previous sequence gear
         expand.extend(process_input(raw_proc(sequence),
-                                             expand[-1][1]))
+                                    expand[-1][1]))
         print("current sequence, ", sequence)
 
         print("last sequence, ", expand[-1])
