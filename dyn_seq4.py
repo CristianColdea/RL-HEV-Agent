@@ -352,7 +352,7 @@ expand = []
 
 # print("expand, ", expand)
 
-for sequence in low_raw[:4]:
+for sequence in low_raw:
     # if expand empty
     if not expand:
         # print("expand bool, ", not expand)
