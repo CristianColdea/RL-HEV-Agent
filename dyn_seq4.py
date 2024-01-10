@@ -34,6 +34,10 @@ low_raw = [[0, 45, 10, 30], [45, 12, 30, 55], [12, 40, 55, 75],
            [18, 0, 570, 575]
            ]
 
+# medium speed section
+med_raw = [[0, 49, 600, 615], [49, 44, 615, 625],
+           ]
+
 def raw_proc(raw_list):
     """
     Function to process the raw list of values as collected
