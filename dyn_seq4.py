@@ -49,6 +49,10 @@ med_raw = [[0, 49, 600, 615], [49, 44, 615, 625],
            [65, 53, 925, 940], [53, 25, 940, 960],
            [25, 52, 960, 970], [52, 0, 970, 985]]
 
+# high speed section
+high_raw = [[ ]
+            ]
+
 def raw_proc(raw_list):
     """
     Function to process the raw list of values as collected
