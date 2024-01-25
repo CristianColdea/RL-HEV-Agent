@@ -57,6 +57,10 @@ high_raw = [[0, 53, 1025, 1050], [53, 11, 1050, 1060],
             [14, 25, 1140, 1145], [25, 12, 1145, 1155],
             [12, 97, 1155, 1250], ]
 
+# ultra high speed section
+ultra_high_raw = [[ ],
+                  ]
+
 def raw_proc(raw_list):
     """
     Function to process the raw list of values as collected
