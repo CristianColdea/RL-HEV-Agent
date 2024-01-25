@@ -58,7 +58,7 @@ high_raw = [[0, 53, 1025, 1050], [53, 11, 1050, 1060],
             [12, 97, 1155, 1250], ]
 
 # ultra high speed section
-ultra_high_raw = [[ ],
+ultra_high_raw = [[0, 48, 1480, 1500],
                   ]
 
 def raw_proc(raw_list):
