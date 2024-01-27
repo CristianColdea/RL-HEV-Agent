@@ -74,6 +74,12 @@ ultra_high_raw = [[0, 48, 1480, 1500], [48, 74, 1500, 1525],
                   [126, 132, 1720, 1730], [132, 90, 1730, 1750],
                   [90, 80, 1750, 1770], [80, 0, 1770, 1800]]
 
+# full testing cycle
+wltp = low_raw + med_raw + high_raw + ultra_high_raw
+print(len(wltp) == (len(low_raw) + len(med_raw) + len(high_raw) +
+                    len(ultra_high_raw)))
+# print(len(wltp))
+ 
 def raw_proc(raw_list):
     """
     Function to process the raw list of values as collected
@@ -391,7 +397,7 @@ def process_input(processed, gear_ini, min_lim=1800, max_lim=3100, tstep=0.5,
 expand = []
 
 # print("expand, ", expand)
-
+"""
 for sequence in low_raw:
     # if expand empty
     if not expand:
@@ -410,7 +416,7 @@ for sequence in low_raw:
 
         print(expand)
         print("**********")
-
+"""
 #print(process_input(raw_proc(low_raw[0]), low_raw[0][1]))
 # print(process_input(raw_proc(low_raw[1]), 1.211))
 # print(process_input([3.333, 0, 0, 10], 5.503))
