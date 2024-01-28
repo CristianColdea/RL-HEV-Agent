@@ -77,7 +77,7 @@ ultra_high_raw = [[0, 48, 1480, 1500], [48, 74, 1500, 1525],
 # full testing cycle
 wltp = low_raw + med_raw + high_raw + ultra_high_raw
 # print(len(wltp) == (len(low_raw) + len(med_raw) + len(high_raw) +
-                    len(ultra_high_raw)))
+#                    len(ultra_high_raw)))
 # print(len(wltp))
  
 def raw_proc(raw_list):
