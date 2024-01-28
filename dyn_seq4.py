@@ -154,7 +154,7 @@ def process_input(processed, gear_ini, min_lim=1800, max_lim=3100, tstep=0.5,
     
     # reference speed per sequence
     v_ref = processed[0] + processed[3] * processed[2]
-    print("v_ref , ", v_ref)
+    # print("v_ref , ", v_ref)
 
     print("processed, ", processed)
 
