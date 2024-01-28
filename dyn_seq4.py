@@ -156,13 +156,13 @@ def process_input(processed, gear_ini, min_lim=1800, max_lim=3100, tstep=0.5,
     v_ref = processed[0] + processed[3] * processed[2]
     # print("v_ref , ", v_ref)
 
-    print("processed, ", processed)
+    # print("processed, ", processed)
 
-    print("gear_ini, ", gear_ini)
+    # print("gear_ini, ", gear_ini)
 
     gear_i = gear_ini
 
-    print("gear_i, ", gear_i)
+    # print("gear_i, ", gear_i)
 
     if processed[0] == 0:
         processed = null_speed(processed)
