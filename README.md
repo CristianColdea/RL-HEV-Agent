@@ -66,8 +66,8 @@ To-do list:
 * Code the neural network in order to model the DQ part.
 * Train the agent and collect output.
 * Collect vehicle parameters for testing.
-* Code the WLTP cycle in order to get the road test parameters for a certain vehicle.
-* Test the vehicle according to WLTP cycle, only Internal Combustion Engine powertrain.
+* ~~Code the WLTP cycle in order to get the road test parameters for a certain vehicle.~~S
+* ~~Test the vehicle according to WLTP cycle, only Internal Combustion Engine powertrain.~~
 * Test the vehicle according to WLTP cycle, HE powertrain.
 * Results and analysis.
 
