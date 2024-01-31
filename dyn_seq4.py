@@ -19,6 +19,7 @@ precisely in this order.
 
 import simfc5 as sfc
 import sfc_call as sc
+import csv
 
 # initial list of lists (list of sequences) for WLTP cycle low speed section
 low_raw = [[0, 45, 10, 30], [45, 12, 30, 55], [12, 40, 55, 75],
@@ -405,8 +406,8 @@ for sequence in low_raw:
         # print("current sequence, ", sequence)
         expand.extend(process_input(raw_proc(sequence),
                                     raw_proc(sequence)[1]))
-        print(expand)
-        print("**********")
+        # print(expand)
+        # print("**********")
 
     else:   # use the previous sequence gear
         print("last gear, ", expand[-1][1])    
