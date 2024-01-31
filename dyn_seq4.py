@@ -395,7 +395,9 @@ def process_input(processed, gear_ini, min_lim=1800, max_lim=3100, tstep=0.5,
 
 # the loop to cycle through the list of sequences, i.e. low_raw
 # the list to store expanded values
-expand = []
+expand = [
+       ['v_init', 'gear', 'accel', 'time'],
+       ]
 
 # print("expand, ", expand)
 
@@ -417,6 +419,11 @@ for sequence in low_raw:
 
         # print(expand)
         # print("**********")
+
+with open('low_section.csv', 'w', newline='') as file:
+    writer = csv.writer(file)
+
+    writer.writerows(expand)
 
 print(expand)
 # print(len(expand))
