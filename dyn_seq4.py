@@ -410,15 +410,15 @@ for sequence in low_raw:
         # print("**********")
 
     else:   # use the previous sequence gear
-        print("last gear, ", expand[-1][1])    
+        # print("last gear, ", expand[-1])    
         expand.extend(process_input(raw_proc(sequence),
                                     expand[-1][1]))
         # print("current sequence, ", sequence)
 
         # print(expand)
-        print("**********")
+        # print("**********")
 
-print(expand)
+# print(expand)
 print(len(expand))
 
 #print(process_input(raw_proc(low_raw[0]), low_raw[0][1]))
