@@ -418,8 +418,8 @@ for sequence in low_raw:
         # print(expand)
         # print("**********")
 
-# print(expand)
-print(len(expand))
+print(expand)
+# print(len(expand))
 
 #print(process_input(raw_proc(low_raw[0]), low_raw[0][1]))
 # print(process_input(raw_proc(low_raw[1]), 1.211))
