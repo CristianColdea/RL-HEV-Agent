@@ -395,7 +395,7 @@ def process_input(processed, gear_ini, min_lim=1800, max_lim=3100, tstep=0.5,
 
 # the loop to cycle through the list of sequences, i.e. low_raw
 # the list to store expanded values
-expand = [
+expand_low = [
        ['v_init', 'gear', 'accel', 'time'],
        ]
 
