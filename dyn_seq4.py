@@ -402,19 +402,19 @@ expand_low = [
 # print("expand, ", expand)
 
 for sequence in low_raw:
-    # if expand empty
-    if not expand:
+    # if expand_low has only the header
+    if len(expand_low) == 1:
         # print("expand bool, ", not expand)
         # print("current sequence, ", sequence)
-        expand.extend(process_input(raw_proc(sequence),
+        expand_low.extend(process_input(raw_proc(sequence),
                                     raw_proc(sequence)[1]))
         # print(expand)
         # print("**********")
 
     else:   # use the previous sequence gear
         # print("last gear, ", expand[-1])    
-        expand.extend(process_input(raw_proc(sequence),
-                                    expand[-1][1]))
+        expand_low.extend(process_input(raw_proc(sequence),
+                                    expand_low[-1][1]))
         # print("current sequence, ", sequence)
 
         # print(expand)
@@ -423,9 +423,9 @@ for sequence in low_raw:
 with open('low_section.csv', 'w', newline='') as file:
     writer = csv.writer(file)
 
-    writer.writerows(expand)
+    writer.writerows(expand_low)
 
-print(expand)
+print(expand_low)
 # print(len(expand))
 
 #print(process_input(raw_proc(low_raw[0]), low_raw[0][1]))
