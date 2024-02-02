@@ -504,7 +504,7 @@ expand_ultra_high = [
 # print("expand, ", expand)
 
 for sequence in ultra_high_raw:
-    # if expand_low has only the header
+    # if expand_ultra_high has only the header
     if len(expand_ultra_high) == 1:
         # print("expand bool, ", not expand)
         # print("current sequence, ", sequence)
@@ -529,6 +529,40 @@ with open('ultra_high_section.csv', 'w', newline='') as file:
 
 # print(expand_ultra_high)
 # print(len(expand_ultra_high))
+
+# the list to store full cycle expanded values
+expand_wltp = [
+       ['v_init', 'gear', 'accel', 'time'],
+       ]
+
+# print("expand, ", expand)
+
+for sequence in wltp:
+    # if expand_wltp has only the header
+    if len(expand_wltp) == 1:
+        # print("expand bool, ", not expand)
+        # print("current sequence, ", sequence)
+        expand_wltp.extend(process_input(raw_proc(sequence),
+                                    raw_proc(sequence)[1]))
+        # print(expand)
+        # print("**********")
+
+    else:   # use the previous sequence gear
+        # print("last gear, ", expand[-1])    
+        expand_wltp.extend(process_input(raw_proc(sequence),
+                                    expand_wltp[-1][1]))
+        # print("current sequence, ", sequence)
+
+        # print(expand)
+        # print("**********")
+
+with open('wltp_full.csv', 'w', newline='') as file:
+    writer = csv.writer(file)
+
+    writer.writerows(expand_wltp)
+
+print(expand_wltp)
+print(len(expand_wltp))
 
 
 #print(process_input(raw_proc(low_raw[0]), low_raw[0][1]))
