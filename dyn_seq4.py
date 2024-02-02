@@ -394,7 +394,7 @@ def process_input(processed, gear_ini, min_lim=1800, max_lim=3100, tstep=0.5,
 #       raw_proc(low_raw[0]))
 
 # the loop to cycle through the list of sequences, i.e. low_raw
-# the list to store expanded values
+# the list to store low speed section expanded values
 expand_low = [
        ['v_init', 'gear', 'accel', 'time'],
        ]
@@ -425,8 +425,42 @@ with open('low_section.csv', 'w', newline='') as file:
 
     writer.writerows(expand_low)
 
-print(expand_low)
+# print(expand_low)
 # print(len(expand))
+
+# the list to store medium speed section expanded values
+expand_med = [
+       ['v_init', 'gear', 'accel', 'time'],
+       ]
+
+# print("expand, ", expand)
+
+for sequence in med_raw:
+    # if expand_med has only the header
+    if len(expand_med) == 1:
+        # print("expand bool, ", not expand)
+        # print("current sequence, ", sequence)
+        expand_med.extend(process_input(raw_proc(sequence),
+                                    raw_proc(sequence)[1]))
+        # print(expand)
+        # print("**********")
+
+    else:   # use the previous sequence gear
+        # print("last gear, ", expand[-1])    
+        expand_med.extend(process_input(raw_proc(sequence),
+                                    expand_med[-1][1]))
+        # print("current sequence, ", sequence)
+
+        # print(expand)
+        # print("**********")
+
+with open('med_section.csv', 'w', newline='') as file:
+    writer = csv.writer(file)
+
+    writer.writerows(expand_med)
+
+print(expand_med)
+print(len(expand_med))
 
 #print(process_input(raw_proc(low_raw[0]), low_raw[0][1]))
 # print(process_input(raw_proc(low_raw[1]), 1.211))
