@@ -527,8 +527,8 @@ with open('ultra_high_section.csv', 'w', newline='') as file:
 
     writer.writerows(expand_ultra_high)
 
-print(expand_ultra_high)
-print(len(expand_ultra_high))
+# print(expand_ultra_high)
+# print(len(expand_ultra_high))
 
 
 #print(process_input(raw_proc(low_raw[0]), low_raw[0][1]))
