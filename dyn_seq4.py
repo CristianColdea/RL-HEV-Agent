@@ -459,8 +459,42 @@ with open('med_section.csv', 'w', newline='') as file:
 
     writer.writerows(expand_med)
 
-print(expand_med)
-print(len(expand_med))
+# print(expand_med)
+# print(len(expand_med))
+
+# the list to store high speed section expanded values
+expand_high = [
+       ['v_init', 'gear', 'accel', 'time'],
+       ]
+
+# print("expand, ", expand)
+
+for sequence in high_raw:
+    # if expand_low has only the header
+    if len(expand_high) == 1:
+        # print("expand bool, ", not expand)
+        # print("current sequence, ", sequence)
+        expand_high.extend(process_input(raw_proc(sequence),
+                                    raw_proc(sequence)[1]))
+        # print(expand)
+        # print("**********")
+
+    else:   # use the previous sequence gear
+        # print("last gear, ", expand[-1])    
+        expand_high.extend(process_input(raw_proc(sequence),
+                                    expand_high[-1][1]))
+        # print("current sequence, ", sequence)
+
+        # print(expand)
+        # print("**********")
+
+with open('high_section.csv', 'w', newline='') as file:
+    writer = csv.writer(file)
+
+    writer.writerows(expand_high)
+
+print(expand_high)
+print(len(expand_high))
 
 #print(process_input(raw_proc(low_raw[0]), low_raw[0][1]))
 # print(process_input(raw_proc(low_raw[1]), 1.211))
