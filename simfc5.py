@@ -351,7 +351,7 @@ def unpack_d(dyns):
     """
     Function to unpack dynamic variables.
     Takes as input the dynamic variables, in particular order.
-    Returns a list latter useful.
+    Returns a dictionary latter useful.
     """
 
     names_d = ['v_init', 'xi_g', 'a', 't']
@@ -366,7 +366,8 @@ def simfc_call(dict_fix, dict_dyn):
     Function to call all functions and methods previously defined.
     The meaning of function parameters is indicated throughout this script 
     and in the 'passing_args' explanatory document.
-    Returns the specific fuel consumption, in kg/kWh.
+    Returns the fuel consumption, kg/100 km, hourly fuel consumption, kg/h, 
+    and the specific fuel consumption, kg/kWh.
     CAVEAT: Vehicle speed is limited by the engine maximum speed and the
             transsmision overall ratio. Vehicle required power is limited by
             the maximum engine output for the given engine speed.
