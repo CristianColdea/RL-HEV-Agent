@@ -470,7 +470,7 @@ expand_high = [
 # print("expand, ", expand)
 
 for sequence in high_raw:
-    # if expand_low has only the header
+    # if expand_high has only the header
     if len(expand_high) == 1:
         # print("expand bool, ", not expand)
         # print("current sequence, ", sequence)
