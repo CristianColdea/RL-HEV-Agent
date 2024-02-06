@@ -318,14 +318,14 @@ def fuel_cons(E, Q_f, v_a, p_i, ro_f):
     Takes as parameters energy required for vehicle movement and fuel
     calorific value, in J/liter, vehicle speed, in m/s, required power
     and fuel density, in kg/l.
-    Returns fuel consumptions in a tuple, in liters/100 km, in kg/hour
-    and in kg/kWh.
+    Returns fuel consumptions in a list, in liters/100 km, in kg/100 km,
+    in kg/hour and in kg/kWh.
     """
-    fc_100 = E/Q_f
-    print("FC per 100 km in kg/100 is: ", fc_100*ro_f)
-    fc_hour = 0.036 * v_a * fc_100 * ro_f
+    lfc_100 = E / Q_f
+    kgfc_100 = lfc_100 * ro_f
+    fc_hour = 0.036 * v_a * lfc_100 * ro_f
     fc_s = fc_hour / p_i
-    return (fc_100, fc_hour, fc_s)
+    return [lfc_100, kgfc_100, fc_hour, fc_s]
 # ==========
 
 """
@@ -382,7 +382,7 @@ def simfc_call(dict_fix, dict_dyn):
               "It was automatically readjusted to MAX value possible!")
  
     # 1) the case of uniform vehicle movement (i.e., a = 0)
-    if a == 0:
+    if dict_dyn['a'] == 0:
         # engine speed
         n_i = engine_speed(dict_dyn['v_init'], dict_fix['xi_f'],
                            dict_dyn['xi_g'], dict_fix['r_d'],
