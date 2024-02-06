@@ -324,6 +324,11 @@ def fuel_cons(E, Q_f, v_a, p_i, ro_f):
     lfc_100 = E / Q_f
     kgfc_100 = lfc_100 * ro_f
     fc_hour = 0.036 * v_a * lfc_100 * ro_f
+    
+    # prevent division by zero at vehicle stop
+    if p_i == 0:
+        p_i = 0.0001
+
     fc_s = fc_hour / p_i
     return [lfc_100, kgfc_100, fc_hour, fc_s]
 # ==========
