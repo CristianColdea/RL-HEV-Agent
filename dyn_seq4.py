@@ -561,15 +561,11 @@ with open('wltp_full.csv', 'w', newline='') as file:
 
     writer.writerows(expand_wltp)
 
-print(expand_wltp)
-print(len(expand_wltp))
+# print(expand_wltp)
+# print(len(expand_wltp))
 
-
-#print(process_input(raw_proc(low_raw[0]), low_raw[0][1]))
-# print(process_input(raw_proc(low_raw[1]), 1.211))
-# print(process_input([3.333, 0, 0, 10], 5.503))
-
-# print(process_input(raw_proc([12, 12, 0, 10]), 5.503))
-
-#print("**********")
-# print(expand)
+for sequence in expand_low:
+    # deccelerated movement starting with null initial speed not possible
+    if seq[0] == 0 and seq[2] < 0:
+        continue
+    sfc.simfc_call(sfc.unpack_f(sc.fixs), sfc.unpack_d(sequence))
