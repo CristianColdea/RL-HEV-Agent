@@ -569,12 +569,15 @@ with open('wltp_full.csv', 'w', newline='') as file:
 # list to store results of low speed section
 fuels_low = ["l/100", "kg/100", "kg/h", "sfc"]
 
-for seq in expand_low[1:2]:
+for seq in expand_low[1:3]:
     # deccelerated movement starting with null initial speed not possible
     if seq[0] == 0 and seq[2] < 0:
         continue
-    fuels_low.extend(sfc.simfc_call(sfc.unpack_f(sc.fixs),
+    fuels_low.append(sfc.simfc_call(sfc.unpack_f(sc.fixs),
                                     sfc.unpack_d(seq)))
+    # print(sfc.simfc_call(sfc.unpack_f(sc.fixs),
+    #                                sfc.unpack_d(seq)))
+
     # print(sfc.unpack_f(sc.fixs))
     # print(sfc.unpack_d(seq))
 
