@@ -575,3 +575,5 @@ for sequence in expand_low:
         continue
     fuels_low.extend(sfc.simfc_call(sfc.unpack_f(sc.fixs),
                                     sfc.unpack_d(sequence)))
+
+print(fuels_low)
