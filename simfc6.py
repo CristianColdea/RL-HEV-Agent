@@ -243,7 +243,7 @@ class Energy:
         Returns the required energy, in J/100 km.
         The hypotesis of average engine speed and output coefficient.
         """
-        #same multiplier for all two terms
+        #same multiplier
         C2 = (2 * m_a * 9.81 * c_r)/(eta_t * eta_max * (mu_n_init * mu_P_init +
                                      mu_n_fin * mu_P_fin))
 
