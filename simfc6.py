@@ -277,10 +277,7 @@ class Energy:
         Ea_c = 100000 * C3 * t**2 * a**2 / (mu_n_fin * mu_n_P)
 
 
-        # fourth term
-        Ea_d = C3 * 0.5 * a**3 * t**3 * (100000 / (v_init * t + 0.5 * a * t**2))
-
-        return (Ea_a + Ea_b + Ea_c + Ea_d)
+        return (Ea_a + Ea_b + Ea_c)
 
 
 
