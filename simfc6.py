@@ -251,31 +251,31 @@ class Energy:
 
     # e_air - the required energy to overcome air resistance during acceleration
 
-    def e_air(eta_t, eta_max, mu_n_fin, mu_P_fin, v_init, C_d, A_f, a, t,
-              ro_air=1.225):
+    def e_air(eta_t, eta_max, mu_n_init, mu_P_init, mu_n_fin, mu_P_fin, v_init,
+              C_d, A_f, a, t, ro_air=1.225):
         """
         Method to compute required energy to overcome the air resistance
         of the vehicle.
         Takes as parameters transmission efficiency, the engine peak efficiency,
-        engine speed coefficient final, engine output coefficient
-        final, vehicle initial speed, in m/s, the air resistance coefficient,
-        the vehicle frontal area, constant acceleration, in m/s**2,
+        engine speed coefficient initial and final, engine output coefficient
+        initial and final, vehicle initial speed, in m/s, the air resistance
+        coefficient, the vehicle frontal area, constant acceleration, in m/s**2,
         acceleration time, in s and air density, in kg/m**3.
         Returns the required energy, in J/100 km.
         """
         #same multiplier for all four terms
-        C3 = (0.5 * ro_air * C_d * A_f)/(eta_t * eta_max * mu_n_fin * mu_P_fin)
+        C3 = (0.5 * ro_air * C_d * A_f)/(eta_t * eta_max)
         
         # first term of energy required to overcome air drag
-        Ea_a = C3 * t * v_init**3 * (100000 / (v_init * t + 0.5 * a * t**2))
-
+        Ea_a = 100000 * C3 * v_init**2 *
+                (mu_n_init * mu_P_init - mu_n_fin * mu_P_fin) /
+                (mu_n_init * mu_P_init * mu_n_fin * mu_P_fin) 
         # second term
-        Ea_b = C3 * t**2 * 2.5 * a * v_init**2 * (100000 / (v_init * t + 0.5 *
-               a * t**2))
+        Ea_b = 2* 100000 * C3 * v_init * t / (mu_n_fin * mu_n_P)
 
         # third term
-        Ea_c = C3 * t**3 * 2 * v_init * a**2 * (100000 / (v_init * t + 0.5 *
-               a * t**2))
+        Ea_c = 100000 * C3 * t**2 * a**2 / (mu_n_fin * mu_n_P)
+
 
         # fourth term
         Ea_d = C3 * 0.5 * a**3 * t**3 * (100000 / (v_init * t + 0.5 * a * t**2))
