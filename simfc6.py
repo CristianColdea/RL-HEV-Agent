@@ -475,9 +475,9 @@ def simfc_call(dict_fix, dict_dyn):
                                dict_fix['c_r'],dict_dyn['a'], dict_dyn['t'])
 
         # energy required to overcome air resistance
-        e_air = Energy.e_air(dict_fix['eta_t'], dict_fix['eta_max'], mu_n_fin,
-                             mu_P_fin, v, dict_fix['C_d'], dict_fix['A_f'],
-                             dict_dyn['a'], dict_dyn['t'])
+        e_air = Energy.e_air(dict_fix['eta_t'], dict_fix['eta_max'], mu_n_init,
+                             mu_P_init, mu_n_fin, mu_P_fin, v, dict_fix['C_d'],
+                             dict_fix['A_f'], dict_dyn['a'], dict_dyn['t'])
 
         # total energy required for accelerated vehicle movement
         e = e_kin + e_roll + e_air
