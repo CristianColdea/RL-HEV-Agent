@@ -17,7 +17,7 @@ The values are intial speed, final speed, initial time, final time,
 precisely in this order.
 """
 
-import simfc5 as sfc
+import simfc6 as sfc
 import sfc_call as sc
 import csv
 
@@ -586,4 +586,4 @@ with open('fcons_low.csv', 'w', newline='') as file:
 
     writer.writerows(fuels_low)
 
-# print(fuels_low)
+print(fuels_low)
