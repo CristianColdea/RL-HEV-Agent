@@ -476,7 +476,8 @@ def simfc_call(dict_fix, dict_dyn):
                              dict_dyn['v_init'], dict_dyn['a'], dict_dyn['t'])
 
         # energy required to overcome rolling resistance
-        e_roll = Energy.e_roll(dict_fix['eta_t'], dict_fix['eta_max'], mu_n_fin,
+        e_roll = Energy.e_roll(dict_fix['eta_t'], dict_fix['eta_max'],
+                               mu_n_init, mu_P_init, mu_n_fin,
                                mu_P_fin, dict_fix['m_a'], v,
                                dict_fix['c_r'],dict_dyn['a'], dict_dyn['t'])
 
