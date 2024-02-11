@@ -417,7 +417,7 @@ def simfc_call(dict_fix, dict_dyn):
                               dict_fix['ro_f'])
     
     # decccelerated vehicle movement
-    # no energy flow from engine to wheels
+    # no energy flow from engine to wheels => no fuel consumptions
     if dict_dyn['a'] < 0:
         return [0, 0, 0, 0]
     
