@@ -267,14 +267,14 @@ class Energy:
         C3 = (0.5 * ro_air * C_d * A_f)/(eta_t * eta_max)
         
         # first term of energy required to overcome air drag
-        Ea_a = 100000 * C3 * v_init**2 *
+        Ea_a = (100000 * C3 * v_init**2 *
                 (mu_n_init * mu_P_init - mu_n_fin * mu_P_fin) /
-                (mu_n_init * mu_P_init * mu_n_fin * mu_P_fin) 
+                (mu_n_init * mu_P_init * mu_n_fin * mu_P_fin)) 
         # second term
-        Ea_b = 2* 100000 * C3 * v_init * t / (mu_n_fin * mu_n_P)
+        Ea_b = 2* 100000 * C3 * v_init * t / (mu_n_fin * mu_P_fin)
 
         # third term
-        Ea_c = 100000 * C3 * t**2 * a**2 / (mu_n_fin * mu_n_P)
+        Ea_c = 100000 * C3 * t**2 * a**2 / (mu_n_fin * mu_P_fin)
 
 
         return (Ea_a + Ea_b + Ea_c)
@@ -416,7 +416,13 @@ def simfc_call(dict_fix, dict_dyn):
         f_cons = fuel_cons(e_const, dict_fix['Q_f'], dict_dyn['v_init'], p_i,
                               dict_fix['ro_f'])
     
-    else:
+    # decccelerated vehicle movement
+    # no energy flow from engine to wheels
+    if dict_dy['a'] < 0:
+        return [0, 0, 0, 0]
+    
+    # accelerated vehicle movement
+    if dict_dyn['a'] > 0:
         # vehicle actual speed after acceleration a applied during time t
         v = dict_dyn['v_init'] + (dict_dyn['a'] * dict_dyn['t'])
         if v > v_max:
