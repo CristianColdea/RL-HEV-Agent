@@ -601,9 +601,10 @@ for seq in expand_med[1:]:
     # print(sfc.unpack_f(sc.fixs))
     # print(sfc.unpack_d(seq))
 
+"""
 with open('fcons_med.csv', 'w', newline='') as file:
     writer = csv.writer(file)
 
     writer.writerows(fuels_med)
-
+"""
 print(fuels_med)
