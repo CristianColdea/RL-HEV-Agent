@@ -269,12 +269,12 @@ class Energy:
         # first term of energy required to overcome air drag
         Ea_a = (100000 * C3 * v_init**2 *
                 (mu_n_init * mu_P_init - mu_n_fin * mu_P_fin) /
-                (mu_n_init * mu_P_init * mu_n_fin * mu_P_fin)) 
+                (t * (mu_n_init * mu_P_init * mu_n_fin * mu_P_fin)))
         # second term
-        Ea_b = 2* 100000 * C3 * v_init * t / (mu_n_fin * mu_P_fin)
+        Ea_b = 100000 * C3 * v_init**2* a * t / (mu_n_fin * mu_P_fin)
 
         # third term
-        Ea_c = 100000 * C3 * t**2 * a**2 / (mu_n_fin * mu_P_fin)
+        Ea_c = 100000 * C3 * t**2 * a**2 / (3 * (mu_n_fin * mu_P_fin))
 
 
         return (Ea_a + Ea_b + Ea_c)
