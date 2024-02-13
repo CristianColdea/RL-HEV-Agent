@@ -275,7 +275,17 @@ class Energy:
 
         # third term
         Ea_c = 100000 * C3 * t**2 * a**2 / (3 * (mu_n_fin * mu_P_fin))
+        
+        Ea_init = (C3 * v_init**2) / (mu_n_init * mu_P_init)
 
+        Ea_fin = (C3 * (v_init**2 + 2 * v_init * a * t + a**2 * t**2)) /
+                 (mu_n_fin * mu_P_fin)
+
+        Ea_med = 100000 * (Ea_init + Ea_fin) / 2
+
+        print(Ea_med)
+
+        print(Ea_a + Ea+b + Ea_c)
 
         return (Ea_a + Ea_b + Ea_c)
 
