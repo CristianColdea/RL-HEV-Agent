@@ -276,16 +276,16 @@ class Energy:
         # third term
         Ea_c = 100000 * C3 * t**2 * a**2 / (3 * (mu_n_fin * mu_P_fin))
         
-        Ea_init = (C3 * v_init**2) / (mu_n_init * mu_P_init)
+        # Ea_init = (C3 * v_init**2) / (mu_n_init * mu_P_init)
 
-        Ea_fin = (C3 * (v_init**2 + 2 * v_init * a * t + a**2 * t**2)) /
-                 (mu_n_fin * mu_P_fin)
+        # Ea_fin = (C3 * (v_init**2 + 2 * v_init * a * t + 
+        #                a**2 * t**2)) / (mu_n_fin * mu_P_fin)
 
-        Ea_med = 100000 * (Ea_init + Ea_fin) / 2
+        # Ea_med = 100000 * (Ea_init + Ea_fin) / 2
 
-        print(Ea_med)
+        # print("Air drag average", Ea_med)
 
-        print(Ea_a + Ea+b + Ea_c)
+        # print("Air drag with integral", Ea_a + Ea_b + Ea_c)
 
         return (Ea_a + Ea_b + Ea_c)
 
@@ -304,8 +304,8 @@ def required_power(eta_t, m_a, c_r, C_d, A_f, v_a, a, p_maxn, ro_a=1.225):
     CAVEAT: The required output of the engine cannot exceed maximum value for the
             given engine speed
     """
-    p_i = (1/(eta_t * 1000)) * (m_a * 9.81 * c_r + (ro_a/2) * C_d * A_f * v_a**2 +
-          m_a * a * 1.08) * v_a
+    p_i = (1/(eta_t * 1000)) * (m_a * 9.81 * c_r + (ro_a/2) * C_d * A_f *
+                                v_a**2 + m_a * a * 1.08) * v_a
     if p_i <= p_maxn:
         return p_i
     else:
