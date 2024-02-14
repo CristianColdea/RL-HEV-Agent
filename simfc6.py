@@ -274,39 +274,45 @@ class Energy:
 
         # third term
         Ea_c = 100000 * C3 * t**2 * a**2 / (3 * (mu_n_fin * mu_P_fin))
-        
-        # Ea_init = (C3 * v_init**2) / (mu_n_init * mu_P_init)
-
-        # Ea_fin = (C3 * (v_init**2 + 2 * v_init * a * t + 
-        #                a**2 * t**2)) / (mu_n_fin * mu_P_fin)
-
-        # Ea_med = 100000 * (Ea_init + Ea_fin) / 2
-
-        # print("Air drag average", Ea_med)
-
-        # print("Air drag with integral", Ea_a + Ea_b + Ea_c)
-
+         
         return (Ea_a + Ea_b + Ea_c)
 
 
 
 # required_power - instant power to be delivered by the engine
 
-def required_power(eta_t, m_a, c_r, C_d, A_f, v_a, a, p_maxn, ro_a=1.225):
+def required_power(eta_t, m_a, c_r, C_d, A_f, v_a, a, t, P_maxn, ro_a=1.225,
+                   gamma_m=1.08):
     """
     Function to compute the required power from the engine, at a given
     moment. Takes as parameters transmission efficiency, vehicle mass, in kg,
     rolling resistance coefficient, aerodynamic drag coefficient, frontal area
-    of the vehicle, in squared meters, vehicle speed, in m/s, 
-    acceleration, in m/s**2 and air density, in kg/m**3.
+    of the vehicle, in squared meters, vehicle (initial) speed, in m/s, 
+    acceleration, in m/s**2, time, in seconds, engine max output, air density,
+    in kg/m**3, and the coefficient of rotational mases.
     Returns the required power, in kW.
+    For constant speed movement use with null acceleration.
     CAVEAT: The required output of the engine cannot exceed maximum value for the
             given engine speed
     """
-    p_i = (1/(eta_t * 1000)) * (m_a * 9.81 * c_r + (ro_a/2) * C_d * A_f *
-                                v_a**2 + m_a * a * 1.08) * v_a
-    if p_i <= p_maxn:
-        return p_i
+
+    # the multipliers first
+    C4 = 1 / (eta_t * 1000)
+    C1 = m_a * gamma_m * a
+    C2 = m_a * c_r * 9.81
+    C3 = 0.5 * ro_a * A_f * C_d
+    
+    P_a = v_a * (C2 * C4 + C1 * C4)
+    P_b = 0.5 * a * (C2 * C4 + C1 * C4) * t
+    P_c = C3 * C4 * v_a**3
+    P_d = 1.5 * C3 * C4 * v_a**2 * a * t
+    P_e = C3 * C4 * v_a * a**2 * t**2
+    P_f = 0.25 * C3 * C4 * a**3 * t**3
+
+    P_i = P_a + P_b + P_c + P_d + P_e + P_f
+
+    if P_i <= P_maxn:
+        return P_i
     else:
         print("The engine output exceeded MAX for the given conditions.\n"
               "Please readjust!")
