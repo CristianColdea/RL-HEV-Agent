@@ -220,7 +220,7 @@ class Energy:
                (v_init * t + 0.5 * a * t**2))
 
         # third term
-        Ek_c = (C1 * a**2 * (t ** 2))/(mu_n_fin * mu_P_fin)* (100000 / (v_init *
+        Ek_c = (C1 * a**2 * t**2)/(mu_n_fin * mu_P_fin)* (100000 / (v_init *
                t + 0.5 * a * t**2))
 
       
@@ -267,9 +267,8 @@ class Energy:
         C3 = (0.5 * ro_air * C_d * A_f)/(eta_t * eta_max)
         
         # first term of energy required to overcome air drag
-        Ea_a = (100000 * C3 * v_init**2 *
-                (mu_n_init * mu_P_init - mu_n_fin * mu_P_fin) /
-                (t * (mu_n_init * mu_P_init * mu_n_fin * mu_P_fin)))
+        Ea_a = (100000 * C3 * v_init**2) /
+                (mu_n_fin * mu_P_fin)
         # second term
         Ea_b = 100000 * C3 * v_init**2* a * t / (mu_n_fin * mu_P_fin)
 
