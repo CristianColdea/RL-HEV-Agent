@@ -230,7 +230,7 @@ class Energy:
     # acceleration
     
     def e_roll(eta_t, eta_max, mu_n_init, mu_P_init, mu_n_fin, mu_P_fin, m_a,
-               v_init, c_r, a, t):
+               c_r):
         """
         Method to compute required energy to overcome the rolling resistance
         of the vehicle.
@@ -251,7 +251,7 @@ class Energy:
 
     # e_air - the required energy to overcome air resistance during acceleration
 
-    def e_air(eta_t, eta_max, mu_n_init, mu_P_init, mu_n_fin, mu_P_fin, v_init,
+    def e_air(eta_t, eta_max, mu_n_fin, mu_P_fin, v_init,
               C_d, A_f, a, t, ro_air=1.225):
         """
         Method to compute required energy to overcome the air resistance
@@ -461,7 +461,7 @@ def simfc_call(dict_fix, dict_dyn):
         P_i_init = required_power(dict_fix['eta_t'], dict_fix['m_a'],
                                   dict_fix['c_r'], dict_fix['C_d'],
                                   dict_fix['A_f'], dict_dyn['v_init'],
-                                  dict_dyn['a'], p_maxn_init)
+                                  dict_dyn['a'], 0, p_maxn_init)
         
         # engine initial output penalty
         mu_P_init = Mus.mu_P(P_i_init, p_maxn_init, engine_tp = 'CIE')
@@ -479,7 +479,7 @@ def simfc_call(dict_fix, dict_dyn):
         # engine final instantaneous power
         P_i_fin = required_power(dict_fix['eta_t'], dict_fix['m_a'],
                                  dict_fix['c_r'], dict_fix['C_d'],
-                                 dict_fix['A_f'], v, dict_dyn['a'], p_maxn_fin)
+                                 dict_fix['A_f'], v, dict_dyn['a'], 0, p_maxn_fin)
 
         # engine final output penalty
         mu_P_fin = Mus.mu_P(P_i_fin, p_maxn_fin)
@@ -492,12 +492,11 @@ def simfc_call(dict_fix, dict_dyn):
         # energy required to overcome rolling resistance
         e_roll = Energy.e_roll(dict_fix['eta_t'], dict_fix['eta_max'],
                                mu_n_init, mu_P_init, mu_n_fin,
-                               mu_P_fin, dict_fix['m_a'], v,
-                               dict_fix['c_r'],dict_dyn['a'], dict_dyn['t'])
+                               mu_P_fin, dict_fix['m_a'], dict_fix['c_r'])
 
         # energy required to overcome air resistance
-        e_air = Energy.e_air(dict_fix['eta_t'], dict_fix['eta_max'], mu_n_init,
-                             mu_P_init, mu_n_fin, mu_P_fin, v, dict_fix['C_d'],
+        e_air = Energy.e_air(dict_fix['eta_t'], dict_fix['eta_max'],
+                             mu_n_fin, mu_P_fin, v, dict_fix['C_d'],
                              dict_fix['A_f'], dict_dyn['a'], dict_dyn['t'])
 
         # total energy required for accelerated vehicle movement
