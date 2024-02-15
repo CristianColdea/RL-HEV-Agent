@@ -210,21 +210,38 @@ class Energy:
         """
         #same multiplier for all three terms
         C1 = (0.5 * m_a * gamma_m)/(eta_t * eta_max) 
-        
+        # space traveled during acceleration sequence
+        s = v_init * t + 0.5 * a * t**2
+
+        print("Space, ", s)
+        print("Time, ", t)
+        print("Acceleration, ", a)
+        print("V init, ", v_init)
+
         # first term of the kinetic energy
         Ek_a = C1 * v_init**2 * ((mu_n_init * mu_P_init - mu_n_fin * mu_P_fin) /
-               mu_n_init * mu_P_init * mu_n_fin * mu_P_fin) * (100000 / (v_init * t + 0.5 * a * t**2))
+               mu_n_init * mu_P_init *
+               mu_n_fin * mu_P_fin) * (100000 / (v_init * t + 0.5 * a * t**2))
         
         # second term
-        Ek_b = ((2 *  C1 * v_init * a * t)/( mu_n_fin * mu_P_fin)) * (100000 /
-               (v_init * t + 0.5 * a * t**2))
+        Ek_b = ((2 *  C1 * v_init * a * t)/( mu_n_fin *
+                 mu_P_fin)) * (100000 / (v_init * t + 0.5 * a * t**2))
 
         # third term
-        Ek_c = (C1 * a**2 * t**2)/(mu_n_fin * mu_P_fin)* (100000 / (v_init *
-               t + 0.5 * a * t**2))
+        Ek_c = (C1 * a**2 * t**2)/(mu_n_fin *
+                mu_P_fin) * (100000 / (v_init * t + 0.5 * a * t**2))
 
+        Ec_init = (C1 * v_init**2) / (mu_n_init * mu_P_init)
+        Ec_fin = (C1 * v_init**2 + C1 * 2 * v_init * a * t +
+                  C1 * a**2 * t**2) / (mu_n_fin * mu_P_fin)
+
+        delta_Ec = 10**5 * (Ec_fin - Ec_init) / (v_init * t + 0.5 * a * t**2)
+
+        print("Kinetic energy with integral, ", (Ek_a+Ek_b+Ek_c))
+        print("Kinetic energy aritmetic mean, ", delta_Ec)
       
-        return (Ek_a + Ek_b + Ek_c) 
+        return ((Ek_a + Ek_b + Ek_c))
+        # return delta_Ec 
 
     # e_roll - the required energy to overcome rolling resistance during
     # acceleration
@@ -247,11 +264,11 @@ class Energy:
         C2 = (2 * m_a * 9.81 * c_r)/(eta_t * eta_max * (mu_n_init * mu_P_init +
                                      mu_n_fin * mu_P_fin))
 
-        return 10**5 * C2 
+        return (10**5 * C2)
 
     # e_air - the required energy to overcome air resistance during acceleration
 
-    def e_air(eta_t, eta_max, mu_n_fin, mu_P_fin, v_init,
+    def e_air(eta_t, eta_max, mu_n_init, mu_P_init, mu_n_fin, mu_P_fin, v_init,
               C_d, A_f, a, t, ro_air=1.225):
         """
         Method to compute required energy to overcome the air resistance
@@ -267,15 +284,24 @@ class Energy:
         C3 = (0.5 * ro_air * C_d * A_f)/(eta_t * eta_max)
         
         # first term of energy required to overcome air drag
-        Ea_a = (100000 * C3 * v_init**2) /
-                (mu_n_fin * mu_P_fin)
+        Ea_a = (100000 * C3 * v_init**2) / (mu_n_fin * mu_P_fin)
         # second term
         Ea_b = 100000 * C3 * v_init * a * t / (mu_n_fin * mu_P_fin)
 
         # third term
         Ea_c = 100000 * C3 * t**2 * a**2 / (3 * (mu_n_fin * mu_P_fin))
+
+        Ea_init = (C3 * v_init**2) / (mu_n_init * mu_P_init)
+        Ea_fin = (C3 * v_init**2 + 2 * C3 * v_init * a * t +
+                  C3 * a**2 * t**2) / (mu_n_fin * mu_P_fin)
+
+        # print("Air drag with integral, ", (Ea_a+Ea_b+Ea_c))
+        # print("Air drag aritmetic mean, ", ((0.5*Ea_init + 0.5*Ea_fin) * 100000))
+        # print("Ea_init, ", Ea_init * 10**5)
+        # print("Ea_fin, ", Ea_fin * 10**5)
          
         return (Ea_a + Ea_b + Ea_c)
+        # return ((0.5*Ea_init + 0.5*Ea_fin) * 10**5)
 
 
 
@@ -484,6 +510,17 @@ def simfc_call(dict_fix, dict_dyn):
         # engine final output penalty
         mu_P_fin = Mus.mu_P(P_i_fin, p_maxn_fin)
 
+        # engine average power on the timestep interval
+        P_i_med = required_power(dict_fix['eta_t'], dict_fix['m_a'],
+                                  dict_fix['c_r'], dict_fix['C_d'],
+                                  dict_fix['A_f'], dict_dyn['v_init'],
+                                  dict_dyn['a'], dict_dyn['t'], p_maxn_fin)
+
+        # print("Initial power, ", P_i_init)
+        # print("Final power, ", P_i_fin)
+        # print("Average power, ", P_i_med)
+        # print("Aritmetic mean power, ", (P_i_init+P_i_fin)/2)
+
         # energy required to accelerate the vehicle
         e_kin = Energy.e_kin(dict_fix['eta_t'], dict_fix['eta_max'], mu_n_init,
                              mu_n_fin, mu_P_init, mu_P_fin, dict_fix['m_a'],
@@ -496,13 +533,13 @@ def simfc_call(dict_fix, dict_dyn):
 
         # energy required to overcome air resistance
         e_air = Energy.e_air(dict_fix['eta_t'], dict_fix['eta_max'],
-                             mu_n_fin, mu_P_fin, v, dict_fix['C_d'],
+                             mu_n_init, mu_P_init, mu_n_fin, mu_P_fin, v, dict_fix['C_d'],
                              dict_fix['A_f'], dict_dyn['a'], dict_dyn['t'])
 
         # total energy required for accelerated vehicle movement
         e = e_kin + e_roll + e_air
 
-       # fuel consumption
-        f_cons = fuel_cons(e, dict_fix['Q_f'], v, P_i_fin, dict_fix['ro_f'])
+        # fuel consumption
+        f_cons = fuel_cons(e, dict_fix['Q_f'], v, P_i_med, dict_fix['ro_f'])
  
     return(f_cons)
