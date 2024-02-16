@@ -286,22 +286,32 @@ class Energy:
         # first term of energy required to overcome air drag
         Ea_a = (100000 * C3 * v_init**2) / (mu_n_fin * mu_P_fin)
         # second term
-        Ea_b = 100000 * C3 * v_init * a * t / (mu_n_fin * mu_P_fin)
+        Ea_b = (100000 * C3 * v_init * a * t) / (mu_n_fin * mu_P_fin)
 
         # third term
-        Ea_c = 100000 * C3 * t**2 * a**2 / (3 * (mu_n_fin * mu_P_fin))
+        Ea_c = (100000 * C3 * t**2 * a**2) / (3 * (mu_n_fin * mu_P_fin))
 
         Ea_init = (C3 * v_init**2) / (mu_n_init * mu_P_init)
         Ea_fin = (C3 * v_init**2 + 2 * C3 * v_init * a * t +
                   C3 * a**2 * t**2) / (mu_n_fin * mu_P_fin)
 
-        # print("Air drag with integral, ", (Ea_a+Ea_b+Ea_c))
-        # print("Air drag aritmetic mean, ", ((0.5*Ea_init + 0.5*Ea_fin) * 100000))
-        # print("Ea_init, ", Ea_init * 10**5)
-        # print("Ea_fin, ", Ea_fin * 10**5)
+        # use space integral
+        Ea1_a = C3 * v_init**3 * t / (mu_n_fin * mu_P_fin)
+        Ea1_b = C3 * 1.5 * v_init**2 * a * t**2 / (mu_n_fin * mu_P_fin)
+        Ea1_c = C3 * a**2 * v_init * t**3 / (mu_n_fin * mu_P_fin)
+        Ea1_d = C3 * 0.25 * a**3 * t**4
+
+        print("Air drag with t integral, ", (Ea_a+Ea_b+Ea_c))
+        print("Air drag aritmetic mean, ", ((0.5*Ea_init + 0.5*Ea_fin) * 100000))
+        print("Air drag with s integral, ", ((Ea1_a+Ea1_b+Ea1_c+Ea1_d) * 10**5
+                                             / (v_init * t + 0.5 * a * t**2)))
+        print("Ea_init, ", Ea_init * 10**5)
+        print("Ea_fin, ", Ea_fin * 10**5)
          
-        return (Ea_a + Ea_b + Ea_c)
+        # return (Ea_a + Ea_b + Ea_c)
         # return ((0.5*Ea_init + 0.5*Ea_fin) * 10**5)
+        return ((Ea1_a+Ea1_b+Ea1_c+Ea1_d) * 10**5 / (v_init * t + 0.5 * a *
+                                                     t**2))
 
 
 
