@@ -219,13 +219,13 @@ class Energy:
         print("V init, ", v_init)
 
         # first term of the kinetic energy
-        Ek_a = C1 * v_init**2 * ((mu_n_init * mu_P_init - mu_n_fin * mu_P_fin) /
+        Ek_a = 10**5 * C1 * v_init**2 * ((mu_n_init * mu_P_init - mu_n_fin * mu_P_fin) /
                mu_n_init * mu_P_init *
-               mu_n_fin * mu_P_fin) * (100000 / (v_init * t + 0.5 * a * t**2))
+               mu_n_fin * mu_P_fin * (v_init * t + 0.5 * a * t**2))
         
         # second term
-        Ek_b = ((2 *  C1 * v_init * a * t)/( mu_n_fin *
-                 mu_P_fin)) * (100000 / (v_init * t + 0.5 * a * t**2))
+        Ek_b = (2 * 10**5 * C1 * v_init * a * t)/( mu_n_fin *
+                 mu_P_fin * (v_init * t + 0.5 * a * t**2))
 
         # third term
         Ek_c = (C1 * a**2 * t**2)/(mu_n_fin *
