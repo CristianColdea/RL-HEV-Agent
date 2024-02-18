@@ -212,11 +212,15 @@ class Energy:
         C1 = (0.5 * m_a * gamma_m)/(eta_t * eta_max) 
         # space traveled during acceleration sequence
         s = v_init * t + 0.5 * a * t**2
+        v = v_init + a * t
 
         print("Space, ", s)
         print("Time, ", t)
         print("Acceleration, ", a)
         print("V init, ", v_init)
+        print("V final, ", v)
+        print("Mass, ", m_a)
+        print("C1, ", C1)
 
         # first term of the kinetic energy
         Ek_a = 10**5 * C1 * v_init**2 * ((mu_n_init * mu_P_init - mu_n_fin * mu_P_fin) /
@@ -235,10 +239,28 @@ class Energy:
         Ec_fin = (C1 * v_init**2 + C1 * 2 * v_init * a * t +
                   C1 * a**2 * t**2) / (mu_n_fin * mu_P_fin)
 
+                
         delta_Ec = 10**5 * (Ec_fin - Ec_init) / (v_init * t + 0.5 * a * t**2)
+        # kinetic energy estimation with the help of inertia force
+
+        F_in_fin = (2 * C1 * a) / (mu_n_fin * mu_P_fin)
+        F_in_in = (2 * C1 * a) / (mu_n_init * mu_P_init)
+
+        # F_in = 2 * C1 * a
+        Ek_in_in =  F_in_in * s
+        Ek_in_fin = F_in_fin * s
 
         print("Kinetic energy with integral, ", (Ek_a+Ek_b+Ek_c))
         print("Kinetic energy aritmetic mean, ", delta_Ec)
+        print("Ec_init, ", Ec_init)
+        print("Ec_fin, ", Ec_fin)
+        print("Delta kinetic, ", (Ec_fin-Ec_init))
+        print("F_in_in, ", F_in_in)
+        print("F_in_fin, ", F_in_fin)
+        print("Kinetic energy with initial inertia force, ", Ek_in_in)
+        print("Kinetic energy with fianl inertia force, ", Ek_in_fin)
+        print("mu inits, ", mu_n_init, mu_P_init)
+        print("mu fins, ", mu_n_fin, mu_P_fin)
       
         return ((Ek_a + Ek_b + Ek_c))
         # return delta_Ec 
@@ -305,8 +327,6 @@ class Energy:
         print("Ea_init, ", Ea_init)
         print("Ea_fin, ", Ea_fin)
          
-        # return (Ea_a + Ea_b + Ea_c)
-        # return ((0.5*Ea_init + 0.5*Ea_fin) * 10**5)
         return (((Ea_a+Ea_b+Ea_c+Ea_d) * 10**5) / (v_init * t + 0.5 * a *
                                                      t**2))
 
