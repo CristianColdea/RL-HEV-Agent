@@ -102,7 +102,7 @@ def raw_proc(raw_list):
 
     return processed
 
-def null_speed(processed, tstep=0.5, n_stab=1000):
+def null_speed(processed, tstep=0.3, n_stab=1000):
     """
     Function to ensure that the vehicle starts in first gear
     at null speed.
@@ -128,7 +128,7 @@ def null_speed(processed, tstep=0.5, n_stab=1000):
     return processed
 
 
-def process_input(processed, gear_ini, min_lim=1800, max_lim=3100, tstep=0.5,
+def process_input(processed, gear_ini, min_lim=1800, max_lim=3100, tstep=0.3,
                   n_stab=1000, n_max=5000):
     """
     Function to handle the processed list in order to get the
@@ -395,6 +395,7 @@ def process_input(processed, gear_ini, min_lim=1800, max_lim=3100, tstep=0.5,
 
 # the loop to cycle through the list of sequences, i.e. low_raw
 # the list to store low speed section expanded values
+
 expand_low = [
        ['v_init', 'gear', 'accel', 'time'],
        ]
@@ -589,7 +590,7 @@ with open('fcons_low.csv', 'w', newline='') as file:
 # list to store results of medium speed section
 fuels_med = ["l/100", "kg/100", "kg/h", "sfc"]
 
-for seq in expand_med[90:110]:
+for seq in expand_med[90:95]:
     # deccelerated movement starting with null initial speed not possible
     if seq[0] == 0 and seq[2] < 0:
         continue
