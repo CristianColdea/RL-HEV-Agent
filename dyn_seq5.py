@@ -102,7 +102,7 @@ def raw_proc(raw_list):
 
     return processed
 
-def null_speed(processed, tstep=0.1, n_stab=1000):
+def null_speed(processed, tstep=0.5, n_stab=1000):
     """
     Function to ensure that the vehicle starts in first gear
     at null speed.
@@ -128,7 +128,7 @@ def null_speed(processed, tstep=0.1, n_stab=1000):
     return processed
 
 
-def process_input(processed, gear_ini, min_lim=1800, max_lim=3100, tstep=0.1,
+def process_input(processed, gear_ini, min_lim=1800, max_lim=3100, tstep=0.5,
                   n_stab=1000, n_max=5000):
     """
     Function to handle the processed list in order to get the
@@ -384,7 +384,8 @@ expand_low = [
        ['v_init', 'gear', 'accel', 'time'],
        ]
 
-# print("expand, ", expand)
+print("expand_low, ", expand_low)
+print("low_raw[:2], ", low_raw[:2])
 
 for sequence in low_raw[:2]:
     # if expand_low has only the header
@@ -400,13 +401,13 @@ for sequence in low_raw[:2]:
         # print("last gear, ", expand[-1])    
         expand_low.extend(process_input(raw_proc(sequence),
                                         expand_low[-1][1]))
-        # print("current sequence, ", sequence)
+        print("current sequence, ", expand_low[-1])
 
         # print(expand)
         # print("**********")
 
 print("expand_low, ", expand_low)
-
+print("length expand_low, ", len(expand_low))
 """
 # the list to store medium speed section expanded values
 expand_med = [
