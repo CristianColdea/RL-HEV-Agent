@@ -102,7 +102,7 @@ def raw_proc(raw_list):
 
     return processed
 
-def null_speed(processed, tstep=0.3, n_stab=1000):
+def null_speed(processed, tstep=0.1, n_stab=1000):
     """
     Function to ensure that the vehicle starts in first gear
     at null speed.
@@ -128,7 +128,7 @@ def null_speed(processed, tstep=0.3, n_stab=1000):
     return processed
 
 
-def process_input(processed, gear_ini, min_lim=1800, max_lim=3100, tstep=0.3,
+def process_input(processed, gear_ini, min_lim=1800, max_lim=3100, tstep=0.1,
                   n_stab=1000, n_max=5000):
     """
     Function to handle the processed list in order to get the
@@ -434,7 +434,7 @@ expand_med = [
        ['v_init', 'gear', 'accel', 'time'],
        ]
 
-# print("expand, ", expand)
+print("expand_med, ", expand_med)
 
 for sequence in med_raw:
     # if expand_med has only the header
@@ -594,6 +594,8 @@ for seq in expand_med[90:95]:
     # deccelerated movement starting with null initial speed not possible
     if seq[0] == 0 and seq[2] < 0:
         continue
+    print("current seq, ", seq)
+    
     fuels_med.append(sfc.simfc_call(sfc.unpack_f(sc.fixs),
                                     sfc.unpack_d(seq)))
     # print(sfc.simfc_call(sfc.unpack_f(sc.fixs),
