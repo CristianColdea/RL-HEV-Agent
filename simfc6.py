@@ -360,15 +360,10 @@ def required_power(eta_t, m_a, c_r, C_d, A_f, v_init, a, t, P_maxn, ro_a=1.225,
         P_i = C1 * (C2 + C3 + C4 * v_init**2)
 
     else:
-        P_a = C1 * C4 * v_a * a * t
-    P_a = v_a * (C2 * C4 + C1 * C4)
-    P_b = 0.5 * a * (C2 * C4 + C1 * C4) * t
-    P_c = C3 * C4 * v_a**3
-    P_d = 1.5 * C3 * C4 * v_a**2 * a * t
-    P_e = C3 * C4 * v_a * a**2 * t**2
-    P_f = 0.25 * C3 * C4 * a**3 * t**3
-
-    P_i = P_a + P_b + P_c + P_d + P_e + P_f
+        P_a = C1 * C4 * v_init * a * t * (2 * v_init + a * t)
+        P_b = C1 * a * t * (C2 + C3 + C4 * v_init**2 + 2 * C4 * v_init * a * t +
+              C4 * a**2 * t**2)
+        P_i = P_a + P_b
 
     if P_i <= P_maxn:
         return P_i
