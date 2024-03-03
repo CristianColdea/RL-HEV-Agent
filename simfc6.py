@@ -334,13 +334,13 @@ class Energy:
 
 # required_power - instant power to be delivered by the engine
 
-def required_power(eta_t, m_a, c_r, C_d, A_f, v_a, a, t, P_maxn, ro_a=1.225,
+def required_power(eta_t, m_a, c_r, C_d, A_f, v_init, a, t, P_maxn, ro_a=1.225,
                    gamma_m=1.08):
     """
     Function to compute the required power from the engine, at a given
     moment. Takes as parameters transmission efficiency, vehicle mass, in kg,
     rolling resistance coefficient, aerodynamic drag coefficient, frontal area
-    of the vehicle, in squared meters, vehicle (initial) speed, in m/s, 
+    of the vehicle, in squared meters, vehicle initial speed, in m/s, 
     acceleration, in m/s**2, time, in seconds, engine max output, air density,
     in kg/m**3, and the coefficient of rotational mases.
     Returns the required power, in kW.
@@ -350,11 +350,17 @@ def required_power(eta_t, m_a, c_r, C_d, A_f, v_a, a, t, P_maxn, ro_a=1.225,
     """
 
     # the multipliers first
-    C4 = 1 / (eta_t * 1000)
-    C1 = m_a * gamma_m * a
-    C2 = m_a * c_r * 9.81
-    C3 = 0.5 * ro_a * A_f * C_d
-    
+    C1 = 1 / (eta_t * 1000)
+    C2 = m_a * gamma_m * a
+    C3 = m_a * c_r * 9.81
+    C4 = 0.5 * ro_a * A_f * C_d
+
+    # uniform movement (a = 0)
+    if a == 0:
+        P_i = C1 * (C2 + C3 + C4 * v_init**2)
+
+    else:
+        P_a = C1 * C4 * v_a * a * t
     P_a = v_a * (C2 * C4 + C1 * C4)
     P_b = 0.5 * a * (C2 * C4 + C1 * C4) * t
     P_c = C3 * C4 * v_a**3
