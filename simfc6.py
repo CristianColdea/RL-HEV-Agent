@@ -357,13 +357,16 @@ def required_power(eta_t, m_a, c_r, C_d, A_f, v_init, a, t, P_maxn, ro_a=1.225,
 
     # uniform movement (a = 0)
     if a == 0:
-        P_i = C1 * (C2 + C3 + C4 * v_init**2)
+        P_i = C1 * (C3 + C4 * v_init**2)
 
     else:
-        P_a = C1 * C4 * v_init * a * t * (2 * v_init + a * t)
-        P_b = C1 * a * t * (C2 + C3 + C4 * v_init**2 + 2 * C4 * v_init * a * t +
-              C4 * a**2 * t**2)
-        P_i = P_a + P_b
+        P_r = C1 * C3 * v_init + C1 * C3 * a * t        # rolling power
+        P_i = C1 * C2 * v_init + C1 * C2 * a**2 * t     # inertia power
+        P_air = (C1 * C4 * v_init**3 + 3 * C1 * C4 * v_init**2 * a * t +
+                 3 * C1 * C4 * v_init * a**2 * t**3 +
+                 C1 * C4 * a**3 * t**3)                 # air power
+
+        P_i = P_r + P_i + P_air
 
     if P_i <= P_maxn:
         return P_i
