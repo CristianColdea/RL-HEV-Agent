@@ -208,11 +208,12 @@ class Energy:
         coefficient of rotational masses.
         Returns the required energy, in J/100 km.
         """
-        #same multiplier for all three terms
-        C1 = (0.5 * m_a * gamma_m)/(eta_t * eta_max) 
         # space traveled during acceleration sequence
         s = v_init * t + 0.5 * a * t**2
-        
+
+        #same multiplier for both terms
+        C1 = (10**5 * 0.5 * m_a * gamma_m)/(eta_t * eta_max * s) 
+                
         Ek_a = C1 * v_init**2 * (1/(mu_n_fin * mu_P_fin) - 1/(mu_n_init *
                                                               mu_P_init))
         Ek_b = C1 * a * t * (2 * v_init + a * t)
