@@ -190,7 +190,7 @@ class Energy:
         and air density, in kg/m**3.
         Returns the required energy, in J/100 km.
         """
-        Ec = 1/(eta_t * eta_max * mu_n_init * mu_P_init) * (m_a * 9.81 * c_r +
+        Ec = (1/(eta_t * eta_max * mu_n_init * mu_P_init)) * (m_a * 9.81 * c_r +
              0.5 * ro_a/2 * C_d * A_f * v_init**2) * 100000
      
         return Ec
