@@ -238,10 +238,11 @@ class Energy:
         The hypotesis of average engine speed and output coefficient.
         """
         #same multiplier
-        C2 = (2 * m_a * 9.81 * c_r)/(eta_t * eta_max * (mu_n_init * mu_P_init +
-                                     mu_n_fin * mu_P_fin))
+        C2 = (10**5 * m_a * 9.81 * c_r)/(2 * eta_t * eta_max)
 
-        return (10**5 * C2)
+        E_roll = C2 * (1/(mu_n_init * mu_P_init) + 1/(mu_n_fin * mu_P_fin))
+
+        return E_roll
 
     # e_air - the required energy to overcome air resistance during acceleration
 
