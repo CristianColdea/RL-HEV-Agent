@@ -258,33 +258,19 @@ class Energy:
         acceleration time, in s and air density, in kg/m**3.
         Returns the required energy, in J/100 km.
         """
-        #same multiplier for all four terms
-        C3 = (0.5 * ro_air * C_d * A_f)/(eta_t * eta_max)
+        #same multiplier for all three terms
+        C3 = (10**5 * ro_air * C_d * A_f)/(4 * eta_t * eta_max)
         
         # first term of energy required to overcome air drag
-        Ea_a = (10**5 * C3 * v_init**3 * t) / (mu_n_fin * mu_P_fin)
+        Ea_a = (C3 * v_init**2) * ((1/(mu_n_init * mu_P_init) +
+                                    1/(mu_n_fin * mu_P_fin)))
         # second term
-        Ea_b = (10*5 * 3 * C3 * v_init**2 * a * t**2) / (mu_n_fin * mu_P_fin)
+        Ea_b = (C3 * 2 * v_init**2 * a * t) / (mu_n_fin * mu_P_fin)
 
         # third term
-        Ea_c = (10*5 * 3 * C3 * v_init * a**2 * t**3) / (mu_n_fin * mu_P_fin)
-
-        # fourth tem
-        Ea_d = (10**5 * C3 * a**3 * t**4) / (mu_n_fin * mu_P_fin)
-
-
-        Ea_init = (10**5 * C3 * v_init**2) / (mu_n_init * mu_P_init)
-        Ea_fin = 10**5 * C3 * (v_init**2 + 2 * v_init * a * t +
-                  a**2 * t**2) / (mu_n_fin * mu_P_fin)
-
-        
-        print("Air drag with integral, ", (Ea_a+Ea_b+Ea_c+Ea_d))
-        print("Air drag aritmetic mean, ", (0.5*(Ea_init + Ea_fin)))
-        print("Ea_init, ", Ea_init)
-        print("Ea_fin, ", Ea_fin)
+        Ea_c = (C3 * a**2 * t**2) / (mu_n_fin * mu_P_fin) 
          
-        return (((Ea_a+Ea_b+Ea_c+Ea_d) * 10**5) / (v_init * t + 0.5 * a *
-                                                     t**2))
+        return (Ea_a+Ea_b+Ea_c)
 
 
 
