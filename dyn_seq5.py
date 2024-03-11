@@ -407,9 +407,9 @@ for sequence in low_raw[:2]:
         # print(expand)
         # print("**********")
 
-print("expand_low, ", expand_low)
-print("length expand_low, ", len(expand_low))
-"""
+# print("expand_low, ", expand_low)
+# print("length expand_low, ", len(expand_low))
+
 # the list to store medium speed section expanded values
 expand_med = [
        ['v_init', 'gear', 'accel', 'time'],
@@ -575,4 +575,3 @@ with open('fcons_med.csv', 'w', newline='') as file:
     writer.writerows(fuels_med)
 
 print(fuels_med)
-"""
