@@ -218,6 +218,9 @@ class Energy:
                                                               mu_P_init))
         Ek_b = C1 * a * t * (2 * v_init + a * t)
 
+        print("Travelled space, ", s)
+        print("Kinetic energy, ", Ek_a+Ek_b)
+
         return (Ek_a + Ek_b)
         
     # e_roll - the required energy to overcome rolling resistance during
@@ -241,6 +244,8 @@ class Energy:
         C2 = (10**5 * m_a * 9.81 * c_r)/(2 * eta_t * eta_max)
 
         E_roll = C2 * (1/(mu_n_init * mu_P_init) + 1/(mu_n_fin * mu_P_fin))
+
+        print("Rolling energy, ", E_roll)
 
         return E_roll
 
@@ -268,7 +273,9 @@ class Energy:
         Ea_b = (C3 * 2 * v_init**2 * a * t) / (mu_n_fin * mu_P_fin)
 
         # third term
-        Ea_c = (C3 * a**2 * t**2) / (mu_n_fin * mu_P_fin) 
+        Ea_c = (C3 * a**2 * t**2) / (mu_n_fin * mu_P_fin)
+
+        print("Air drag energy, ", Ea_a+Ea_b+Ea_c)
          
         return (Ea_a+Ea_b+Ea_c)
 
@@ -309,6 +316,8 @@ def required_power(eta_t, m_a, c_r, C_d, A_f, v_init, a, t, P_maxn, ro_a=1.225,
                  C1 * C4 * a**3 * t**3)                 # air power
 
         P_i = P_r + P_i + P_air
+
+        print("Developed engine power, ", P_i)
 
     if P_i <= P_maxn:
         return P_i
