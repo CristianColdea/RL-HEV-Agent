@@ -384,13 +384,13 @@ expand_low = [
        ['v_init', 'gear', 'accel', 'time'],
        ]
 
-print("expand_low, ", expand_low)
-print("low_raw[:2], ", low_raw[:2])
+# print("expand_low, ", expand_low)
+# print("low_raw[:2], ", low_raw[:2])
 
 for sequence in low_raw[:2]:
     # if expand_low has only the header
     if len(expand_low) == 1:
-        print("First process, ", raw_proc(sequence))
+        # print("First process, ", raw_proc(sequence))
         # print("expand bool, ", not expand)
         # print("current sequence, ", sequence)
         expand_low.extend(process_input(raw_proc(sequence),
