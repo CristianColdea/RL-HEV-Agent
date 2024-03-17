@@ -218,8 +218,13 @@ class Energy:
                                                               mu_P_init))
         Ek_b = C1 * a * t * (2 * v_init + a * t)
 
+        # compare kinetic energy delta with the work done on the interval
+        W = (C1 * a * s) * (1 / (mu_n_init * mu_P_init) + 1 / (mu_n_fin *
+                                                           mu_P_fin))
+
         print("Travelled space, ", s)
         print("Kinetic energy, ", Ek_a+Ek_b)
+        print("Work done, ", W)
 
         return (Ek_a + Ek_b)
         
