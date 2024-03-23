@@ -56,7 +56,8 @@ def kE_mus (m, v_init, a, t, gamma_m=1.08, eta_t=0.98, eta_max=0.4, mu_init=0.81
 def wk_avf_mus(m, v_init, a, t, gamma_m=1.08, eta_t=0.98, eta_max=0.4,
                mu_init=0.81, mu_fin=0.83):
     """
-    Function to compute the work of the inertial force during accelerated period.
+    Function to compute the work of the average inertial force during
+    accelerated period.
     Takes as inputs the vehicle mass, initial speed, acceleration, time,
     coefficient of rotational masses, vehicle transmission efficiency,
     engine max. efficiency, engine initial efficiency coefficient and
@@ -73,6 +74,28 @@ def wk_avf_mus(m, v_init, a, t, gamma_m=1.08, eta_t=0.98, eta_max=0.4,
     wk_fav_mus = C2 * (v_init * t + (a * t**2) / 2)
 
     return wk_fav_mus
+
+
+def wk_avmus(m, v_init, a, t, gamma_m=1.08, eta_t=0.98, eta_max=0.4,
+               mu_init=0.81, mu_fin=0.83):
+    """
+    Function to compute the work of the inertial force with average mus during
+    accelerated period.
+    Takes as inputs the vehicle mass, initial speed, acceleration, time,
+    coefficient of rotational masses, vehicle transmission efficiency,
+    engine max. efficiency, engine initial efficiency coefficient and
+    engine final efficiency coefficient.
+    Returns the kinetic energy variation.
+    Note:  engine efficiency coefficients across speed and output
+    ranges are taken into account.
+    """
+
+    # same coefficient for facile formula writting
+    C3 = (2 * m * gamma_m * a) / (eta_t * eta_max * (mu_init + mu_fin))
+
+    wk_avmus = C3 * (v_init * t + (a * t**2) / 2)
+
+    return wk_avmus
 
 
 # The data to be used to check scenarios
