@@ -40,5 +40,24 @@ v_init = 2
 # mu_init = 0.81
 # mu_fin = 0.83
 
+def kE_mus (m, v_init, a, t, gamma_m=1.08, eta_t=0.98, eta_max=0.4, mu_init=0.81,
+            mu_fin=0.83):
+    """
+    Function to compute kinetic energy variation during accelerated period.
+    Takes as inputs the vehicle mass, initial speed, acceleration, time,
+    coefficient of rotational masses, vehicle transmission efficiency,
+    engine max. efficiency, engine initial efficiency coefficient and
+    engine final efficiency coefficient.
+    Returns the kinetic energy variation.
+    Note:  engine efficiency coefficients across speed and output
+    ranges taken into account.
+    """
+    kE_mus = ((m * gamma_m * a * t) / (2 * eta_t * eta_max)) * (2 * v_init + a * t)
+
+    return kE
+
+
 print("Kinetic energy variation, no mus, ", kE(m, v_init, a, t))
 print("Work done by net/inertia force, no mus, ", wk(m, v_init, a, t))
+
+
