@@ -41,10 +41,10 @@ def kE_mus (m, v_init, a, t, gamma_m=1.08, eta_t=0.98, eta_max=0.4, mu_init=0.81
     engine final efficiency coefficient.
     Returns the kinetic energy variation.
     Note:  engine efficiency coefficients across speed and output
-    ranges taken into account.
+    ranges are taken into account.
     """
 
-    # same coefficient for facile formulae writing
+    # same coefficient for facile formula writting
     C1 = (m * gamma_m) / (2 * eta_t * eta_max)
 
     kE_mus = (C1 * v_init**2 * ((1/mu_fin) - (1/mu_init)) + ((C1 * a * t) /
@@ -53,7 +53,26 @@ def kE_mus (m, v_init, a, t, gamma_m=1.08, eta_t=0.98, eta_max=0.4, mu_init=0.81
     return kE_mus
 
 
+def wk_avf_mus(m, v_init, a, t, gamma_m=1.08, eta_t=0.98, eta_max=0.4,
+               mu_init=0.81, mu_fin=0.83):
+    """
+    Function to compute the work of the inertial force during accelerated period.
+    Takes as inputs the vehicle mass, initial speed, acceleration, time,
+    coefficient of rotational masses, vehicle transmission efficiency,
+    engine max. efficiency, engine initial efficiency coefficient and
+    engine final efficiency coefficient.
+    Returns the kinetic energy variation.
+    Note:  engine efficiency coefficients across speed and output
+    ranges are taken into account.
+    """
 
+    # same coefficient for facile formula writting
+    C2 = ((m * gamma_m * a) / (2 * eta_t * eta_max)) * ((1 / mu_init) + (1 /
+                                                                     mu_fin))
+
+    wk_fav_mus = C2 * (v_init * t + (a * t**2) / 2)
+
+    return wk_fav_mus
 
 
 # The data to be used to check scenarios
@@ -71,3 +90,5 @@ v_init = 2
 print("Kinetic energy variation, no mus, ", kE(m, v_init, a, t))
 print("Work done by net/inertia force, no mus, ", wk(m, v_init, a, t))
 print("Kinetic energy variation, with mus, ", kE_mus(m, v_init, a, t))
+print("Work done by the average inertia force, with mus, ", wk_avf_mus(m,
+                                                            v_init, a, t))
