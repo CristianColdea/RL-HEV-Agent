@@ -30,15 +30,6 @@ def wk (m, v_init, a, t, gamma_m=1.08, eta_t=0.98, eta_max=0.4):
     
     return work
 
-# The data to be used to check scenarios
-m = 10
-a = 1.5
-t = 3
-v_init = 2
-# eta_max = 0.4
-# eta_t = 0.98
-# mu_init = 0.81
-# mu_fin = 0.83
 
 def kE_mus (m, v_init, a, t, gamma_m=1.08, eta_t=0.98, eta_max=0.4, mu_init=0.81,
             mu_fin=0.83):
@@ -55,6 +46,21 @@ def kE_mus (m, v_init, a, t, gamma_m=1.08, eta_t=0.98, eta_max=0.4, mu_init=0.81
     kE_mus = ((m * gamma_m * a * t) / (2 * eta_t * eta_max)) * (2 * v_init + a * t)
 
     return kE
+
+
+
+
+
+# The data to be used to check scenarios
+m = 10
+a = 1.5
+t = 3
+v_init = 2
+# eta_max = 0.4
+# eta_t = 0.98
+# mu_init = 0.81
+# mu_fin = 0.83
+
 
 
 print("Kinetic energy variation, no mus, ", kE(m, v_init, a, t))
