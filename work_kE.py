@@ -2,7 +2,7 @@
 Work done by the net force of a moving (accelerated) body is equal to kinetic energy variation during movement, W = delta E_k.
 """
 
-def kE (m, v_init, a, t, gamma=1.08, eta_t=0.98, eta_max=0.4):
+def kE (m, v_init, a, t, gamma_m=1.08, eta_t=0.98, eta_max=0.4):
     """
     Function to compute kinetic energy variation during accelerated period.
     Takes as inputs the vehicle mass, initial speed, acceleration, time,
@@ -16,7 +16,7 @@ def kE (m, v_init, a, t, gamma=1.08, eta_t=0.98, eta_max=0.4):
 
     return kE
 
-def wk (m, v_init, a, t, gamma=1.08, eta_t=0.98, eta_max=0.4):
+def wk (m, v_init, a, t, gamma_m=1.08, eta_t=0.98, eta_max=0.4):
     """
     Function to compute work done by the net force during acceleration period.
     Takes as inputs the vehicle mass, initian speed, acceleration, time, coefficient
@@ -35,7 +35,10 @@ m = 10
 a = 1.5
 t = 3
 v_init = 2
-eta_max = 0.4
-eta_t = 0.98
-mu_init = 0.81
-mu_fin = 0.83
+# eta_max = 0.4
+# eta_t = 0.98
+# mu_init = 0.81
+# mu_fin = 0.83
+
+print("Kinetic energy variation, no mus, ", kE(m, v_init, a, t))
+print("Work done by net/inertia force, no mus, ", wk(m, v_init, a, t))
