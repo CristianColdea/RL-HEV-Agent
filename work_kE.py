@@ -9,9 +9,33 @@ def kE (m, v_init, a, t, gamma=1.08, eta_t=0.98, eta_max=0.4):
     coefficient of rotational masses, vehicle transmission efficiency and
     engine max. efficiency.
     Returns the kinetic energy variation.
-    Note: at this stage engine efficiency coefficients are not taken into account.
+    Note: at this stage engine efficiency coefficients across speed and output
+    ranges are not taken into account.
     """
-    kE = ((m * gamma_m * a * t) / (2 * eta_t * eta_max)) / (2 * v_init + a * t)
+    kE = ((m * gamma_m * a * t) / (2 * eta_t * eta_max)) * (2 * v_init + a * t)
 
     return kE
 
+def wk (m, v_init, a, t, gamma=1.08, eta_t=0.98, eta_max=0.4):
+    """
+    Function to compute work done by the net force during acceleration period.
+    Takes as inputs the vehicle mass, initian speed, acceleration, time, coefficient
+    of rotational masses, vehicle transmission efficiency and engine max. efficiency.
+    Returns the work done.
+    Note: at this stage engine efficiency coefficients across speed and output
+    ranges are not taken into account.
+    """
+
+    work = ((m * gamma_m * a * t) / (2 * eta_t * eta_max)) * (2 * v_init + a * t)
+    
+    return work
+
+# The data to be used to check scenarios
+m = 10
+a = 1.5
+t = 3
+v_init = 2
+eta_max = 0.4
+eta_t = 0.98
+mu_init = 0.81
+mu_fin = 0.83
