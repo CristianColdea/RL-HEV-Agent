@@ -43,9 +43,14 @@ def kE_mus (m, v_init, a, t, gamma_m=1.08, eta_t=0.98, eta_max=0.4, mu_init=0.81
     Note:  engine efficiency coefficients across speed and output
     ranges taken into account.
     """
-    kE_mus = ((m * gamma_m * a * t) / (2 * eta_t * eta_max)) * (2 * v_init + a * t)
 
-    return kE
+    # same coefficient for facile formulae writing
+    C1 = (m * gamma_m) / (2 * eta_t * eta_max)
+
+    kE_mus = (C1 * v_init**2 * ((1/mu_fin) - (1/mu_init)) + ((C1 * a * t) /
+              (mu_fin)) * (2 * v_init + a * t))
+
+    return kE_mus
 
 
 
@@ -65,5 +70,4 @@ v_init = 2
 
 print("Kinetic energy variation, no mus, ", kE(m, v_init, a, t))
 print("Work done by net/inertia force, no mus, ", wk(m, v_init, a, t))
-
-
+print("Kinetic energy variation, with mus, ", kE_mus(m, v_init, a, t))
