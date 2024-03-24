@@ -212,21 +212,25 @@ class Energy:
         s = v_init * t + 0.5 * a * t**2
 
         #same multiplier for both terms
-        C1 = (10**5 * 0.5 * m_a * gamma_m)/(eta_t * eta_max * s) 
+        C1 = (m_a * gamma_m)/(2 * eta_t * eta_max) 
                 
-        Ek_a = C1 * v_init**2 * (1/(mu_n_fin * mu_P_fin) - 1/(mu_n_init *
-                                                              mu_P_init))
-        Ek_b = C1 * a * t * (2 * v_init + a * t)
+        Ek_a = C1 * v_init**2 * ((1/(mu_n_fin * mu_P_fin)) - (1/(mu_n_init *
+                                                              mu_P_init)))
+        Ek_b = ((C1 * a) / (mu_n_fin * mu_P_fin)) * t * (2 * v_init + a * t)
 
         # compare kinetic energy delta with the work done on the interval
-        W = (C1 * a * s) * (1 / (mu_n_init * mu_P_init) + 1 / (mu_n_fin *
+        F_av = (C1 * a) * (1 / (mu_n_init * mu_P_init) + 1 / (mu_n_fin *
                                                            mu_P_fin))
+        
+        W = F_av * (v_init * t + a * (t**2) / 2)
+        
+        to_return = (10**5 * (Ek_a + Ek_b)) / s
 
         print("Travelled space, ", s)
         print("Kinetic energy, ", Ek_a+Ek_b)
         print("Work done, ", W)
 
-        return (Ek_a + Ek_b)
+        return to_return
         
     # e_roll - the required energy to overcome rolling resistance during
     # acceleration
