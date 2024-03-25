@@ -2,7 +2,7 @@
 Work done by the net force of a moving (accelerated) body is equal to kinetic energy variation during movement, W = delta E_k.
 """
 
-def kE (m, v_init, a, t, gamma_m=1.08, eta_t=0.98, eta_max=0.4):
+def kE (m, v_init, a, t, gamma_m=1.08, eta_t=0.95, eta_max=0.4):
     """
     Function to compute kinetic energy variation during accelerated period.
     Takes as inputs the vehicle mass, initial speed, acceleration, time,
@@ -16,7 +16,7 @@ def kE (m, v_init, a, t, gamma_m=1.08, eta_t=0.98, eta_max=0.4):
 
     return kE
 
-def wk (m, v_init, a, t, gamma_m=1.08, eta_t=0.98, eta_max=0.4):
+def wk (m, v_init, a, t, gamma_m=1.08, eta_t=0.95, eta_max=0.4):
     """
     Function to compute work done by the net force during acceleration period.
     Takes as inputs the vehicle mass, initian speed, acceleration, time, coefficient
@@ -31,7 +31,7 @@ def wk (m, v_init, a, t, gamma_m=1.08, eta_t=0.98, eta_max=0.4):
     return work
 
 
-def kE_mus (m, v_init, a, t, gamma_m=1.08, eta_t=0.98, eta_max=0.4, mu_init=0.81,
+def kE_mus (m, v_init, a, t, gamma_m=1.08, eta_t=0.95, eta_max=0.4, mu_init=0.81,
             mu_fin=0.83):
     """
     Function to compute kinetic energy variation during accelerated period.
@@ -53,7 +53,7 @@ def kE_mus (m, v_init, a, t, gamma_m=1.08, eta_t=0.98, eta_max=0.4, mu_init=0.81
     return kE_mus
 
 
-def wk_avf_mus(m, v_init, a, t, gamma_m=1.08, eta_t=0.98, eta_max=0.4,
+def wk_avf_mus(m, v_init, a, t, gamma_m=1.08, eta_t=0.95, eta_max=0.4,
                mu_init=0.81, mu_fin=0.83):
     """
     Function to compute the work of the average inertial force during
@@ -76,7 +76,7 @@ def wk_avf_mus(m, v_init, a, t, gamma_m=1.08, eta_t=0.98, eta_max=0.4,
     return wk_fav_mus
 
 
-def wk_avmus(m, v_init, a, t, gamma_m=1.08, eta_t=0.98, eta_max=0.4,
+def wk_avmus(m, v_init, a, t, gamma_m=1.08, eta_t=0.95, eta_max=0.4,
                mu_init=0.81, mu_fin=0.83):
     """
     Function to compute the work of the inertial force with average mus during
@@ -123,22 +123,27 @@ def wk_parts(m, v_init, a, t, gamma_m=1.08, eta_t=0.98, eta_max=0.4,
 
 
 # The data to be used to check scenarios
-m = 10
+m = 2235
 a = 1.5
 t = 3
 v_init = 2
 # eta_max = 0.4
-# eta_t = 0.98
-# mu_init = 0.81
-# mu_fin = 0.83
+# eta_t = 0.95
+mu_init = 0.85
+mu_fin = 0.78
 
 
 print("Kinetic energy variation, no mus, ", kE(m, v_init, a, t))
 print("Work done by net/inertia force, no mus, ", wk(m, v_init, a, t))
-print("Kinetic energy variation, with mus, ", kE_mus(m, v_init, a, t))
+print("Kinetic energy variation, with mus, ", kE_mus(m, v_init, a, t, mu_init,
+                                                     mu_fin))
 print("Work done by the average inertia force, with mus, ", wk_avf_mus(m,
-                                                            v_init, a, t))
+                                                            v_init, a, t,
+                                                                       mu_init,
+                                                                       mu_fin))
 print("Work done by the inertia force, with average mu, ", wk_avmus(m, v_init,
-                                                                    a, t))
+                                                                    a, t,
+                                                                    mu_init,
+                                                                    mu_fin))
 # print("Work done by the inertia force, with weighted components, ", wk_parts(m,
 #                                                                 v_init, a, t))
