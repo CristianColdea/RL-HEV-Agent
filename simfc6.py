@@ -216,19 +216,29 @@ class Energy:
                 
         Ek_a = C1 * v_init**2 * ((1/(mu_n_fin * mu_P_fin)) - (1/(mu_n_init *
                                                               mu_P_init)))
-        Ek_b = ((C1 * a) / (mu_n_fin * mu_P_fin)) * t * (2 * v_init + a * t)
+        Ek_b = ((C1 * a * t) / (mu_n_fin * mu_P_fin)) * (2 * v_init + a * t)
 
-        # compare kinetic energy delta with the work done on the interval
-        F_av = (C1 * a) * (1 / (mu_n_init * mu_P_init) + 1 / (mu_n_fin *
-                                                           mu_P_fin))
+        # compare kinetic energy delta with the work of average force
+        # done on the interval
+        F_av = C1 * a * ((1 / (mu_n_init * mu_P_init) + 1 / (mu_n_fin *
+                                                           mu_P_fin)))
         
-        W = F_av * (v_init * t + a * (t**2) / 2)
-        
+        W_af = F_av * (v_init * t + (a * t**2) / 2)
+
+        # work done with average mus
+
+        comn = (4 * C1) / ((1 / (mu_n_init * mu_P_init)) + (1 / (mu_n_fin *
+                                                               mu_P_fin))) 
+        W_amus = comn * (v_init * t + (a * t**2) / 2)
+
         to_return = (10**5 * (Ek_a + Ek_b)) / s
 
+        print("Mus init, ", mu_n_init, mu_P_init)
+        print("Mus fin, ", mu_n_fin, mu_P_fin)
         print("Travelled space, ", s)
         print("Kinetic energy, ", Ek_a+Ek_b)
-        print("Work done, ", W)
+        print("Work done av force, ", W_af)
+        print("Work done av mus, ", W_amus)
 
         return to_return
         
