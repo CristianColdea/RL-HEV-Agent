@@ -357,7 +357,7 @@ def process_input(processed, gear_ini, min_lim=1800, max_lim=3100, tstep=1,
                     print("The final imposed speed is too low.")
                     exit()
                                                          
-
+"""
 expand_low = [
        ['v_init', 'gear', 'accel', 'time'],
        ]
@@ -551,5 +551,11 @@ with open('fcons_med.csv', 'w', newline='') as file:
     writer = csv.writer(file)
 
     writer.writerows(fuels_med)
+"""
+sequence = low_raw[2]
+processed = process_input(raw_proc(sequence), raw_proc(sequence)[1])
+# print(processed)
+
+fuels_med = sfc.simfc_call(sfc.unpack_f(sc.fixs), sfc.unpack_d(processed[0]))
 
 print(fuels_med)
