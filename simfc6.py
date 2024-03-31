@@ -302,16 +302,16 @@ class Energy:
 
 # required_power - instant power to be delivered by the engine
 
-def required_power(eta_t, m_a, c_r, C_d, A_f, v_init, a, t, P_maxn_init,
-                   P_max_fin,  ro_a=1.225, gamma_m=1.08):
+def required_power(eta_t, m_a, c_r, C_d, A_f, v_init, a, t, P_maxn,
+                   ro_a=1.225, gamma_m=1.08):
     """
     Function to compute the required power from the engine, at a given
     moment. Takes as parameters transmission efficiency, vehicle mass, in kg,
     rolling resistance coefficient, aerodynamic drag coefficient, frontal area
     of the vehicle, in squared meters, vehicle initial speed, in m/s, 
-    acceleration, in m/s**2, time, in seconds, engine max output for initial
-    and final vehicle speed, respectively, air density,
-    in kg/m**3, and the coefficient of rotational mases.
+    acceleration, in m/s**2, time, in seconds, engine max output for
+    vehicle speed, air density, in kg/m**3, and the coefficient of rotational
+    mases.
     Returns the required power, in kW.
     For constant speed movement use with null acceleration.
     CAVEAT: The required output of the engine cannot exceed maximum value for the
@@ -327,16 +327,7 @@ def required_power(eta_t, m_a, c_r, C_d, A_f, v_init, a, t, P_maxn_init,
     # uniform movement (a = 0)
     if a == 0:
         P_i = C1 * (C3 + C4 * v_init**2)
-
-        if P_i <= P_maxn_init:
-            return P_i
-        else:
-            print("The engine output exceeded MAX for the given conditions.\n"
-              "Please readjust!")
-      
-            exit()
-
-
+ 
     else:
         P_r = C1 * C3 * v_init + C1 * C3 * a * t        # rolling power
         P_i = C1 * C2 * v_init + C1 * C2 * a**2 * t     # inertia power
@@ -346,9 +337,9 @@ def required_power(eta_t, m_a, c_r, C_d, A_f, v_init, a, t, P_maxn_init,
 
         P_i = P_r + P_i + P_air
 
-        print("Developed engine power, ", P_i)
+        # print("Developed engine power, ", P_i)
 
-    if P_i <= P_maxn_fin:
+    if P_i <= P_maxn:
         return P_i
     else:
         print("The engine output exceeded MAX for the given conditions.\n"
@@ -451,8 +442,7 @@ def simfc_call(dict_fix, dict_dyn):
         # engine instantaneous power
         p_i = required_power(dict_fix['eta_t'], dict_fix['m_a'], dict_fix['c_r'],
                              dict_fix['C_d'], dict_fix['A_f'],
-                             dict_dyn['v_init'],dict_dyn['a'],
-                             dict_fix['P_max'])
+                             dict_dyn['v_init'],dict_dyn['a'], 0, p_maxn)
 
         
         # engine output penalty mu_P
@@ -469,7 +459,7 @@ def simfc_call(dict_fix, dict_dyn):
                               dict_fix['ro_f'])
     
     # decccelerated vehicle movement
-    # no energy flow from engine to wheels => no fuel consumptions
+    # no energy flow from engine to wheels => no fuel consumption
     if dict_dyn['a'] < 0:
         return [0, 0, 0, 0]
     
@@ -513,12 +503,11 @@ def simfc_call(dict_fix, dict_dyn):
         
         # engine final maximum power at the given engine speed
         p_maxn_fin = Mus.p_maxn(dict_fix['P_max'], n_i_fin, dict_fix['n_max'])
-"""
+
         # engine final instantaneous power
         P_i_fin = required_power(dict_fix['eta_t'], dict_fix['m_a'],
                                  dict_fix['c_r'], dict_fix['C_d'],
                                  dict_fix['A_f'], v, dict_dyn['a'], 0, p_maxn_fin)
-"""
 
         # engine final output penalty
         mu_P_fin = Mus.mu_P(P_i_fin, p_maxn_fin)
@@ -530,9 +519,7 @@ def simfc_call(dict_fix, dict_dyn):
                                   dict_dyn['a'], dict_dyn['t'], p_maxn_fin)
 
         # print("Initial power, ", P_i_init)
-        # print("Final power, ", P_i_fin)
-        # print("Average power, ", P_i_med)
-        # print("Aritmetic mean power, ", (P_i_init+P_i_fin)/2)
+        print("Engine required power, ", P_i_fin)
 
         # energy required to accelerate the vehicle
         e_kin = Energy.e_kin(dict_fix['eta_t'], dict_fix['eta_max'], mu_n_init,
