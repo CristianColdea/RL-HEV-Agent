@@ -433,7 +433,7 @@ def simfc_call(dict_fix, dict_dyn):
         print("Initial speed is too high.\n",
               "It was automatically readjusted to MAX value possible!")
  
-    # 1) the case of uniform vehicle movement (i.e., a = 0)
+    # the case of uniform vehicle movement (i.e., a = 0)
     if dict_dyn['a'] == 0:
         # engine speed
         n_i = engine_speed(dict_dyn['v_init'], dict_fix['xi_f'],
@@ -494,13 +494,12 @@ def simfc_call(dict_fix, dict_dyn):
         p_maxn_init = Mus.p_maxn(dict_fix['P_max'], n_i_init,
                                  dict_fix['n_max'], engine_tp = 'CIE')
 
-"""
+
         # engine initial instantaneous power
         P_i_init = required_power(dict_fix['eta_t'], dict_fix['m_a'],
                                   dict_fix['c_r'], dict_fix['C_d'],
                                   dict_fix['A_f'], dict_dyn['v_init'],
                                   dict_dyn['a'], 0, p_maxn_init)
-"""
 
         # engine initial output penalty
         mu_P_init = Mus.mu_P(P_i_init, p_maxn_init, engine_tp = 'CIE')
