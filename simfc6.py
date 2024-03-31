@@ -302,14 +302,15 @@ class Energy:
 
 # required_power - instant power to be delivered by the engine
 
-def required_power(eta_t, m_a, c_r, C_d, A_f, v_init, a, t, P_maxn, ro_a=1.225,
-                   gamma_m=1.08):
+def required_power(eta_t, m_a, c_r, C_d, A_f, v_init, a, t, P_maxn_init,
+                   P_max_fin,  ro_a=1.225, gamma_m=1.08):
     """
     Function to compute the required power from the engine, at a given
     moment. Takes as parameters transmission efficiency, vehicle mass, in kg,
     rolling resistance coefficient, aerodynamic drag coefficient, frontal area
     of the vehicle, in squared meters, vehicle initial speed, in m/s, 
-    acceleration, in m/s**2, time, in seconds, engine max output, air density,
+    acceleration, in m/s**2, time, in seconds, engine max output for initial
+    and final vehicle speed, respectively, air density,
     in kg/m**3, and the coefficient of rotational mases.
     Returns the required power, in kW.
     For constant speed movement use with null acceleration.
@@ -327,6 +328,15 @@ def required_power(eta_t, m_a, c_r, C_d, A_f, v_init, a, t, P_maxn, ro_a=1.225,
     if a == 0:
         P_i = C1 * (C3 + C4 * v_init**2)
 
+        if P_i <= P_maxn_init:
+            return P_i
+        else:
+            print("The engine output exceeded MAX for the given conditions.\n"
+              "Please readjust!")
+      
+            exit()
+
+
     else:
         P_r = C1 * C3 * v_init + C1 * C3 * a * t        # rolling power
         P_i = C1 * C2 * v_init + C1 * C2 * a**2 * t     # inertia power
@@ -338,7 +348,7 @@ def required_power(eta_t, m_a, c_r, C_d, A_f, v_init, a, t, P_maxn, ro_a=1.225,
 
         print("Developed engine power, ", P_i)
 
-    if P_i <= P_maxn:
+    if P_i <= P_maxn_fin:
         return P_i
     else:
         print("The engine output exceeded MAX for the given conditions.\n"
@@ -484,12 +494,14 @@ def simfc_call(dict_fix, dict_dyn):
         p_maxn_init = Mus.p_maxn(dict_fix['P_max'], n_i_init,
                                  dict_fix['n_max'], engine_tp = 'CIE')
 
+"""
         # engine initial instantaneous power
         P_i_init = required_power(dict_fix['eta_t'], dict_fix['m_a'],
                                   dict_fix['c_r'], dict_fix['C_d'],
                                   dict_fix['A_f'], dict_dyn['v_init'],
                                   dict_dyn['a'], 0, p_maxn_init)
-        
+"""
+
         # engine initial output penalty
         mu_P_init = Mus.mu_P(P_i_init, p_maxn_init, engine_tp = 'CIE')
         
@@ -502,11 +514,12 @@ def simfc_call(dict_fix, dict_dyn):
         
         # engine final maximum power at the given engine speed
         p_maxn_fin = Mus.p_maxn(dict_fix['P_max'], n_i_fin, dict_fix['n_max'])
-
+"""
         # engine final instantaneous power
         P_i_fin = required_power(dict_fix['eta_t'], dict_fix['m_a'],
                                  dict_fix['c_r'], dict_fix['C_d'],
                                  dict_fix['A_f'], v, dict_dyn['a'], 0, p_maxn_fin)
+"""
 
         # engine final output penalty
         mu_P_fin = Mus.mu_P(P_i_fin, p_maxn_fin)
