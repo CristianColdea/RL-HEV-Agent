@@ -490,6 +490,8 @@ def simfc_call(dict_fix, dict_dyn):
                                   dict_fix['c_r'], dict_fix['C_d'],
                                   dict_fix['A_f'], dict_dyn['v_init'],
                                   dict_dyn['a'], 0, p_maxn_init)
+        
+        print("Initial engine power, ", P_i_init)
 
         # engine initial output penalty
         mu_P_init = Mus.mu_P(P_i_init, p_maxn_init, engine_tp = 'CIE')
@@ -507,7 +509,10 @@ def simfc_call(dict_fix, dict_dyn):
         # engine final instantaneous power
         P_i_fin = required_power(dict_fix['eta_t'], dict_fix['m_a'],
                                  dict_fix['c_r'], dict_fix['C_d'],
-                                 dict_fix['A_f'], v, dict_dyn['a'], 0, p_maxn_fin)
+                                 dict_fix['A_f'], dict_dyn['v_init'],
+                                 dict_dyn['a'], dict_dyn['t'], p_maxn_fin)
+        
+        # print("Final engine power, ", P_i_fin)
 
         # engine final output penalty
         mu_P_fin = Mus.mu_P(P_i_fin, p_maxn_fin)
@@ -518,7 +523,6 @@ def simfc_call(dict_fix, dict_dyn):
                                   dict_fix['A_f'], dict_dyn['v_init'],
                                   dict_dyn['a'], dict_dyn['t'], p_maxn_fin)
 
-        # print("Initial power, ", P_i_init)
         print("Engine required power, ", P_i_fin)
 
         # energy required to accelerate the vehicle
@@ -540,6 +544,6 @@ def simfc_call(dict_fix, dict_dyn):
         e = e_kin + e_roll + e_air
 
         # fuel consumption
-        f_cons = fuel_cons(e, dict_fix['Q_f'], v, P_i_med, dict_fix['ro_f'])
+        f_cons = fuel_cons(e, dict_fix['Q_f'], v, P_i_fin, dict_fix['ro_f'])
  
     return(f_cons)
