@@ -31,8 +31,8 @@ def wk (m, v_init, a, t, gamma_m=1.08, eta_t=0.95, eta_max=0.4):
     return work
 
 
-def kE_mus (m, v_init, a, t, gamma_m=1.08, eta_t=0.95, eta_max=0.4, mu_init=0.81,
-            mu_fin=0.83):
+def kE_mus (m, v_init, a, t, mu_init, mu_fin, gamma_m=1.08,
+            eta_t=0.95, eta_max=0.4):
     """
     Function to compute kinetic energy variation during accelerated period.
     Takes as inputs the vehicle mass, initial speed, acceleration, time,
@@ -53,8 +53,8 @@ def kE_mus (m, v_init, a, t, gamma_m=1.08, eta_t=0.95, eta_max=0.4, mu_init=0.81
     return kE_mus
 
 
-def wk_avf_mus(m, v_init, a, t, gamma_m=1.08, eta_t=0.95, eta_max=0.4,
-               mu_init=0.81, mu_fin=0.83):
+def wk_avf_mus(m, v_init, a, t, mu_init, mu_fin, gamma_m=1.08, 
+               eta_t=0.95, eta_max=0.4):
     """
     Function to compute the work of the average inertial force during
     accelerated period.
@@ -76,8 +76,8 @@ def wk_avf_mus(m, v_init, a, t, gamma_m=1.08, eta_t=0.95, eta_max=0.4,
     return wk_fav_mus
 
 
-def wk_avmus(m, v_init, a, t, gamma_m=1.08, eta_t=0.95, eta_max=0.4,
-               mu_init=0.81, mu_fin=0.83):
+def wk_avmus(m, v_init, a, t, mu_init, mu_fin, gamma_m=1.08,
+             eta_t=0.95, eta_max=0.4):
     """
     Function to compute the work of the inertial force with average mus during
     accelerated period.
@@ -120,5 +120,3 @@ print("Work done by the inertia force, with average mu, ", wk_avmus(m, v_init,
                                                                     a, t,
                                                                     mu_init,
                                                                     mu_fin))
-# print("Work done by the inertia force, with weighted components, ", wk_parts(m,
-#                                                                 v_init, a, t))
