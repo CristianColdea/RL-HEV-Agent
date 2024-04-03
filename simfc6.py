@@ -236,6 +236,7 @@ class Energy:
         print("m_a, ", m_a)
         print("acceleration, ", a)
         print("time, ", t)
+        print("initial speed, ", v_init)
         print("eta_t, ", eta_t)
         print("eta_max, ", eta_max)
         print("Mus init, ", mu_n_init, mu_P_init)
