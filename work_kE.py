@@ -124,11 +124,11 @@ def wk_parts(m, v_init, a, t, gamma_m=1.08, eta_t=0.98, eta_max=0.4,
 
 # The data to be used to check scenarios
 m = 2235
-a = 1.5
-t = 3
+a = 0.38889
+t = 1
 v_init = 2
-# eta_max = 0.4
-# eta_t = 0.95
+eta_max = 0.4
+eta_t = 0.95
 mu_init = 0.85
 mu_fin = 0.78
 
