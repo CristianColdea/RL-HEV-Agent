@@ -233,12 +233,17 @@ class Energy:
 
         to_return = (10**5 * (Ek_a + Ek_b)) / s
 
+        print("m_a, ", m_a)
+        print("acceleration, ", a)
+        print("time, ", t)
+        print("eta_t, ", eta_t)
+        print("eta_max, ", eta_max)
         print("Mus init, ", mu_n_init, mu_P_init)
         print("Mus fin, ", mu_n_fin, mu_P_fin)
         print("Travelled space, ", s)
         print("Kinetic energy, ", Ek_a+Ek_b)
-        print("Work done av force, ", W_af)
-        print("Work done av mus, ", W_amus)
+        print("Work done average force, ", W_af)
+        print("Work done average mus, ", W_amus)
 
         return to_return
         
