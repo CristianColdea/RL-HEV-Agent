@@ -50,6 +50,12 @@ def kE_mus (m, v_init, a, t, mu_init, mu_fin, gamma_m=1.08,
     kE_mus = (C1 * v_init**2 * ((1/mu_fin) - (1/mu_init)) + ((C1 * a * t) /
               (mu_fin)) * (2 * v_init + a * t))
 
+    Ek_a = C1 * v_init**2 * ((1/mu_fin) - (1/mu_init))
+    Ek_b = ((C1 * a * t) / (mu_fin)) * (2 * v_init + a * t)
+
+    print("Ek_a, ", Ek_a)
+    print("Ek_b, ", Ek_b)
+
     return kE_mus
 
 
@@ -104,8 +110,8 @@ t = 1
 v_init = 3.72222
 eta_max = 0.4
 eta_t = 0.95
-mu_init = 0.544684
-mu_fin = 0.363850
+mu_init = 0.5446894401779139
+mu_fin = 0.3638525818782324
 
 
 print("Kinetic energy variation, no mus, ", kE(m, v_init, a, t))
