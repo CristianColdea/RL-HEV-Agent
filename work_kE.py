@@ -111,7 +111,7 @@ def wk_avmus(m, v_init, a, t, mu_init, mu_fin, gamma_m=1.08,
     return wk_avmus
 
 # The data to be used to check scenarios
-m = 2235
+m = 2355
 a = 0.38889
 t = 1
 v_init = 3.72222
