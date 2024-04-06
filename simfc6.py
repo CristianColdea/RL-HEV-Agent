@@ -219,6 +219,9 @@ class Energy:
         Ek_b = ((C1 * a * t) / (mu_n_fin * mu_P_fin)) * \
                 (2 * v_init + a * t)
         
+        print("m_a, ", m_a)
+        print("eta_t, ", eta_t)
+        print("eta_max, ", eta_max)
         print("C1, ", C1)
         print("Ek_a, ", Ek_a)
         print("Ek_b, ", Ek_b)
