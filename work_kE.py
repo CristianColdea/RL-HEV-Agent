@@ -52,7 +52,8 @@ def kE_mus (m, v_init, a, t, mu_init, mu_fin, gamma_m=1.08,
 
     Ek_a = C1 * v_init**2 * ((1/mu_fin) - (1/mu_init))
     Ek_b = ((C1 * a * t) / (mu_fin)) * (2 * v_init + a * t)
-
+    
+    print("C1, ", C1)
     print("Ek_a, ", Ek_a)
     print("Ek_b, ", Ek_b)
 
