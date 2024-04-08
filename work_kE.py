@@ -115,7 +115,7 @@ def wk_avmus(m, v_init, a, t, mu_init, mu_fin, gamma_m=1.08,
 # The data to be used to check scenarios
 m = 2355
 a = 0.38889
-t = 0.1
+t = 1
 v_init = 3.72222
 eta_max = 0.4
 eta_t = 0.95
