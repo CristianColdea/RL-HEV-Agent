@@ -218,7 +218,7 @@ class Energy:
                                  (1/(mu_n_init * mu_P_init)))
         Ek_b = ((C1 * a * t) / (mu_n_fin * mu_P_fin)) * \
                 (2 * v_init + a * t)
-        
+        """    
         print("m_a, ", m_a)
         print("eta_t, ", eta_t)
         print("eta_max, ", eta_max)
@@ -227,22 +227,23 @@ class Energy:
         print("Ek_b, ", Ek_b)
         print("mu_init, ", mu_n_init*mu_P_init)
         print("mu_fin, ", mu_n_fin*mu_P_fin)
+        """
 
         # compare kinetic energy delta with the work of average force
         # done on the interval
         F_av = C1 * a * ((1 / (mu_n_init * mu_P_init) + 1 / (mu_n_fin *
                                                            mu_P_fin)))
         
-        W_af = F_av * (v_init * t + (a * t**2) / 2)
+        W_af = F_av * s
 
         # work done with average mus
 
-        comn = (4 * C1) / ((1 / (mu_n_init * mu_P_init)) + (1 / (mu_n_fin *
-                                                               mu_P_fin))) 
-        W_amus = comn * (v_init * t + (a * t**2) / 2)
+        comn = (4 * C1) * (1 / (mu_n_init * mu_P_init +  mu_n_fin * mu_P_fin)) 
+        W_amus = comn * s
 
-        to_return = (10**5 * (Ek_a + Ek_b)) / s
-
+        # to_return = (10**5 * (Ek_a + Ek_b)) / s
+        to_return = 10**5 * W_amus / s
+        """
         print("m_a, ", m_a)
         print("acceleration, ", a)
         print("time, ", t)
@@ -255,6 +256,7 @@ class Energy:
         print("Kinetic energy, ", Ek_a+Ek_b)
         print("Work done average force, ", W_af)
         print("Work done average mus, ", W_amus)
+        """
 
         return to_return
         
