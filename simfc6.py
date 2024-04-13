@@ -300,21 +300,29 @@ class Energy:
         acceleration time, in s and air density, in kg/m**3.
         Returns the required energy, in J/100 km.
         """
+        # spaced traveled during acceleration
+        s = v_init * t + 0.5 * a * t**2
+
         #same multiplier for all three terms
-        C3 = (10**5 * ro_air * C_d * A_f)/(4 * eta_t * eta_max)
+        C3 = (10**5 * ro_air * C_d * A_f * t) / \
+                (s * eta_t * eta_max * \
+                (mu_n_init*mu_P_init + mu_n_fin*mu_P_fin))
         
         # first term of energy required to overcome air drag
-        Ea_a = (C3 * v_init**2) * ((1/(mu_n_init * mu_P_init) +
-                                    1/(mu_n_fin * mu_P_fin)))
+        Ea_a = C3 * v_init**3
+
         # second term
-        Ea_b = (C3 * 2 * v_init**2 * a * t) / (mu_n_fin * mu_P_fin)
+        Ea_b = C3 * 1.5 * v_init**2 * a * t
 
         # third term
-        Ea_c = (C3 * a**2 * t**2) / (mu_n_fin * mu_P_fin)
+        Ea_c = C3 * v_init * a**2 * t**2
 
-        print("Air drag energy, ", Ea_a+Ea_b+Ea_c)
+        # fourth term
+        Ea_d = C3 * 0.25 * a**3 * t**3
+
+        print("Air drag energy, ", Ea_a+Ea_b+Ea_c+Ea_d)
          
-        return (Ea_a+Ea_b+Ea_c)
+        return (Ea_a+Ea_b+Ea_c+Ea_d)
 
 
 
