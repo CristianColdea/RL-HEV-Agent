@@ -223,7 +223,7 @@ class Energy:
 
         Ek = Ek_a + Ek_b
 
-        print("Kinetic energy, ", Ek)
+        # print("Kinetic energy, ", Ek)
        
         return Ek
         
@@ -261,7 +261,7 @@ class Energy:
 
         E_roll = Er_a + Er_b
 
-        print("Rolling energy, ", E_roll)
+        # print("Rolling energy, ", E_roll)
 
         return E_roll
 
@@ -299,7 +299,7 @@ class Energy:
         # fourth term
         Ea_d = C3 * 0.25 * a**3 * t**3
 
-        print("Air drag energy, ", Ea_a+Ea_b+Ea_c+Ea_d)
+        # print("Air drag energy, ", Ea_a+Ea_b+Ea_c+Ea_d)
          
         return (Ea_a+Ea_b+Ea_c+Ea_d)
 
@@ -496,7 +496,7 @@ def simfc_call(dict_fix, dict_dyn):
                                   dict_fix['A_f'], dict_dyn['v_init'],
                                   dict_dyn['a'], 0, p_maxn_init)
         
-        print("Initial engine power, ", P_i_init)
+        # print("Initial engine power, ", P_i_init)
 
         # engine initial output penalty
         mu_P_init = Mus.mu_P(P_i_init, p_maxn_init, engine_tp = 'CIE')
@@ -528,7 +528,7 @@ def simfc_call(dict_fix, dict_dyn):
                                   dict_fix['A_f'], dict_dyn['v_init'],
                                   dict_dyn['a'], dict_dyn['t'], p_maxn_fin)
 
-        print("Engine required power, ", P_i_fin)
+        # print("Engine required power, ", P_i_fin)
 
         # energy required to accelerate the vehicle
         e_kin = Energy.e_kin(dict_fix['eta_t'], dict_fix['eta_max'], mu_n_init,
