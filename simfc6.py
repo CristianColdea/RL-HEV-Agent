@@ -540,7 +540,7 @@ def simfc_call(dict_fix, dict_dyn):
                                mu_n_init, mu_P_init, mu_n_fin,
                                mu_P_fin, dict_fix['m_a'], 
                                dict_dyn['v_init'], dict_dyn['a'],
-                               dict_dyn['t'a], dict_fix['c_r'])
+                               dict_dyn['t'], dict_fix['c_r'])
 
         # energy required to overcome air resistance
         e_air = Energy.e_air(dict_fix['eta_t'], dict_fix['eta_max'],
