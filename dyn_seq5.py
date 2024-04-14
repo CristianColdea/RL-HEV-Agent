@@ -38,7 +38,7 @@ low_raw = [[0, 45, 10, 30], [45, 12, 30, 55], [12, 40, 55, 75],
 # medium speed section
 med_raw = [[0, 49, 600, 615], [49, 44, 615, 625],
            [44, 57, 625, 652], [57, 11, 652, 654],
-           [11, 40,654, 675], [40, 18, 675, 685],
+           [11, 40, 654, 675], [40, 18, 675, 685],
            [18, 33, 685, 700], [33, 12, 700, 710],
            [12, 22, 710, 718], [22, 12, 718, 725],
            [12, 40, 725, 732], [40, 50, 732, 750],
@@ -96,13 +96,13 @@ def raw_proc(raw_list):
     processed = []  #list to store the returned results
     processed.append(raw_list[0]/3.6)  # initial speed
     processed.append(0)  # the second position reserved
-    processed.append((raw_list[1] - raw_list[0]) /\
+    processed.append((raw_list[1] - raw_list[0]) / \
                  (3.6 * (raw_list[3] - raw_list[2])))  # acceleration
     processed.append(raw_list[3] - raw_list[2])  # time
 
     return processed
 
-def null_speed(processed, tstep=1, n_stab=1000):
+def null_speed(processed, tstep=0.1, n_stab=1000):
     """
     Function to ensure that the vehicle starts in first gear
     at null speed.
@@ -128,7 +128,7 @@ def null_speed(processed, tstep=1, n_stab=1000):
     return processed
 
 
-def process_input(processed, gear_ini, min_lim=1800, max_lim=3100, tstep=1,
+def process_input(processed, gear_ini, min_lim=1800, max_lim=3100, tstep=0.1,
                   n_stab=1000, n_max=5000):
     """
     Function to handle the processed list in order to get the
@@ -357,7 +357,7 @@ def process_input(processed, gear_ini, min_lim=1800, max_lim=3100, tstep=1,
                     print("The final imposed speed is too low.")
                     exit()
                                                          
-"""
+
 expand_low = [
        ['v_init', 'gear', 'accel', 'time'],
        ]
@@ -365,7 +365,7 @@ expand_low = [
 # print("expand_low, ", expand_low)
 # print("low_raw[:2], ", low_raw[:2])
 
-for sequence in low_raw[:2]:
+for sequence in low_raw:
     # if expand_low has only the header
     if len(expand_low) == 1:
         # print("First process, ", raw_proc(sequence))
@@ -409,15 +409,6 @@ for sequence in med_raw:
         # print("last gear, ", expand[-1])    
         expand_med.extend(process_input(raw_proc(sequence),
                                     expand_med[-1][1]))
-        # print("current sequence, ", sequence)
-
-        # print(expand)
-        # print("**********")
-
-# print("expand_med, ", expand_med)
-
-# print(expand_med)
-# print(len(expand_med))
 
 # the list to store high speed section expanded values
 expand_high = [
@@ -506,8 +497,7 @@ for sequence in wltp:
         # print("**********")
 
 
-# print(expand_low)
-# print(len(expand_wltp))
+# **********
 
 # fuel consumptions function call
 
@@ -531,31 +521,70 @@ with open('fcons_low.csv', 'w', newline='') as file:
 
     writer.writerows(fuels_low)
 
+# print(fuels_low)
+
+
 # list to store results of medium speed section
 fuels_med = ["l/100", "kg/100", "kg/h", "sfc"]
 
-for seq in expand_med[90:91]:
+for seq in expand_med[1:]:
     # deccelerated movement starting with null initial speed not possible
     if seq[0] == 0 and seq[2] < 0:
         continue
     fuels_med.append(sfc.simfc_call(sfc.unpack_f(sc.fixs),
                                     sfc.unpack_d(seq)))
-    # print(sfc.simfc_call(sfc.unpack_f(sc.fixs),
-    #                                sfc.unpack_d(seq)))
-
-    # print(sfc.unpack_f(sc.fixs))
-    # print(sfc.unpack_d(seq))
-
 
 with open('fcons_med.csv', 'w', newline='') as file:
     writer = csv.writer(file)
 
     writer.writerows(fuels_med)
-"""
-sequence = low_raw[2]
-processed = process_input(raw_proc(sequence), raw_proc(sequence)[1])
-# print(processed)
 
-fuels_med = sfc.simfc_call(sfc.unpack_f(sc.fixs), sfc.unpack_d(processed[0]))
+# print(fuels_med)
 
-print(fuels_med)
+
+# list to store results of high speed section
+fuels_high = ["l/100", "kg/100", "kg/h", "sfc"]
+
+for seq in expand_high[1:]:
+    # deccelerated movement starting with null initial speed not possible
+    if seq[0] == 0 and seq[2] < 0:
+        continue
+    fuels_high.append(sfc.simfc_call(sfc.unpack_f(sc.fixs),
+                                    sfc.unpack_d(seq)))
+
+with open('fcons_high.csv', 'w', newline='') as file:
+    writer = csv.writer(file)
+
+    writer.writerows(fuels_high)
+
+
+# list to store results of ultra high speed section
+fuels_ultra_high = ["l/100", "kg/100", "kg/h", "sfc"]
+
+for seq in expand_ultra_high[1:]:
+    # deccelerated movement starting with null initial speed not possible
+    if seq[0] == 0 and seq[2] < 0:
+        continue
+    fuels_ultra_high.append(sfc.simfc_call(sfc.unpack_f(sc.fixs),
+                                    sfc.unpack_d(seq)))
+
+with open('fcons_ultra_high.csv', 'w', newline='') as file:
+    writer = csv.writer(file)
+
+    writer.writerows(fuels_ultra_high)
+
+
+# list to store results of full WLTP testing cycle
+fuels_wltp = ["l/100", "kg/100", "kg/h", "sfc"]
+
+for seq in expand_wltp[1:]:
+    # deccelerated movement starting with null initial speed not possible
+    if seq[0] == 0 and seq[2] < 0:
+        continue
+    fuels_wltp.append(sfc.simfc_call(sfc.unpack_f(sc.fixs),
+                                    sfc.unpack_d(seq)))
+
+with open('fcons_wltp.csv', 'w', newline='') as file:
+    writer = csv.writer(file)
+
+    writer.writerows(fuels_wltp)
