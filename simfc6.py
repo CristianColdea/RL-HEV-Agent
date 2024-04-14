@@ -214,7 +214,7 @@ class Energy:
         s = v_init * t + 0.5 * a * t**2
 
         #same multiplier for both terms
-        C1 = 10**5 * m_a * gamma_m * t) / \
+        C1 = (10**5 * m_a * gamma_m * t) / \
                 (s * eta_t * eta_max * 
                 (mu_n_init*mu_P_init + mu_n_fin*mu_P_fin)) 
                 
@@ -538,7 +538,9 @@ def simfc_call(dict_fix, dict_dyn):
         # energy required to overcome rolling resistance
         e_roll = Energy.e_roll(dict_fix['eta_t'], dict_fix['eta_max'],
                                mu_n_init, mu_P_init, mu_n_fin,
-                               mu_P_fin, dict_fix['m_a'], dict_fix['c_r'])
+                               mu_P_fin, dict_fix['m_a'], 
+                               dict_dyn['v_init'], dict_dyn['a'],
+                               dict_dyn['t'a], dict_fix['c_r'])
 
         # energy required to overcome air resistance
         e_air = Energy.e_air(dict_fix['eta_t'], dict_fix['eta_max'],
