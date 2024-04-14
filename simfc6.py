@@ -264,7 +264,7 @@ class Energy:
     # acceleration
     
     def e_roll(eta_t, eta_max, mu_n_init, mu_P_init, mu_n_fin, mu_P_fin, m_a,
-               c_r):
+               v_init, a, t, c_r):
         """
         Method to compute required energy to overcome the rolling resistance
         of the vehicle.
@@ -272,15 +272,27 @@ class Energy:
         engine speed coefficient initial and final, engine output
         coefficient initial and final,
         vehicle mass, in kg, vehicle initial speed, in m/s,
-        the rolling resistance coefficient, constant acceleration, in m/s**2
-        and acceleration time, in s.
+        constant acceleration, in m/s**2, acceleration time, in s and rolling
+        resistance coefficient.
         Returns the required energy, in J/100 km.
         The hypotesis of average engine speed and output coefficient.
         """
-        #same multiplier
-        C2 = (10**5 * m_a * 9.81 * c_r)/(2 * eta_t * eta_max)
 
-        E_roll = C2 * (1/(mu_n_init * mu_P_init) + 1/(mu_n_fin * mu_P_fin))
+        # spaced traveled during acceleration
+        s = v_init * t + 0.5 * a * t**2
+
+        #same multiplier
+        C2 = (10**5 * 2 * m_a * 9.81 * c_r * t)i / \
+                (s * eta_t * eta_max * \
+                (mu_n_init*mu_P_init + mu_n_fin*mu_P_fin))
+
+        # first term
+        Er_a = C2 * v_init
+
+        # second term
+        Er_b = C2 * a * t
+
+        E_roll = Er_a + Er_b
 
         print("Rolling energy, ", E_roll)
 
