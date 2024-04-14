@@ -207,58 +207,25 @@ class Energy:
         constant acceleration, in m/s**2, acceleration time, in s and the
         coefficient of rotational masses.
         Returns the required energy, in J/100 km.
+        The hypotesis of average engine speed and output coefficient.
         """
-        # space traveled during acceleration sequence
+
+        # space traveled during acceleration
         s = v_init * t + 0.5 * a * t**2
 
         #same multiplier for both terms
-        C1 = (m_a * gamma_m)/(2 * eta_t * eta_max) 
+        C1 = 10**5 * m_a * gamma_m * t) / \
+                (s * eta_t * eta_max * 
+                (mu_n_init*mu_P_init + mu_n_fin*mu_P_fin)) 
                 
-        Ek_a = C1 * v_init**2 * ((1/(mu_n_fin * mu_P_fin)) -
-                                 (1/(mu_n_init * mu_P_init)))
-        Ek_b = ((C1 * a * t) / (mu_n_fin * mu_P_fin)) * \
-                (2 * v_init + a * t)
-        """    
-        print("m_a, ", m_a)
-        print("eta_t, ", eta_t)
-        print("eta_max, ", eta_max)
-        print("C1, ", C1)
-        print("Ek_a, ", Ek_a)
-        print("Ek_b, ", Ek_b)
-        print("mu_init, ", mu_n_init*mu_P_init)
-        print("mu_fin, ", mu_n_fin*mu_P_fin)
-        """
+        Ek_a = 2 * C1 * v_init * a
+        Ek_b = C1 * a**2 * t
 
-        # compare kinetic energy delta with the work of average force
-        # done on the interval
-        F_av = C1 * a * ((1 / (mu_n_init * mu_P_init) + 1 / (mu_n_fin *
-                                                           mu_P_fin)))
-        
-        W_af = F_av * s
+        Ek = Ek_a + Ek_b
 
-        # work done with average mus
-
-        comn = (4 * C1) * (1 / (mu_n_init * mu_P_init +  mu_n_fin * mu_P_fin)) 
-        W_amus = comn * s
-
-        # to_return = (10**5 * (Ek_a + Ek_b)) / s
-        to_return = 10**5 * W_amus / s
-        """
-        print("m_a, ", m_a)
-        print("acceleration, ", a)
-        print("time, ", t)
-        print("initial speed, ", v_init)
-        print("eta_t, ", eta_t)
-        print("eta_max, ", eta_max)
-        print("Mus init, ", mu_n_init, mu_P_init)
-        print("Mus fin, ", mu_n_fin, mu_P_fin)
-        print("Travelled space, ", s)
-        print("Kinetic energy, ", Ek_a+Ek_b)
-        print("Work done average force, ", W_af)
-        print("Work done average mus, ", W_amus)
-        """
-
-        return to_return
+        print("Kinetic energy, ", Ek)
+       
+        return Ek
         
     # e_roll - the required energy to overcome rolling resistance during
     # acceleration
@@ -282,8 +249,8 @@ class Energy:
         s = v_init * t + 0.5 * a * t**2
 
         #same multiplier
-        C2 = (10**5 * 2 * m_a * 9.81 * c_r * t)i / \
-                (s * eta_t * eta_max * \
+        C2 = (10**5 * 2 * m_a * 9.81 * c_r * t) / \
+                (s * eta_t * eta_max * 
                 (mu_n_init*mu_P_init + mu_n_fin*mu_P_fin))
 
         # first term
@@ -317,7 +284,7 @@ class Energy:
 
         #same multiplier for all three terms
         C3 = (10**5 * ro_air * C_d * A_f * t) / \
-                (s * eta_t * eta_max * \
+                (s * eta_t * eta_max * 
                 (mu_n_init*mu_P_init + mu_n_fin*mu_P_fin))
         
         # first term of energy required to overcome air drag
