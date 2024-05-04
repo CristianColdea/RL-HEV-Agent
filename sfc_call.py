@@ -12,7 +12,7 @@ understand which script are belonging to either category and the
 order of arguments.
 """
 
-import simfc5 as sfc
+import simfc6 as sfc
 #import dyn_seq as dyn
 
 #the 'fixed' vars list
